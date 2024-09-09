@@ -29,4 +29,4 @@ main()
 ```
 
 ## Known issues
-- Square root function is incorrect
+None currently found
