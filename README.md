@@ -1,11 +1,9 @@
 # MLib
 
 > [!WARNING]
-> THIS LIBRARY IS A WORK IN PROGRESS! ANYTHING IS SUBJECT TO CHANGE WITHOUT NOTICE! USE THIS LIBRARY AT YOUR OWN RISK!
+> This library is a work in progress, and anything is subject to change without notice. Use this library at your own risk!
 
 A mathematical library that does not have any dependencies and aims to provide advanced mathematical functionality.
-
-The library is not concerned with displaying the image. It only fills up the memory with pixels. It's up to you what to do with those pixels.
 
 The library itself does not need to be built. You can simply copy-paste [./mlib.h](./mlib.h) to your project and `#include` it. (Because the truly reusable code is the one that you can simply copy-paste).
 
