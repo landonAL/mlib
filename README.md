@@ -15,12 +15,12 @@ MLib is a classical [stb-style](https://github.com/nothings/stb) single header l
 #include <stdio.h>
 
 #define MLIB_IMPLEMENTATION
-#include "mlib.h"
+#include "mlib.c"
 
 int main(void)
 {
     for (int i = 1; i < 11; ++i) {
-        printf("%f", pow(i, 2));
+        printf("%f\n", powd(i, 2));
     }
 
     return 0;
