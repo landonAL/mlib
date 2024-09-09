@@ -33,40 +33,20 @@ toDegreef(float rad)
 
 /* ROUNDING */
 
-double
-floord(double a)
+int
+floor(double a)
 {
     return (int) a;
 }
 
-float
-floorf(float a)
-{
-    return (int) a;
-}
-
-double
-ceild(double a)
+int
+ceil(double a)
 {
     return (int) a + 1;
 }
 
-float
-ceilf(float a)
-{
-    return (int) a + 1;
-}
-
-double
-roundd(double a)
-{
-    return a + 0.5 > (int) a + 1
-        ? (int) a + 1
-        : (int) a;
-}
-
-float
-roundf(float a)
+int
+round(double a)
 {
     return a + 0.5 > (int) a + 1
         ? (int) a + 1
