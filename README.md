@@ -9,7 +9,7 @@ The library itself does not need to be built. You can simply copy-paste [./mlib.
 
 MLib is a classic [stb-style](https://github.com/nothings/stb) single header library. That is, by default it acts like a header, but if you add `#define MLIB_IMPLEMENTATION` prior to including the library it acts like a source file.
 
-## Quick Example
+## Example
 
 ```c
 #include <stdio.h>
