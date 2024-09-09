@@ -74,7 +74,7 @@ floor(double a)
 MLIBDEF int
 ceil(double a)
 {
-    return (int) a + 1;
+    return a > (int) a ? (int) a + 1 : (int) a;
 }
 
 MLIBDEF int
