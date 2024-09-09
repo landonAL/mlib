@@ -28,5 +28,5 @@ main()
 }
 ```
 
-** Known issues
+## Known issues
 - Square root function is incorrect
