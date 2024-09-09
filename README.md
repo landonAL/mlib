@@ -17,7 +17,8 @@ MLib is a classic [stb-style](https://github.com/nothings/stb) single header lib
 #define MLIB_IMPLEMENTATION
 #include "mlib.c"
 
-int main(void)
+int
+main()
 {
     for (int i = 1; i < 11; ++i) {
         printf("%f\n", powd(i, 2));
