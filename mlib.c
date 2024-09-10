@@ -2,82 +2,81 @@
 #define MLIB_C_
 
 #include <assert.h>
+#include <stdbool.h>
 
-#ifndef MLIBDEF
-#define MLIBDEF static inline
-#endif
+#define PI  3.1415926535897932
+#define E   2.7182818284590452
+#define PHI 1.6180339887498948
 
-#define PI 3.14159265358979324
-#define E  2.7182818284590452
-
-MLIBDEF double toRadiand(double deg);
-MLIBDEF float toRadianf(float deg);
-MLIBDEF double toDegreed(double deg);
-MLIBDEF float toDegreef(float deg);
-MLIBDEF int floor(double a);
-MLIBDEF int ceil(double a);
-MLIBDEF int round(double a);
-MLIBDEF double absd(double a);
-MLIBDEF float absf(float a);
-MLIBDEF double sqrt(double a);
-MLIBDEF int addi(int a, int b);
-MLIBDEF double addd(double a, double b);
-MLIBDEF float addf(float a, float b);
-MLIBDEF int subi(int a, int b);
-MLIBDEF double subd(double a, double b);
-MLIBDEF float subf(float a, float b);
-MLIBDEF int multi(int a, int b);
-MLIBDEF double multd(double a, double b);
-MLIBDEF float multf(float a, float b);
-MLIBDEF int divi(int a, int b);
-MLIBDEF double divd(double a, double b);
-MLIBDEF float divf(float a, float b);
-MLIBDEF int mod(int a, int b);
-MLIBDEF int fdiv(double a, double b);
-MLIBDEF double powd(double base, int pow);
-MLIBDEF float powf(float base, int pow);
+double toRadiand(double deg);
+float toRadianf(float deg);
+double toDegreed(double deg);
+float toDegreef(float deg);
+int floor(double a);
+int ceil(double a);
+int round(double a);
+double absd(double a);
+float absf(float a);
+double sqrt(double a);
+int addi(int a, int b);
+double addd(double a, double b);
+float addf(float a, float b);
+int subi(int a, int b);
+double subd(double a, double b);
+float subf(float a, float b);
+int multi(int a, int b);
+double multd(double a, double b);
+float multf(float a, float b);
+int divi(int a, int b);
+double divd(double a, double b);
+float divf(float a, float b);
+int mod(int a, int b);
+int fdiv(double a, double b);
+double powd(double base, int pow);
+float powf(float base, int pow);
+bool isPrime(int a);
 
 #endif // MLIB_C_
 
 #ifdef MLIB_IMPLEMENTATION
 
-MLIBDEF double
+double
 toRadiand(double deg)
 {
     return deg * (PI / 180);
 }
 
-MLIBDEF float
+float
 toRadianf(float deg)
 {
     return deg * (PI / 180);
 }
 
-MLIBDEF double
+double
 toDegreed(double rad)
 {
     return rad * (180 / PI);
 }
 
-MLIBDEF float
+float
 toDegreef(float rad)
 {
     return rad * (180 / PI);
 }
 
-MLIBDEF int
+int
 floor(double a)
 {
     return (int) a;
 }
 
-MLIBDEF int
+int
 ceil(double a)
 {
     return a > (int) a ? (int) a + 1 : (int) a;
 }
 
-MLIBDEF int
+int
 round(double a)
 {
     return a + 0.5 >= (int) a + 1
@@ -85,118 +84,116 @@ round(double a)
         : (int) a;
 }
 
-MLIBDEF double
+double
 absd(double a)
 {
     return a < 0 ? a * -1 : a;
 }
 
-MLIBDEF float
+float
 absf(float a)
 {
     return a < 0 ? a * -1 : a;
 }
 
-MLIBDEF double
+double
 sqrt(double a)
 {
+    assert(a >= 0);
+    if (a == 0) return 0;
+
     double b = a, root;
 
-    for (int i = 0; i < 5; ++i) {
-        root = 0.5 * (b + (a / b));
-
-	if ((root - b) < 1)
-	    break;
-
-	b = root;
+    for (int i = 1; i < 17; ++i) {
+        b = root = 0.5 * (b + (a / b));
     }
 
     return root;
 }
 
-MLIBDEF int
+int
 addi(int a, int b)
 {
     return a + b;
 }
 
-MLIBDEF double
+double
 addd(double a, double b)
 {
     return a + b;
 }
 
-MLIBDEF float
+float
 addf(float a, float b)
 {
     return a + b;
 }
 
-MLIBDEF int
+int
 subi(int a, int b)
 {
     return a - b;
 }
 
-MLIBDEF double
+double
 subd(double a, double b)
 {
     return a - b;
 }
 
-MLIBDEF float
+float
 subf(float a, float b)
 {
     return a - b;
 }
 
-MLIBDEF int
+int
 multi(int a, int b)
 {
     return a * b;
 }
 
-MLIBDEF double
+double
 multd(double a, double b)
 {
     return a * b;
 }
 
-MLIBDEF float
+float
 multf(float a, float b)
 {
     return a * b;
 }
 
-MLIBDEF int
+int
 divi(int a, int b)
 {
     assert(b > 0);
     return a / b;
 }
 
-MLIBDEF double
+double
 divd(double a, double b)
 {
     assert(b > 0);
     return a / b;
 }
 
-MLIBDEF float
+float
 divf(float a, float b)
 {
     assert(b > 0);
     return a / b;
 }
 
-MLIBDEF int
+int
 mod(int a, int b)
 {
     assert(b > 0);
     return a % b;
 }
 
-MLIBDEF int
+int
 fdiv(double a, double b)
 {
     assert(b > 0);
@@ -215,7 +212,7 @@ powd(double base, int pow)
     return product;
 }
 
-MLIBDEF float
+float
 powf(float base, int pow)
 {
     if (pow == 0) return 1;
@@ -225,6 +222,18 @@ powf(float base, int pow)
     for (int i = 1; i < pow; ++i) product *= base;
 
     return product;
+}
+
+bool
+isPrime(int a)
+{
+    if (a < 2) return false;
+
+    for (int i = 2; i < a / 2; ++i) {
+        if (a % i == 0) return false;
+    }
+
+    return true;
 }
 
 #endif // MLIB_IMPLEMENTATION
