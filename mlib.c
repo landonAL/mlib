@@ -105,7 +105,7 @@ sqrt(double a)
     double b = a, root;
 
     for (int i = 1; i < 17; ++i) {
-        b = root = 0.5 * (b + (a / b));
+        b = root = (b + (a / b)) / 2;
     }
 
     return root;
@@ -228,6 +228,7 @@ bool
 isPrime(int a)
 {
     if (a < 2) return false;
+    if (a > 2 && a % 2 == 0) return false;
 
     for (int i = 2; i < a / 2; ++i) {
         if (a % i == 0) return false;
