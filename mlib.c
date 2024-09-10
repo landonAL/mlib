@@ -8,33 +8,59 @@
 #define E   2.7182818284590452
 #define PHI 1.6180339887498948
 
+typedef struct
+{
+    double x;
+    double y;
+} Vector2;
+
+typedef struct
+{
+    double x;
+    double y;
+    double z;
+} Vector3;
+
 double toRadiand(double deg);
-float toRadianf(float deg);
 double toDegreed(double deg);
-float toDegreef(float deg);
 int floor(double a);
 int ceil(double a);
 int round(double a);
-double absd(double a);
-float absf(float a);
+double abs(double a);
 double sqrt(double a);
-int addi(int a, int b);
-double addd(double a, double b);
-float addf(float a, float b);
-int subi(int a, int b);
-double subd(double a, double b);
-float subf(float a, float b);
-int multi(int a, int b);
-double multd(double a, double b);
-float multf(float a, float b);
-int divi(int a, int b);
-double divd(double a, double b);
-float divf(float a, float b);
 int mod(int a, int b);
 int fdiv(double a, double b);
-double powd(double base, int pow);
-float powf(float base, int pow);
+double pow(double base, int pow);
 bool isPrime(int a);
+void v2add(Vector2 a, Vector2 b);
+void v2sub(Vector2 a, Vector2 b);
+void v2mult(Vector2 a, Vector2 b);
+void v2div(Vector2 a, Vector2 b);
+void v2perp(Vector2 a);
+double v2cross(Vector2 a, Vector2 b);
+double v2project(Vector2 a);
+void v2reverse(Vector2 a);
+void v2set(Vector2 a, Vector2 b);
+void v2zero(Vector2 a);
+double v2length(Vector2 a);
+double v2lengthSq(Vector2 a);
+double v2distance(Vector2 a, Vector2 b);
+double v2distanceSq(Vector2 a, Vector2 b);
+void v2norm(Vector2 a);
+void v3add(Vector3 a, Vector3 b);
+void v3sub(Vector3 a, Vector3 b);
+void v3mult(Vector3 a, Vector3 b);
+void v3div(Vector3 a, Vector3 b);
+double v3cross(Vector3 a, Vector3 b);
+double v3project(Vector3 a);
+void v3reverse(Vector3 a);
+void v3set(Vector3 a, Vector3 b);
+void v3zero(Vector3 a);
+double v3length(Vector3 a);
+double v3lengthSq(Vector3 a);
+double v3distance(Vector3 a, Vector3 b);
+double v3distanceSq(Vector3 a, Vector3 b);
+void v3norm(Vector3 a);
 
 #endif // MLIB_C_
 
@@ -46,20 +72,8 @@ toRadiand(double deg)
     return deg * (PI / 180);
 }
 
-float
-toRadianf(float deg)
-{
-    return deg * (PI / 180);
-}
-
 double
 toDegreed(double rad)
-{
-    return rad * (180 / PI);
-}
-
-float
-toDegreef(float rad)
 {
     return rad * (180 / PI);
 }
@@ -85,13 +99,7 @@ round(double a)
 }
 
 double
-absd(double a)
-{
-    return a < 0 ? a * -1 : a;
-}
-
-float
-absf(float a)
+abs(double a)
 {
     return a < 0 ? a * -1 : a;
 }
@@ -112,81 +120,6 @@ sqrt(double a)
 }
 
 int
-addi(int a, int b)
-{
-    return a + b;
-}
-
-double
-addd(double a, double b)
-{
-    return a + b;
-}
-
-float
-addf(float a, float b)
-{
-    return a + b;
-}
-
-int
-subi(int a, int b)
-{
-    return a - b;
-}
-
-double
-subd(double a, double b)
-{
-    return a - b;
-}
-
-float
-subf(float a, float b)
-{
-    return a - b;
-}
-
-int
-multi(int a, int b)
-{
-    return a * b;
-}
-
-double
-multd(double a, double b)
-{
-    return a * b;
-}
-
-float
-multf(float a, float b)
-{
-    return a * b;
-}
-
-int
-divi(int a, int b)
-{
-    assert(b > 0);
-    return a / b;
-}
-
-double
-divd(double a, double b)
-{
-    assert(b > 0);
-    return a / b;
-}
-
-float
-divf(float a, float b)
-{
-    assert(b > 0);
-    return a / b;
-}
-
-int
 mod(int a, int b)
 {
     assert(b > 0);
@@ -201,23 +134,11 @@ fdiv(double a, double b)
 }
 
 double
-powd(double base, int pow)
+pow(double base, int pow)
 {
     if (pow == 0) return 1;
 
     double product = base;
-
-    for (int i = 1; i < pow; ++i) product *= base;
-
-    return product;
-}
-
-float
-powf(float base, int pow)
-{
-    if (pow == 0) return 1;
-
-    float product = base;
 
     for (int i = 1; i < pow; ++i) product *= base;
 
@@ -235,6 +156,220 @@ isPrime(int a)
     }
 
     return true;
+}
+
+void
+v2add(Vector2 a, Vector2 b)
+{
+    a.x += b.x;
+    a.y += b.y;
+}
+
+void
+v2sub(Vector2 a, Vector2 b)
+{
+    a.x -= b.x;
+    a.y -= b.y;
+}
+
+void
+v2mult(Vector2 a, Vector2 b)
+{
+    a.x *= b.x;
+    a.y *= b.y;
+}
+
+void
+v2div(Vector2 a, Vector2 b)
+{
+    a.x /= b.x;
+    a.y /= b.y;
+}
+
+void
+v2perp(Vector2 a)
+{
+    a.x = -a.y;
+    a.y = a.x;
+}
+
+double
+v2cross(Vector2 a, Vector2 b)
+{
+    return (a.x * b.y) - (a.y * b.x);
+}
+
+double
+v2project(Vector2 a)
+{
+    return v2lengthSq(a) / v2length(a);
+}
+
+void
+v2reverse(Vector2 a)
+{
+    a.x = -a.x;
+    a.y = -a.y;
+}
+
+void
+v2set(Vector2 a, Vector2 b)
+{
+    a.x = b.x;
+    a.y = b.y;
+}
+
+void
+v2zero(Vector2 a)
+{
+    a.x = a.y = 0;
+}
+
+double
+v2length(Vector2 a)
+{
+    return sqrt((a.x * a.x) + (a.y * a.y));
+}
+
+double
+v2lengthSq(Vector2 a)
+{
+    return (a.x * a.x) + (a.y * a.y);
+}
+
+double
+v2distance(Vector2 a, Vector2 b)
+{
+    a.x -= b.x;
+    a.y -= b.y;
+
+    return sqrt((a.x * a.x) + (a.y * a.y));
+}
+
+double
+v2distanceSq(Vector2 a, Vector2 b)
+{
+    a.x -= b.x;
+    a.y -= b.y;
+
+    return (a.x * a.x) + (a.y * a.y);
+}
+
+void
+v2norm(Vector2 a)
+{
+    double magnitude = v2length(a);
+
+    a.x /= magnitude;
+    a.y /= magnitude;
+}
+
+void
+v3add(Vector3 a, Vector3 b)
+{
+    a.x += b.x;
+    a.y += b.y;
+    a.z += b.z;
+}
+
+void
+v3sub(Vector3 a, Vector3 b)
+{
+    a.x -= b.x;
+    a.y -= b.y;
+    a.z -= b.z;
+}
+
+void
+v3mult(Vector3 a, Vector3 b)
+{
+    a.x *= b.x;
+    a.y *= b.y;
+    a.z *= b.z;
+}
+
+void
+v3div(Vector3 a, Vector3 b)
+{
+    a.x /= b.x;
+    a.y /= b.y;
+    a.z /= b.z;
+}
+
+double
+v3cross(Vector3 a, Vector3 b)
+{
+    return (a.x * b.y) - (a.y * b.x);
+}
+
+double
+v3project(Vector3 a)
+{
+    return v3lengthSq(a) / v3length(a);
+}
+
+void
+v3reverse(Vector3 a)
+{
+    a.x = -a.x;
+    a.y = -a.y;
+    a.z = -a.z;
+}
+
+void
+v3set(Vector3 a, Vector3 b)
+{
+    a.x = b.x;
+    a.y = b.y;
+    a.z = b.z;
+}
+
+void
+v3zero(Vector3 a)
+{
+    a.x = a.y = a.z = 0;
+}
+
+double
+v3length(Vector3 a)
+{
+    return sqrt((a.x * a.x) + (a.y * a.y) + (a.z * a.z));
+}
+
+double
+v3lengthSq(Vector3 a)
+{
+    return (a.x * a.x) + (a.y * a.y) + (a.z * a.z);
+}
+
+double
+v3distance(Vector3 a, Vector3 b)
+{
+    a.x -= b.x;
+    a.y -= b.y;
+    a.z -= b.z;
+
+    return sqrt((a.x * a.x) + (a.y * a.y) + (a.z * a.z));
+}
+
+double
+v3distanceSq(Vector3 a, Vector3 b)
+{
+    a.x -= b.x;
+    a.y -= b.y;
+    a.z -= b.z;
+
+    return (a.x * a.x) + (a.y * a.y) + (a.z * a.z);
+}
+
+void
+v3norm(Vector3 a)
+{
+    double magnitude = v3length(a);
+
+    a.x /= magnitude;
+    a.y /= magnitude;
+    a.z /= magnitude;
 }
 
 #endif // MLIB_IMPLEMENTATION
