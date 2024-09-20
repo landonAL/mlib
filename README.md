@@ -5,9 +5,9 @@
 
 A mathematical library that does not have any dependencies and aims to provide advanced mathematical functionality.
 
-The library itself does not need to be built. You can simply copy-paste [./mlib.c](./mlib.c) into your project and `#include` it.
+The library itself does not need to be built. You can simply copy-paste mlib into your project directory and include it.
 
-MLib is a classic [stb-style](https://github.com/nothings/stb) single header library, meaning that by default it acts like a header, but if you add `#define MLIB_IMPLEMENTATION` prior to including the library it acts like a source file.
+In its primary language, MLib is a classic [stb-style](https://github.com/nothings/stb) single header library, meaning that by default it acts like a header, but if you add `#define MLIB_IMPLEMENTATION` prior to including the library it acts like a source file.
 
 ## Example
 ### C
