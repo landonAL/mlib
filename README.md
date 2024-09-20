@@ -58,6 +58,21 @@ if __name__ == "__main__":
     main()
 ```
 
+### CSharp
+```cs
+using static mlib;
+
+namespace Main
+{
+    class Program
+    {
+        static void Main(string[] args) {
+            Console.WriteLine(mlib.pow(2, 8));
+        }
+    }
+}
+```
+
 ## Known issues
 None currently found
     
