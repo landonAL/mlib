@@ -1,15 +1,16 @@
 from typing import List
 import struct
 
-PI     = 3.1415926535897932
-TAU    = 6.2831853071795864
-E      = 2.7182818284590452
-PHI    = 1.6180339887498948
-LN2    = 0.6931471805599453
-LN10   = 2.3025850929940457
-LOG2E  = 1.4426950408889634
-LOG10E = 0.4342944819032518
-EULER  = 0.5772156649015329
+PI      = 3.1415926535897932
+TAU     = 6.2831853071795864
+E       = 2.7182818284590452
+PHI     = 1.6180339887498948
+LN2     = 0.6931471805599453
+LN10    = 2.3025850929940457
+LOG2E   = 1.4426950408889634
+LOG10E  = 0.4342944819032518
+EULER   = 0.5772156649015329
+CATALAN = 0.9159655941772190
 
 def to_bits(a):
     s = struct.pack('>f', a)
@@ -88,7 +89,7 @@ def fact(a: int) -> int:
 
     return result
 
-def mod(a: int, b: int) -> int:
+def rem(a: int, b: int) -> int:
 	assert b > 0
 	return a % b
 
@@ -235,6 +236,50 @@ def cot(a: float) -> float:
 
     return c / s
 
+def sech(a: float) -> float:
+    if a == 0: return 1
+    if is_infinite(a): return 0
+
+    ea = exp(a)
+    return 2 / (ea + (1 / ea))
+
+def csch(a: float) -> float:
+    if a == 0: return is_infinite(a)
+    if is_infinite(a): return 0
+
+    ea = exp(a)
+    return 2 / (ea - (1 / ea))
+
+def coth(a: float) -> float:
+    if a == 0: return is_infinite(a)
+    if is_infinite(a): return 1 if a > 0 else -1
+
+    ea = exp(2 * a)
+    return (ea + 1) / (ea - 1)
+
+def asec(a: float) -> float:
+    assert abs(a) >= 1
+    return acos(1 / a)
+
+def acsc(a: float) -> float:
+    assert abs(a) >= 1
+    return asin(1 / a)
+
+def acot(a: float) -> float:
+    return atan(1 / a)
+
+def asech(a: float) -> float:
+    assert a > 0 and a <= 1
+    return acosh(1 / a)
+
+def acsch(a: float) -> float:
+    assert a != 0
+    return asinh(1 / a)
+
+def acoth(a: float) -> float:
+    assert abs(a) > 1
+    return 0.5 * ln((a + 1) / (a - 1))
+
 def exp(a: float) -> float:
     assert is_finite(a)
     if a == 0: return 1
@@ -290,6 +335,9 @@ def ln(a: float) -> float:
         sum += y
 
     return sum + exp * LN2
+
+def log(a: float, base: int) -> float:
+    return ln(a) / ln(base)
 
 def log2(a: float) -> float:
     return ln(a) / LN2

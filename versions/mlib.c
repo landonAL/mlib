@@ -4,15 +4,16 @@
 #include <assert.h>
 #include <stdbool.h>
 
-#define PI     3.1415926535897932
-#define TAU    6.2831853071795864
-#define E      2.7182818284590452
-#define PHI    1.6180339887498948
-#define LN2    0.6931471805599453
-#define LN10   2.3025850929940457
-#define LOG2E  1.4426950408889634
-#define LOG10E 0.4342944819032518
-#define EULER  0.5772156649015329
+#define PI      3.1415926535897932
+#define TAU     6.2831853071795864
+#define E       2.7182818284590452
+#define PHI     1.6180339887498948
+#define LN2     0.6931471805599453
+#define LN10    2.3025850929940457
+#define LOG2E   1.4426950408889634
+#define LOG10E  0.4342944819032518
+#define EULER   0.5772156649015329
+#define CATALAN 0.9159655941772190
 
 double toRadian(double deg);
 double toDegree(double deg);
@@ -23,7 +24,7 @@ double abs(double a);
 double sqrt(double a);
 double isqrt(double a);
 double qisqrt(double a);
-int mod(int a, int b);
+int rem(int a, int b);
 int fdiv(double a, double b);
 double pow(double base, int pow);
 bool isPrime(int a);
@@ -46,11 +47,21 @@ double atanh(double a);
 double sec(double a);
 double csc(double a);
 double cot(double a);
+double sech(double a);
+double csch(double a);
+double coth(double a);
+double asec(double a);
+double acsc(double a);
+double acot(double a);
+double asech(double a);
+double acsch(double a);
+double acoth(double a);
 double exp(double a);
 double min(double a, double b);
 double max(double a, double b);
 double clamp(double value, double min, double max);
 double ln(double a);
+double log(double a, double base);
 double log2(double a);
 double log10(double a);
 double sum(double *data, int size);
@@ -180,7 +191,7 @@ fact(int a)
 }
 
 int
-mod(int a, int b)
+rem(int a, int b)
 {
 	assert(b > 0);
 	return a % b;
@@ -403,6 +414,77 @@ cot(double a)
 }
 
 double
+sech(double a)
+{
+    if (a == 0) return 1;
+    if (isInfinite(a)) return 0;
+
+    double ea = exp(a);
+    return 2 / (ea + (1 / ea));
+}
+
+double
+csch(double a)
+{
+    if (a == 0) return isInfinite(a);
+    if (isInfinite(a)) return 0;
+
+    double ea = exp(a);
+    return 2 / (ea - (1 / ea));
+}
+
+double
+coth(double a)
+{
+    if (a == 0) return isInfinite(a);
+    if (isInfinite(a)) return a > 0 ? 1 : -1;
+
+    double ea = exp(2 * a);
+    return (ea + 1) / (ea - 1);
+}
+
+double
+asec(double a)
+{
+    assert(abs(a) >= 1);
+    return acos(1 / a);
+}
+
+double
+acsc(double a)
+{
+    assert(abs(a) >= 1);
+    return asin(1 / a);
+}
+
+double
+acot(double a)
+{
+    return atan(1 / a);
+}
+
+double
+asech(double a)
+{
+    assert(a > 0 && a <= 1);
+    return acosh(1 / a);
+}
+
+double
+acsch(double a)
+{
+    assert(a != 0);
+    return asinh(1 / a);
+}
+
+double
+acoth(double a)
+{
+    assert(abs(a) > 1);
+    return 0.5 * ln((a + 1) / (a - 1));
+}
+
+double
 exp(double a)
 {
     assert(isFinite(a));
@@ -468,6 +550,12 @@ ln(double a)
     } while (abs(y) > 1E-15);
 
     return sum + exp * LN2;
+}
+
+double
+log(double a, double base)
+{
+    return ln(a) / ln(base)
 }
 
 double
