@@ -28,6 +28,24 @@ main()
 }
 ```
 
+### C++
+```cpp
+#include <iostream>
+
+#define MLIB_IMPLEMENTATION
+#include "mlib.c"
+
+int
+main()
+{
+    for (int i = 1; i < 11; ++i) {
+        std::cout << pow(i, 2) << "\n";
+    }
+
+    return 0;
+}
+```
+
 ### Python
 ```python
 import mlib
