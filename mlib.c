@@ -15,19 +15,6 @@
 #define LOG10E 0.4342944819032518
 #define EULER  0.5772156649015329
 
-typedef struct
-{
-	double x;
-	double y;
-} Vector2;
-
-typedef struct
-{
-	double x;
-	double y;
-	double z;
-} Vector3;
-
 double toRadian(double deg);
 double toDegree(double deg);
 int floor(double a);
@@ -67,6 +54,7 @@ double clamp(double value, double min, double max);
 double ln(double a);
 double log2(double a);
 double log10(double a);
+double sum(double *data, int size);
 double mean(double *data, int size);
 double median(double *data, int size);
 double mode(double *data, int size);
@@ -74,35 +62,6 @@ double stddev(double *data, int size);
 int gcd(int a, int b);
 int lcm(int a, int b);
 int fact(int a);
-void v2add(Vector2 a, Vector2 b);
-void v2sub(Vector2 a, Vector2 b);
-void v2mult(Vector2 a, Vector2 b);
-void v2div(Vector2 a, Vector2 b);
-void v2perp(Vector2 a);
-double v2cross(Vector2 a, Vector2 b);
-double v2project(Vector2 a);
-void v2reverse(Vector2 a);
-void v2set(Vector2 a, Vector2 b);
-void v2zero(Vector2 a);
-double v2length(Vector2 a);
-double v2lengthSq(Vector2 a);
-double v2distance(Vector2 a, Vector2 b);
-double v2distanceSq(Vector2 a, Vector2 b);
-void v2norm(Vector2 a);
-void v3add(Vector3 a, Vector3 b);
-void v3sub(Vector3 a, Vector3 b);
-void v3mult(Vector3 a, Vector3 b);
-void v3div(Vector3 a, Vector3 b);
-double v3cross(Vector3 a, Vector3 b);
-double v3project(Vector3 a);
-void v3reverse(Vector3 a);
-void v3set(Vector3 a, Vector3 b);
-void v3zero(Vector3 a);
-double v3length(Vector3 a);
-double v3lengthSq(Vector3 a);
-double v3distance(Vector3 a, Vector3 b);
-double v3distanceSq(Vector3 a, Vector3 b);
-void v3norm(Vector3 a);
 
 #endif // MLIB_C_
 
@@ -525,7 +484,7 @@ log10(double a)
 }
 
 double
-mean(double *data, int size)
+sum(double *data, int size)
 {
     assert(size > 0);
 
@@ -535,7 +494,13 @@ mean(double *data, int size)
         sum += data[i];
     }
 
-    return sum / size;
+    return sum;
+}
+
+double
+mean(double *data, int size)
+{
+    return sum(data) / size;
 }
 
 double
@@ -603,220 +568,6 @@ stddev(double *data, int size)
     }
 
     return sqrt(sum / (size - 1));
-}
-
-void
-v2add(Vector2 a, Vector2 b)
-{
-	a.x += b.x;
-	a.y += b.y;
-}
-
-void
-v2sub(Vector2 a, Vector2 b)
-{
-	a.x -= b.x;
-	a.y -= b.y;
-}
-
-void
-v2mult(Vector2 a, Vector2 b)
-{
-	a.x *= b.x;
-	a.y *= b.y;
-}
-
-void
-v2div(Vector2 a, Vector2 b)
-{
-	a.x /= b.x;
-	a.y /= b.y;
-}
-
-void
-v2perp(Vector2 a)
-{
-	a.x = -a.y;
-	a.y = a.x;
-}
-
-double
-v2cross(Vector2 a, Vector2 b)
-{
-	return (a.x * b.y) - (a.y * b.x);
-}
-
-double
-v2project(Vector2 a)
-{
-	return v2lengthSq(a) / v2length(a);
-}
-
-void
-v2reverse(Vector2 a)
-{
-	a.x = -a.x;
-	a.y = -a.y;
-}
-
-void
-v2set(Vector2 a, Vector2 b)
-{
-	a.x = b.x;
-	a.y = b.y;
-}
-
-void
-v2zero(Vector2 a)
-{
-	a.x = a.y = 0;
-}
-
-double
-v2length(Vector2 a)
-{
-	return sqrt((a.x * a.x) + (a.y * a.y));
-}
-
-double
-v2lengthSq(Vector2 a)
-{
-	return (a.x * a.x) + (a.y * a.y);
-}
-
-double
-v2distance(Vector2 a, Vector2 b)
-{
-	a.x -= b.x;
-	a.y -= b.y;
-
-	return sqrt((a.x * a.x) + (a.y * a.y));
-}
-
-double
-v2distanceSq(Vector2 a, Vector2 b)
-{
-	a.x -= b.x;
-	a.y -= b.y;
-
-	return (a.x * a.x) + (a.y * a.y);
-}
-
-void
-v2norm(Vector2 a)
-{
-	double magnitude = v2length(a);
-
-	a.x /= magnitude;
-	a.y /= magnitude;
-}
-
-void
-v3add(Vector3 a, Vector3 b)
-{
-	a.x += b.x;
-	a.y += b.y;
-	a.z += b.z;
-}
-
-void
-v3sub(Vector3 a, Vector3 b)
-{
-	a.x -= b.x;
-	a.y -= b.y;
-	a.z -= b.z;
-}
-
-void
-v3mult(Vector3 a, Vector3 b)
-{
-	a.x *= b.x;
-	a.y *= b.y;
-	a.z *= b.z;
-}
-
-void
-v3div(Vector3 a, Vector3 b)
-{
-	a.x /= b.x;
-	a.y /= b.y;
-	a.z /= b.z;
-}
-
-double
-v3cross(Vector3 a, Vector3 b)
-{
-	return (a.x * b.y) - (a.y * b.x);
-}
-
-double
-v3project(Vector3 a)
-{
-	return v3lengthSq(a) / v3length(a);
-}
-
-void
-v3reverse(Vector3 a)
-{
-	a.x = -a.x;
-	a.y = -a.y;
-	a.z = -a.z;
-}
-
-void
-v3set(Vector3 a, Vector3 b)
-{
-	a.x = b.x;
-	a.y = b.y;
-	a.z = b.z;
-}
-
-void
-v3zero(Vector3 a)
-{
-	a.x = a.y = a.z = 0;
-}
-
-double
-v3length(Vector3 a)
-{
-	return sqrt((a.x * a.x) + (a.y * a.y) + (a.z * a.z));
-}
-
-double
-v3lengthSq(Vector3 a)
-{
-	return (a.x * a.x) + (a.y * a.y) + (a.z * a.z);
-}
-
-double
-v3distance(Vector3 a, Vector3 b)
-{
-	a.x -= b.x;
-	a.y -= b.y;
-	a.z -= b.z;
-
-	return sqrt((a.x * a.x) + (a.y * a.y) + (a.z * a.z));
-}
-
-double
-v3distanceSq(Vector3 a, Vector3 b)
-{
-	a.x -= b.x;
-	a.y -= b.y;
-	a.z -= b.z;
-
-	return (a.x * a.x) + (a.y * a.y) + (a.z * a.z);
-}
-
-void
-v3norm(Vector3 a)
-{
-	double magnitude = v3length(a);
-
-	a.x /= magnitude;
-	a.y /= magnitude;
-	a.z /= magnitude;
 }
 
 #endif // MLIB_IMPLEMENTATION
