@@ -323,7 +323,6 @@ sinh(double a)
     assert(isFinite(a));
 
     if (a == 0) return 0;
-    if (isInfinite(a)) return a;
 
     double ea = exp(a);
     return (ea - (1 / ea)) / 2;
@@ -335,7 +334,6 @@ cosh(double a)
     assert(isFinite(a));
 
     if (a == 0) return 1;
-    if (isInfinite(a)) return abs(a);
 
     double ea = exp(a);
     return (ea + (1 / ea)) / 2;
@@ -347,7 +345,6 @@ tanh(double a)
     assert(isFinite(a));
 
     if (a == 0) return 0;
-    if (isInfinite(a)) return a > 0 ? 1 : -1;
 
     double ea = exp(2 * a);
     return (ea - 1) / (ea + 1);
@@ -460,7 +457,6 @@ sech(double a)
     assert(isFinite(a));
 
     if (a == 0) return 1;
-    if (isInfinite(a)) return 0;
 
     double ea = exp(a);
     return 2 / (ea + (1 / ea));
@@ -472,7 +468,6 @@ csch(double a)
     assert(isFinite(a));
 
     if (a == 0) return isInfinite(a);
-    if (isInfinite(a)) return 0;
 
     double ea = exp(a);
     return 2 / (ea - (1 / ea));
@@ -484,7 +479,6 @@ coth(double a)
     assert(isFinite(a));
 
     if (a == 0) return isInfinite(a);
-    if (isInfinite(a)) return a > 0 ? 1 : -1;
 
     double ea = exp(2 * a);
     return (ea + 1) / (ea - 1);
@@ -541,6 +535,7 @@ double
 ln(double a)
 {
     assert(isFinite(a) && a > 0);
+
     if (a == 1) return 0;
 
     int exp = 0;

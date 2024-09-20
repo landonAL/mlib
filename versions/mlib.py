@@ -190,7 +190,6 @@ def sinh(a: float) -> float:
     assert is_finite(a)
 
     if a == 0: return 0
-    if is_infinite(a): return a
 
     ea = exp(a)
     return (ea - (1 / ea)) / 2
@@ -199,7 +198,6 @@ def cosh(a: float) -> float:
     assert is_finite(a)
 
     if a == 0: return 1
-    if is_infinite(a): return abs(a)
 
     ea = exp(a)
     return (ea + (1 / ea)) / 2
@@ -208,7 +206,6 @@ def tanh(a: float) -> float:
     assert is_finite(a)
 
     if a == 0: return 0
-    if is_infinite(a): return 1 if a > 0 else -1
 
     ea = exp(2 * a)
     return (ea - 1) / (ea + 1)
@@ -286,7 +283,6 @@ def sech(a: float) -> float:
     assert is_finite(a)
 
     if a == 0: return 1
-    if is_infinite(a): return 0
 
     ea = exp(a)
     return 2 / (ea + (1 / ea))
@@ -295,7 +291,6 @@ def csch(a: float) -> float:
     assert is_finite(a)
 
     if a == 0: return is_infinite(a)
-    if is_infinite(a): return 0
 
     ea = exp(a)
     return 2 / (ea - (1 / ea))
@@ -304,7 +299,6 @@ def coth(a: float) -> float:
     assert is_finite(a)
 
     if a == 0: return is_infinite(a)
-    if is_infinite(a): return 1 if a > 0 else -1
 
     ea = exp(2 * a)
     return (ea + 1) / (ea - 1)
