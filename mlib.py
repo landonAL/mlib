@@ -115,20 +115,19 @@ def is_prime(a: int) -> bool:
     return True
 
 def is_finite(a: float) -> bool:
-				return not is_infinite(a) and not is_nan(a)
+	return not is_infinite(a) and not is_nan(a)
 
 def is_infinite(a: float) -> bool:
-				return a / a != a / a
+	return a / a != a / a
 
 def is_nan(a: float) -> bool:
-				return a != a
+	return a != a
 
 def sin(a: float) -> float:
     while a > PI: a -= 2 * PI
     while a < -PI: a += 2 * PI
 
-    result = a
-    term = a
+    result = term = a
 
     for i in range(1, 8):
         term *= -a * a / ((2 * i) * (2 * i + 1))
@@ -140,8 +139,7 @@ def cos(a: float) -> float:
     while a > PI: a -= 2 * PI
     while a < -PI: a += 2 * PI
 
-    result = 1
-    term = 1
+    result = term = 1
 
     for i in range(1, 8):
         term *= -a * a / ((2 * i - 1) * (2 * i))
@@ -150,12 +148,12 @@ def cos(a: float) -> float:
     return result
 
 def tan(a: float) -> float:
-    s = sin(a);
-    c = cos(a);
+    s = sin(a)
+    c = cos(a)
 
     if c == 0: return is_infinite(a)
 
-    return s / c;
+    return s / c
 
 def sinh(a: float) -> float:
     if a == 0: return 0
@@ -181,8 +179,8 @@ def tanh(a: float) -> float:
 def asin(a: float) -> float:
     assert a >= -1 and a <= 1
 
-    a2 = pow(a, 2);
-    return a + a * a2 * (1 / 6 + a2 * (3 / 40 + a2 * (5 / 112 + a2 * 35 / 1152)));
+    a2 = pow(a, 2)
+    return a + a * a2 * (1 / 6 + a2 * (3 / 40 + a2 * (5 / 112 + a2 * 35 / 1152)))
 
 def acos(a: float) -> float:
     assert a >= -1 and a <= 1
@@ -274,20 +272,15 @@ def ln(a: float) -> float:
 
     while a > 2:
         a /= 2
-        exp += 1
 
     while a < 1:
         a *= 2
-        exp -= 1
-
-    a -= 1
 
     y = a
     sum = y
     i = 1
 
     while abs(y) > 1E-15:
-        i += 1
         y *= -a * (i - 1) / i
         sum += y
 
@@ -311,7 +304,7 @@ def sum(data: List[float]) -> float:
 
 def mean(data: List[float]) -> float:
     assert len(data) > 0
-    return sum(data) / len(data);
+    return sum(data) / len(data)
 
 def median(data: List[float]) -> float:
     assert len(data) > 0
