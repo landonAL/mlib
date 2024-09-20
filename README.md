@@ -7,7 +7,7 @@ A mathematical library that does not have any dependencies and aims to provide a
 
 The library itself does not need to be built. You can simply copy-paste mlib into your project directory and include it.
 
-In its primary language, MLib is a classic [stb-style](https://github.com/nothings/stb) single header library, meaning that by default it acts like a header, but if you add `#define MLIB_IMPLEMENTATION` prior to including the library it acts like a source file.
+In its primary language, which is C, MLib is a classic [stb-style](https://github.com/nothings/stb) single header library, meaning that by default it acts like a header, but if you add `#define MLIB_IMPLEMENTATION` prior to including the library it acts like a source file.
 
 ## Example
 ### C
@@ -46,6 +46,25 @@ main()
 }
 ```
 
+### CSharp
+```cs
+using static mlib;
+
+namespace Main
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            for (int i = 0; i < 11; ++i)
+            {
+                Console.WriteLine(mlib.pow(i, 2));
+            }
+        }
+    }
+}
+```
+
 ### Python
 ```python
 import mlib
@@ -56,21 +75,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
-
-### CSharp
-```cs
-using static mlib;
-
-namespace Main
-{
-    class Program
-    {
-        static void Main(string[] args) {
-            Console.WriteLine(mlib.pow(2, 8));
-        }
-    }
-}
 ```
 
 ### Javascript
@@ -84,6 +88,17 @@ function start() {
 }
 
 start();
+```
+
+### Rust
+```rust
+pub mod mlib;
+
+fn main() {
+    for i in 1..11 {
+        println!("{}", mlib::pow(i as f64, 2));
+    }
+}
 ```
 
 ## Known issues
