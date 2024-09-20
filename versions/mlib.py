@@ -272,15 +272,20 @@ def ln(a: float) -> float:
 
     while a > 2:
         a /= 2
+        exp += 1
 
     while a < 1:
         a *= 2
+        exp -= 1
+
+    a -= 1
 
     y = a
     sum = y
     i = 1
 
     while abs(y) > 1E-15:
+        i += 1
         y *= -a * (i - 1) / i
         sum += y
 
