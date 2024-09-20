@@ -491,48 +491,6 @@ coth(double a)
 }
 
 double
-asec(double a)
-{
-    assert(isFinite(a) && abs(a) >= 1);
-    return acos(1 / a);
-}
-
-double
-acsc(double a)
-{
-    assert(isFinite(a) && abs(a) >= 1);
-    return asin(1 / a);
-}
-
-double
-acot(double a)
-{
-    assert(isFinite(a));
-    return atan(1 / a);
-}
-
-double
-asech(double a)
-{
-    assert(isFinite(a) && a > 0 && a <= 1);
-    return acosh(1 / a);
-}
-
-double
-acsch(double a)
-{
-    assert(isFinite(a) && a != 0);
-    return asinh(1 / a);
-}
-
-double
-acoth(double a)
-{
-    assert(isFinite(a) && abs(a) > 1);
-    return 0.5 * ln((a + 1) / (a - 1));
-}
-
-double
 exp(double a)
 {
     assert(isFinite(a));
@@ -608,7 +566,7 @@ ln(double a)
 double
 log(double a, double base)
 {
-    assert(isFinite(a), isFinite(base));
+    assert(isFinite(a) && isFinite(base));
     return ln(a) / ln(base);
 }
 

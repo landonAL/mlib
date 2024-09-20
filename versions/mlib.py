@@ -309,30 +309,6 @@ def coth(a: float) -> float:
     ea = exp(2 * a)
     return (ea + 1) / (ea - 1)
 
-def asec(a: float) -> float:
-    assert is_finite(a) and abs(a) >= 1
-    return acos(1 / a)
-
-def acsc(a: float) -> float:
-    assert is_finite(a) and abs(a) >= 1
-    return asin(1 / a)
-
-def acot(a: float) -> float:
-    assert is_finite(a)
-    return atan(1 / a)
-
-def asech(a: float) -> float:
-    assert is_finite(a) and a > 0 and a <= 1
-    return acosh(1 / a)
-
-def acsch(a: float) -> float:
-    assert is_finite(a) and a != 0
-    return asinh(1 / a)
-
-def acoth(a: float) -> float:
-    assert is_finite(a) and abs(a) > 1
-    return 0.5 * ln((a + 1) / (a - 1))
-
 def exp(a: float) -> float:
     assert is_finite(a)
 
