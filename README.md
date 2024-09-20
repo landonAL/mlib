@@ -73,6 +73,19 @@ namespace Main
 }
 ```
 
+### Javascript
+```js
+const mlib = require('./mlib.js');
+
+function start() {
+    for (let i = 0; i < 11; ++i) {
+        console.log(mlib.pow(i, 2));
+    }
+}
+
+start();
+```
+
 ## Known issues
 None currently found
     
