@@ -182,8 +182,6 @@ def tan(a: float) -> float:
     s = sin(a)
     c = cos(a)
 
-    if c == 0: return is_infinite(a)
-
     return s / c
 
 def sinh(a: float) -> float:
@@ -257,7 +255,6 @@ def sec(a: float) -> float:
     assert is_finite(a)
 
     c = cos(a)
-    if c == 0: return is_infinite(a)
 
     return 1 / c
 
@@ -265,7 +262,6 @@ def csc(a: float) -> float:
     assert is_finite(a)
 
     s = sin(a)
-    if s == 0: return is_infinite(a)
 
     return 1 / s
 
@@ -274,8 +270,6 @@ def cot(a: float) -> float:
 
     s = sin(a)
     c = cos(a)
-
-    if s == 0: return is_infinite(a)
 
     return c / s
 
@@ -290,15 +284,11 @@ def sech(a: float) -> float:
 def csch(a: float) -> float:
     assert is_finite(a)
 
-    if a == 0: return is_infinite(a)
-
     ea = exp(a)
     return 2 / (ea - (1 / ea))
 
 def coth(a: float) -> float:
     assert is_finite(a)
-
-    if a == 0: return is_infinite(a)
 
     ea = exp(2 * a)
     return (ea + 1) / (ea - 1)

@@ -57,7 +57,7 @@ public static class mlib
         Debug.Assert(IsFinite(a) && a >= 0);
         if (a == 0) return 0;
 
-        double b = a, root;
+        double b = a, root = 0;
 
         for (int i = 1; i < 17; ++i)
         {
@@ -78,15 +78,15 @@ public static class mlib
         Debug.Assert(IsFinite(a));
 
         long i;
-        float x2, y;
+        double x2, y;
 
-        x2 = (float) a * 0.5;
+        x2 = a * 0.5;
         y = (float) a;
         i = BitConverter.DoubleToInt64Bits(y);
         i = 0x5f3759df - (i >> 1);
         y = BitConverter.Int64BitsToDouble(i);
-        y *= (1.5f - (x2 * y * y));
-        y *= (1.5f - (x2 * y * y));
+        y *= (1.5 - (x2 * y * y));
+        y *= (1.5 - (x2 * y * y));
 
         return y;
     }
@@ -95,8 +95,8 @@ public static class mlib
     {
         Debug.Assert(IsFinite(a) && IsFinite(b));
 
-        a = Abs(a);
-        b = Abs(b);
+        if (a < 0) a = -a;
+        if (b < 0) b = -b;
 
         while (b != 0)
         {
@@ -116,7 +116,7 @@ public static class mlib
         int result = GCD(a, b);
         if (result == 0) return 0;
 
-        return Abs(a / result * b);
+        return a * b >= 0 ? a / result * b : -(a / result * b);
     }
 
     public static int Fact(int a)
@@ -233,8 +233,6 @@ public static class mlib
         double s = Sin(a);
         double c = Cos(a);
 
-        if (c == 0) return IsInfinite(a);
-
         return s / c;
     }
 
@@ -334,7 +332,6 @@ public static class mlib
         Debug.Assert(IsFinite(a));
 
         double c = Cos(a);
-        if (c == 0) return IsInfinite(a);
 
         return 1 / c;
     }
@@ -344,7 +341,6 @@ public static class mlib
         Debug.Assert(IsFinite(a));
 
         double s = Sin(a);
-        if (s == 0) return IsInfinite(a);
 
         return 1 / s;
     }
@@ -355,8 +351,6 @@ public static class mlib
 
         double s = Sin(a);
         double c = Cos(a);
-
-        if (s == 0) return IsInfinite(a);
 
         return c / s;
     }
@@ -375,8 +369,6 @@ public static class mlib
     {
         Debug.Assert(IsFinite(a));
 
-        if (a == 0) return IsInfinite(a);
-
         double ea = Math.Exp(a);
         return 2 / (ea - (1 / ea));
     }
@@ -384,8 +376,6 @@ public static class mlib
     public static double Coth(double a)
     {
         Debug.Assert(IsFinite(a));
-
-        if (a == 0) return IsInfinite(a);
 
         double ea = Math.Exp(2 * a);
         return (ea + 1) / (ea - 1);

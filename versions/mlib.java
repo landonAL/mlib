@@ -201,8 +201,6 @@ public class mlib {
         double s = sin(a);
         double c = cos(a);
 
-        if (c == 0) return isInfinite(a);
-
         return s / c;
     }
 
@@ -289,7 +287,6 @@ public class mlib {
         assert isFinite(a);
 
         double c = cos(a);
-        if (c == 0) return isInfinite(a);
 
         return 1 / c;
     }
@@ -298,7 +295,6 @@ public class mlib {
         assert isFinite(a);
 
         double s = sin(a);
-        if (s == 0) return isInfinite(a);
 
         return 1 / s;
     }
@@ -308,8 +304,6 @@ public class mlib {
 
         double s = sin(a);
         double c = cos(a);
-
-        if (s == 0) return isInfinite(a);
 
         return c / s;
     }
@@ -325,8 +319,6 @@ public class mlib {
 
     public static double csch(double a) {
         assert isFinite(a);
-
-        if (a == 0) return isInfinite(a);
 
         double ea = exp(a);
         return 2 / (ea - (1 / ea));

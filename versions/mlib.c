@@ -312,8 +312,6 @@ tan(double a)
     double s = sin(a);
     double c = cos(a);
 
-    if (c == 0) return isInfinite(a);
-
     return s / c;
 }
 
@@ -422,7 +420,6 @@ sec(double a)
     assert(isFinite(a));
 
     double c = cos(a);
-    if (c == 0) return isInfinite(a);
 
     return 1 / c;
 }
@@ -433,7 +430,6 @@ csc(double a)
     assert(isFinite(a));
 
     double s = sin(a);
-    if (s == 0) return isInfinite(a);
 
     return 1 / s;
 }
@@ -445,8 +441,6 @@ cot(double a)
 
     double s = sin(a);
     double c = cos(a);
-
-    if (s == 0) return isInfinite(a);
 
     return c / s;
 }
@@ -467,8 +461,6 @@ csch(double a)
 {
     assert(isFinite(a));
 
-    if (a == 0) return isInfinite(a);
-
     double ea = exp(a);
     return 2 / (ea - (1 / ea));
 }
@@ -477,8 +469,6 @@ double
 coth(double a)
 {
     assert(isFinite(a));
-
-    if (a == 0) return isInfinite(a);
 
     double ea = exp(2 * a);
     return (ea + 1) / (ea - 1);
