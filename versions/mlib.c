@@ -125,6 +125,7 @@ double
 sqrt(double a)
 {
 	assert(isFinite(a) && a >= 0);
+
 	if (a == 0) return 0;
 
 	double b = a, root;
@@ -149,13 +150,13 @@ qisqrt(double a)
     assert(isFinite(a));
 
     long i;
-    float x2, y;
+    double x2, y;
 
     x2 = a * 0.5;
     y  = a;
     i  = *(long *) &y;
     i  = 0x5f3759df - (i >> 1);
-    y  = *(float *) &i;
+    y  = *(double *) &i;
     y  *= (1.5 - (x2 * y * y));
     y  *= (1.5 - (x2 * y * y));
 

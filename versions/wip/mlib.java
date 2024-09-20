@@ -64,13 +64,13 @@ public class mlib {
         assert isFinite(a);
 
         long i = 0;
-        float x2 = 0, y = 0;
+        double x2 = 0, y = 0;
 
         x2 = a * 0.5;
         y = a;
-        i = Float.floatToRawIntBits(y);
+        i = Double.floatToRawIntBits(y);
         i = 0x5f3759df - (i >> 1);
-        y = Float.intBitsToFloat((int) i);
+        y = Double.intBitsToFloat((int) i);
         y *= (1.5 - (x2 * y * y));
         y *= (1.5 - (x2 * y * y));
 

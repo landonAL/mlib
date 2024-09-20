@@ -43,6 +43,7 @@ function abs(a) {
 
 function sqrt(a) {
 		if (!Number.isFinite(a) || a < 0) throw new Error("Input must be finite and non-negative");
+
 		if (a === 0) return 0;
 
 		let b = a, root;

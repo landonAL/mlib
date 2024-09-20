@@ -55,6 +55,7 @@ public static class mlib
     public static double Sqrt(double a)
     {
         Debug.Assert(IsFinite(a) && a >= 0);
+
         if (a == 0) return 0;
 
         double b = a, root = 0;
@@ -81,7 +82,7 @@ public static class mlib
         double x2, y;
 
         x2 = a * 0.5;
-        y = (float) a;
+        y = a;
         i = BitConverter.DoubleToInt64Bits(y);
         i = 0x5f3759df - (i >> 1);
         y = BitConverter.Int64BitsToDouble(i);
