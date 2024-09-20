@@ -46,6 +46,24 @@ main()
 }
 ```
 
+### CSharp
+```cs
+using static mlib;
+
+namespace Main
+{
+    class Program
+    {
+        static void Main(string[] args) {
+            for (int i = 0; i < 11; ++i)
+            {
+                Console.WriteLine(mlib.pow(i, 2));
+            }
+        }
+    }
+}
+```
+
 ### Python
 ```python
 import mlib
@@ -56,21 +74,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
-
-### CSharp
-```cs
-using static mlib;
-
-namespace Main
-{
-    class Program
-    {
-        static void Main(string[] args) {
-            Console.WriteLine(mlib.pow(2, 8));
-        }
-    }
-}
 ```
 
 ### Javascript
