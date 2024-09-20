@@ -90,6 +90,17 @@ function start() {
 start();
 ```
 
+### Rust
+```rust
+pub mod mlib;
+
+fn main() {
+    for i in 1..11 {
+        println!("{}", mlib::pow(i as f64, 2));
+    }
+}
+```
+
 ## Known issues
 None currently found
     
