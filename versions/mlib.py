@@ -11,11 +11,11 @@ LOG2E  = 1.4426950408889634
 LOG10E = 0.4342944819032518
 EULER  = 0.5772156649015329
 
-def toBits(a):
+def to_bits(a):
     s = struct.pack('>f', a)
     return struct.unpack('>l', s)[0]
 
-def toFloat(a):
+def to_float(a):
     s = struct.pack('>l', a)
     return struct.unpack('>f', s)[0]
 
@@ -53,14 +53,14 @@ def isqrt(a: float) -> float:
 
 def qisqrt(a: float) -> float:
     x2 = a * 0.5
-    y = a
-    i = toBits(y)
-    i = 0x5FE6EB50C7B537A9 - (i >> 1)
-    y = toFloat(i)
-    y *= (1.5 - (x2 * y * y))
-    y *= (1.5 - (x2 * y * y))
+    y  = a
+    i  = to_bits(y)
+    i  = 0x5f3759df - (i >> 1)
+    y  = to_float(i)
+    y  *= (1.5 - (x2 * y * y))
+    y  *= (1.5 - (x2 * y * y))
 
-    return y
+    return y;
 
 def gcd(a: int, b: int) -> int:
     if a < 0: a = -a

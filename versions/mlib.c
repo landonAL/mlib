@@ -2,7 +2,6 @@
 #define MLIB_C_
 
 #include <assert.h>
-#include <bits/types/siginfo_t.h>
 #include <stdbool.h>
 
 #define PI     3.1415926535897932
@@ -130,15 +129,15 @@ double
 qisqrt(double a)
 {
     long i;
-    double x2, y;
+    float x2, y;
 
     x2 = a * 0.5;
-    y = a;
-    i = *(long*) &y;
-    i = 0X5FE6EB50C7B537A9 - (i >> 1);
-    y = *(double*) &i;
-    y *= (1.5 - (x2 * y * y));
-    y *= (1.5 - (x2 * y * y));
+    y  = a;
+    i  = *(long *) &y;
+    i  = 0x5f3759df - (i >> 1);
+    y  = *(float *) &i;
+    y  *= (1.5 - (x2 * y * y));
+    y  *= (1.5 - (x2 * y * y));
 
     return y;
 }
