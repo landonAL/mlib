@@ -248,7 +248,7 @@ def exp(a: float) -> float:
         term *= r / i
         result += term
 
-        if term < 1e-15 * result: break
+        if term < 1E-15 * result: break
 
     return result * pow(2, k)
 
