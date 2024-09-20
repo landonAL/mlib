@@ -9,8 +9,14 @@ The library itself does not need to be built. You can simply copy-paste [./mlib.
 
 MLib is a classic [stb-style](https://github.com/nothings/stb) single header library, meaning that by default it acts like a header, but if you add `#define MLIB_IMPLEMENTATION` prior to including the library it acts like a source file.
 
-## Example
+## Supported Languages
 
+C
+C++
+Python
+
+## Example
+### C
 ```c
 #include <stdio.h>
 
@@ -21,12 +27,25 @@ int
 main()
 {
     for (int i = 1; i < 11; ++i) {
-        printf("%f\n", powd(i, 2));
+        printf("%f\n", pow(i, 2));
     }
 
     return 0;
 }
 ```
 
+### Python
+```python
+import mlib
+
+def main():
+    for i in range(11):
+        print(pow(i, 2))
+
+if __name__ == "__main__":
+    main()
+```
+
 ## Known issues
 None currently found
+    
