@@ -102,7 +102,7 @@ round(double a)
 double
 abs(double a)
 {
-	return a < 0 ? a * -1 : a;
+	return a < 0 ? -a : a;
 }
 
 double
