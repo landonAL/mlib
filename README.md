@@ -65,6 +65,20 @@ namespace Main
 }
 ```
 
+### C3
+```c
+import mlib;
+import std::io;
+
+fn int main()
+{
+    for (int i = 1; i < 11; ++i)
+    {
+        io::printn(mlib::pow(i, 2));
+    }
+}
+```
+
 ### Python
 ```python
 import mlib
