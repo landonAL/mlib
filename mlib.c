@@ -102,7 +102,7 @@ round(double a)
 double
 abs(double a)
 {
-	return a < 0 ? a * -1 : a;
+	return a < 0 ? -a : a;
 }
 
 double
@@ -500,7 +500,7 @@ sum(double *data, int size)
 double
 mean(double *data, int size)
 {
-    return sum(data, size) / size;
+    return sum(data) / size;
 }
 
 double

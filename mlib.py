@@ -35,7 +35,7 @@ def round(a: float) -> int:
 	return int(a + 1) if a + 0.5 >= int(a + 1) else int(a)
 
 def abs(a: float) -> float:
-	return a * -1 if a < 0 else a
+	return -a if a < 0 else a
 
 def sqrt(a: float) -> float:
 	assert a >= 0
