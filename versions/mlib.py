@@ -13,33 +13,44 @@ EULER   = 0.5772156649015329
 CATALAN = 0.9159655941772190
 
 def to_bits(a):
+    assert is_finite(a)
+
     s = struct.pack('>f', a)
     return struct.unpack('>l', s)[0]
 
 def to_float(a):
+    assert is_finite(a)
+
     s = struct.pack('>l', a)
     return struct.unpack('>f', s)[0]
 
 def to_radian(deg: float) -> float:
-	return deg * (PI / 180)
+    assert is_finite(deg)
+    return deg * (PI / 180)
 
 def to_degree(rad: float) -> float:
-	return rad * (180 / PI)
+    assert is_finite(rad)
+    return rad * (180 / PI)
 
 def floor(a: float) -> int:
-	return int(a)
+    assert is_finite(a)
+    return int(a)
 
 def ceil(a: float) -> int:
-	return int(a + 1) if a > int(a) else int(a)
+    assert is_finite(a)
+    return int(a + 1) if a > int(a) else int(a)
 
 def round(a: float) -> int:
-	return int(a + 1) if a + 0.5 >= int(a + 1) else int(a)
+    assert is_finite(a)
+    return int(a + 1) if a + 0.5 >= int(a + 1) else int(a)
 
 def abs(a: float) -> float:
-	return -a if a < 0 else a
+    assert is_finite(a)
+    return -a if a < 0 else a
 
 def sqrt(a: float) -> float:
-	assert a >= 0
+	assert is_finite(a) and a >= 0
+
 	if a == 0: return 0
 
 	b, root = a, 0
@@ -50,9 +61,12 @@ def sqrt(a: float) -> float:
 	return root
 
 def isqrt(a: float) -> float:
-	return 1 / sqrt(a)
+    assert is_finite(a)
+    return 1 / sqrt(a)
 
 def qisqrt(a: float) -> float:
+    assert is_finite(a)
+
     x2 = a * 0.5
     y  = a
     i  = to_bits(y)
@@ -64,6 +78,8 @@ def qisqrt(a: float) -> float:
     return y
 
 def gcd(a: int, b: int) -> int:
+    assert is_finite(a) and is_finite(b)
+
     if a < 0: a = -a
     if b < 0: b = -b
 
@@ -76,12 +92,16 @@ def gcd(a: int, b: int) -> int:
     return a
 
 def lcm(a: int, b: int) -> int:
+    assert is_finite(a) and is_finite(b)
+
     result = gcd(a, b)
     if result == 0: return 0
 
     return a // result * b if a * b >= 0 else -(a // result * b)
 
 def fact(a: int) -> int:
+    assert is_finite(a)
+
     result = 1
 
     for i in range(2, a + 1):
@@ -90,14 +110,16 @@ def fact(a: int) -> int:
     return result
 
 def rem(a: int, b: int) -> int:
-	assert b > 0
+	assert is_finite(a) and is_finite(b) and b > 0
 	return a % b
 
 def fdiv(a: float, b: float) -> int:
-	assert b > 0
+	assert is_finite(a) and is_finite(b) and b > 0
 	return floor(a / b)
 
 def pow(base: float, power: int) -> float:
+    assert is_finite(base) and is_finite(power)
+
     if power == 0: return 1
 
     product = base
@@ -107,6 +129,8 @@ def pow(base: float, power: int) -> float:
     return product
 
 def is_prime(a: int) -> bool:
+    assert is_finite(a)
+
     if a < 2: return False
     if a > 2 and a % 2 == 0: return False
 
@@ -125,6 +149,8 @@ def is_nan(a: float) -> bool:
 	return a != a
 
 def sin(a: float) -> float:
+    assert is_finite(a)
+
     while a > PI: a -= 2 * PI
     while a < -PI: a += 2 * PI
 
@@ -137,6 +163,8 @@ def sin(a: float) -> float:
     return result
 
 def cos(a: float) -> float:
+    assert is_finite(a)
+
     while a > PI: a -= 2 * PI
     while a < -PI: a += 2 * PI
 
@@ -149,6 +177,8 @@ def cos(a: float) -> float:
     return result
 
 def tan(a: float) -> float:
+    assert is_finite(a)
+
     s = sin(a)
     c = cos(a)
 
@@ -157,6 +187,8 @@ def tan(a: float) -> float:
     return s / c
 
 def sinh(a: float) -> float:
+    assert is_finite(a)
+
     if a == 0: return 0
     if is_infinite(a): return a
 
@@ -164,6 +196,8 @@ def sinh(a: float) -> float:
     return (ea - (1 / ea)) / 2
 
 def cosh(a: float) -> float:
+    assert is_finite(a)
+
     if a == 0: return 1
     if is_infinite(a): return abs(a)
 
@@ -171,6 +205,8 @@ def cosh(a: float) -> float:
     return (ea + (1 / ea)) / 2
 
 def tanh(a: float) -> float:
+    assert is_finite(a)
+
     if a == 0: return 0
     if is_infinite(a): return 1 if a > 0 else -1
 
@@ -178,19 +214,22 @@ def tanh(a: float) -> float:
     return (ea - 1) / (ea + 1)
 
 def asin(a: float) -> float:
-    assert a >= -1 and a <= 1
+    assert is_finite(a) and a >= -1 and a <= 1
 
     a2 = pow(a, 2)
     return a + a * a2 * (1 / 6 + a2 * (3 / 40 + a2 * (5 / 112 + a2 * 35 / 1152)))
 
 def acos(a: float) -> float:
-    assert a >= -1 and a <= 1
+    assert is_finite(a) and a >= -1 and a <= 1
     return (PI / 2) - asin(a)
 
 def atan(a: float) -> float:
+    assert is_finite(a)
     return a / (1.28 * pow(a, 2))
 
 def atan2(a: float, b: float) -> float:
+    assert is_finite(a) and is_finite(b)
+
     if b == 0:
         if a > 0: return PI / 2
         if a < 0: return -PI / 2
@@ -206,29 +245,36 @@ def atan2(a: float, b: float) -> float:
     return result
 
 def asinh(a: float) -> float:
+    assert is_finite(a)
     return ln(a + sqrt(a * a + 1))
 
 def acosh(a: float) -> float:
-    assert a >= 1
+    assert is_finite(a) and a >= 1
     return ln(a + sqrt(a * a - 1))
 
 def atanh(a: float) -> float:
-    assert a > -1 and a < 1
+    assert is_finite(a) and a > -1 and a < 1
     return 0.5 * ln((1 + a) / (1 - a))
 
 def sec(a: float) -> float:
+    assert is_finite(a)
+
     c = cos(a)
     if c == 0: return is_infinite(a)
 
     return 1 / c
 
 def csc(a: float) -> float:
+    assert is_finite(a)
+
     s = sin(a)
     if s == 0: return is_infinite(a)
 
     return 1 / s
 
 def cot(a: float) -> float:
+    assert is_finite(a)
+
     s = sin(a)
     c = cos(a)
 
@@ -237,6 +283,8 @@ def cot(a: float) -> float:
     return c / s
 
 def sech(a: float) -> float:
+    assert is_finite(a)
+
     if a == 0: return 1
     if is_infinite(a): return 0
 
@@ -244,6 +292,8 @@ def sech(a: float) -> float:
     return 2 / (ea + (1 / ea))
 
 def csch(a: float) -> float:
+    assert is_finite(a)
+
     if a == 0: return is_infinite(a)
     if is_infinite(a): return 0
 
@@ -251,6 +301,8 @@ def csch(a: float) -> float:
     return 2 / (ea - (1 / ea))
 
 def coth(a: float) -> float:
+    assert is_finite(a)
+
     if a == 0: return is_infinite(a)
     if is_infinite(a): return 1 if a > 0 else -1
 
@@ -258,30 +310,32 @@ def coth(a: float) -> float:
     return (ea + 1) / (ea - 1)
 
 def asec(a: float) -> float:
-    assert abs(a) >= 1
+    assert is_finite(a) and abs(a) >= 1
     return acos(1 / a)
 
 def acsc(a: float) -> float:
-    assert abs(a) >= 1
+    assert is_finite(a) and abs(a) >= 1
     return asin(1 / a)
 
 def acot(a: float) -> float:
+    assert is_finite(a)
     return atan(1 / a)
 
 def asech(a: float) -> float:
-    assert a > 0 and a <= 1
+    assert is_finite(a) and a > 0 and a <= 1
     return acosh(1 / a)
 
 def acsch(a: float) -> float:
-    assert a != 0
+    assert is_finite(a) and a != 0
     return asinh(1 / a)
 
 def acoth(a: float) -> float:
-    assert abs(a) > 1
+    assert is_finite(a) and abs(a) > 1
     return 0.5 * ln((a + 1) / (a - 1))
 
 def exp(a: float) -> float:
     assert is_finite(a)
+
     if a == 0: return 1
 
     k = int(a * LOG2E)
@@ -298,19 +352,24 @@ def exp(a: float) -> float:
     return result * pow(2, k)
 
 def min(a: float, b: float) -> float:
+    assert is_finite(a) and is_finite(b)
     return a if a < b else b
 
 def max(a: float, b: float) -> float:
+    assert is_finite(a) and is_finite(b)
     return a if a > b else b
 
 def clamp(value: float, min_val: float, max_val: float) -> float:
+    assert is_finite(value) and is_finite(min_val) and is_finite(max_val)
+
     if value < min_val: return min_val
     if value > max_val: return max_val
 
     return value
 
 def ln(a: float) -> float:
-    assert a > 0
+    assert is_finite(a) and a > 0
+
     if a == 1: return 0
 
     exp = 0
@@ -337,16 +396,19 @@ def ln(a: float) -> float:
     return sum + exp * LN2
 
 def log(a: float, base: int) -> float:
+    assert is_finite(a) and is_finite(base)
     return ln(a) / ln(base)
 
 def log2(a: float) -> float:
+    assert is_finite(a)
     return ln(a) / LN2
 
 def log10(a: float) -> float:
+    assert is_finite(a)
     return ln(a) / LN10
 
 def sum(data: List[float]) -> float:
-    assert len(data) > 0
+    assert is_finite(len(data)) and len(data) > 0
 
     sum = 0
 
@@ -356,11 +418,11 @@ def sum(data: List[float]) -> float:
     return sum
 
 def mean(data: List[float]) -> float:
-    assert len(data) > 0
+    assert is_finite(len(data)) and len(data) > 0
     return sum(data) / len(data)
 
 def median(data: List[float]) -> float:
-    assert len(data) > 0
+    assert is_finite(len(data)) and len(data) > 0
 
     size = len(data)
 
@@ -373,7 +435,7 @@ def median(data: List[float]) -> float:
     else: return data[size // 2]
 
 def mode(data: List[float]) -> float:
-    assert len(data) > 0
+    assert is_finite(len(data)) and len(data) > 0
 
     mode = data[0]
     max_count = 1
@@ -395,7 +457,7 @@ def mode(data: List[float]) -> float:
     return mode
 
 def stddev(data: List[float]) -> float:
-    assert len(data) > 1
+    assert is_finite(len(data)) and len(data) > 1
 
     size = len(data)
     m = mean(data)

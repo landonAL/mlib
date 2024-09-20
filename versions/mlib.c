@@ -80,30 +80,35 @@ int fact(int a);
 double
 toRadian(double deg)
 {
+    assert(isFinite(deg));
 	return deg * (PI / 180);
 }
 
 double
 toDegree(double rad)
 {
+    assert(isFinite(rad));
 	return rad * (180 / PI);
 }
 
 int
 floor(double a)
 {
+    assert(isFinite(a));
 	return (int) a;
 }
 
 int
 ceil(double a)
 {
+    assert(isFinite(a));
 	return a > (int) a ? (int) a + 1 : (int) a;
 }
 
 int
 round(double a)
 {
+    assert(isFinite(a));
 	return a + 0.5 >= (int) a + 1
 		? (int) a + 1
 		: (int) a;
@@ -112,13 +117,14 @@ round(double a)
 double
 abs(double a)
 {
+    assert(isFinite(a));
 	return a < 0 ? -a : a;
 }
 
 double
 sqrt(double a)
 {
-	assert(a >= 0);
+	assert(isFinite(a) && a >= 0);
 	if (a == 0) return 0;
 
 	double b = a, root;
@@ -133,12 +139,15 @@ sqrt(double a)
 double
 isqrt(double a)
 {
+    assert(isFinite(a));
     return 1 / sqrt(a);
 }
 
 double
 qisqrt(double a)
 {
+    assert(isFinite(a));
+
     long i;
     float x2, y;
 
@@ -156,6 +165,8 @@ qisqrt(double a)
 int
 gcd(int a, int b)
 {
+    assert(isFinite(a) && isFinite(b));
+
     a = abs(a);
     b = abs(b);
 
@@ -172,6 +183,8 @@ gcd(int a, int b)
 int
 lcm(int a, int b)
 {
+    assert(isFinite(a) && isFinite(b));
+
     int result = gcd(a, b);
     if (result == 0) return 0;
 
@@ -181,6 +194,8 @@ lcm(int a, int b)
 int
 fact(int a)
 {
+    assert(isFinite(a));
+
     int result = 1;
 
     for (int i = 2; i <= a; ++i) {
@@ -193,20 +208,22 @@ fact(int a)
 int
 rem(int a, int b)
 {
-	assert(b > 0);
+	assert(isFinite(a) && isFinite(b) && b > 0);
 	return a % b;
 }
 
 int
 fdiv(double a, double b)
 {
-	assert(b > 0);
+	assert(isFinite(a) && isFinite(b) && b > 0);
 	return floor(a / b);
 }
 
 double
 pow(double base, int pow)
 {
+    assert(isFinite(base) && isFinite(pow));
+
 	if (pow == 0) return 1;
 
 	double product = base;
@@ -219,6 +236,8 @@ pow(double base, int pow)
 bool
 isPrime(int a)
 {
+    assert(isFinite(a));
+
 	if (a < 2) return false;
 	if (a > 2 && a % 2 == 0) return false;
 
@@ -250,6 +269,8 @@ isNaN(double a)
 double
 sin(double a)
 {
+    assert(isFinite(a));
+
     while (a > PI) a -= 2 * PI;
     while (a < -PI) a += 2 * PI;
 
@@ -267,6 +288,8 @@ sin(double a)
 double
 cos(double a)
 {
+    assert(isFinite(a));
+
     while (a > PI) a -= 2 * PI;
     while (a < -PI) a += 2 * PI;
 
@@ -284,6 +307,8 @@ cos(double a)
 double
 tan(double a)
 {
+    assert(isFinite(a));
+
     double s = sin(a);
     double c = cos(a);
 
@@ -295,6 +320,8 @@ tan(double a)
 double
 sinh(double a)
 {
+    assert(isFinite(a));
+
     if (a == 0) return 0;
     if (isInfinite(a)) return a;
 
@@ -305,6 +332,8 @@ sinh(double a)
 double
 cosh(double a)
 {
+    assert(isFinite(a));
+
     if (a == 0) return 1;
     if (isInfinite(a)) return abs(a);
 
@@ -315,6 +344,8 @@ cosh(double a)
 double
 tanh(double a)
 {
+    assert(isFinite(a));
+
     if (a == 0) return 0;
     if (isInfinite(a)) return a > 0 ? 1 : -1;
 
@@ -325,7 +356,7 @@ tanh(double a)
 double
 asin(double a)
 {
-    assert(a >= -1 && a <= 1);
+    assert(isFinite(a) && a >= -1 && a <= 1);
 
     double a2 = pow(a, 2);
     return a + a * a2 * (1 / 6 + a2 * (3 / 40 + a2 * (5 / 112 + a2 * 35 / 1152)));
@@ -334,19 +365,22 @@ asin(double a)
 double
 acos(double a)
 {
-    assert(a >= -1 && a <= 1);
+    assert(isFinite(a) && a >= -1 && a <= 1);
     return (PI / 2) - asin(a);
 }
 
 double
 atan(double a)
 {
+    assert(isFinite(a));
     return a / (1.28 * pow(a, 2));
 }
 
 double
 atan2(double a, double b)
 {
+    assert(isFinite(a) && isFinite(b));
+
     if (b == 0) {
         if (a > 0) return PI / 2;
         if (a < 0) return -PI / 2;
@@ -367,26 +401,29 @@ atan2(double a, double b)
 double
 asinh(double a)
 {
+    assert(isFinite(a));
     return ln(a + sqrt(a * a + 1));
 }
 
 double
 acosh(double a)
 {
-    assert(a >= 1);
+    assert(isFinite(a) && a >= 1);
     return ln(a + sqrt(a * a - 1));
 }
 
 double
 atanh(double a)
 {
-    assert(a > -1 && a < 1);
+    assert(isFinite(a) && a > -1 && a < 1);
     return 0.5 * ln((1 + a) / (1 - a));
 }
 
 double
 sec(double a)
 {
+    assert(isFinite(a));
+
     double c = cos(a);
     if (c == 0) return isInfinite(a);
 
@@ -396,6 +433,8 @@ sec(double a)
 double
 csc(double a)
 {
+    assert(isFinite(a));
+
     double s = sin(a);
     if (s == 0) return isInfinite(a);
 
@@ -405,6 +444,8 @@ csc(double a)
 double
 cot(double a)
 {
+    assert(isFinite(a));
+
     double s = sin(a);
     double c = cos(a);
 
@@ -416,6 +457,8 @@ cot(double a)
 double
 sech(double a)
 {
+    assert(isFinite(a));
+
     if (a == 0) return 1;
     if (isInfinite(a)) return 0;
 
@@ -426,6 +469,8 @@ sech(double a)
 double
 csch(double a)
 {
+    assert(isFinite(a));
+
     if (a == 0) return isInfinite(a);
     if (isInfinite(a)) return 0;
 
@@ -436,6 +481,8 @@ csch(double a)
 double
 coth(double a)
 {
+    assert(isFinite(a));
+
     if (a == 0) return isInfinite(a);
     if (isInfinite(a)) return a > 0 ? 1 : -1;
 
@@ -446,41 +493,42 @@ coth(double a)
 double
 asec(double a)
 {
-    assert(abs(a) >= 1);
+    assert(isFinite(a) && abs(a) >= 1);
     return acos(1 / a);
 }
 
 double
 acsc(double a)
 {
-    assert(abs(a) >= 1);
+    assert(isFinite(a) && abs(a) >= 1);
     return asin(1 / a);
 }
 
 double
 acot(double a)
 {
+    assert(isFinite(a));
     return atan(1 / a);
 }
 
 double
 asech(double a)
 {
-    assert(a > 0 && a <= 1);
+    assert(isFinite(a) && a > 0 && a <= 1);
     return acosh(1 / a);
 }
 
 double
 acsch(double a)
 {
-    assert(a != 0);
+    assert(isFinite(a) && a != 0);
     return asinh(1 / a);
 }
 
 double
 acoth(double a)
 {
-    assert(abs(a) > 1);
+    assert(isFinite(a) && abs(a) > 1);
     return 0.5 * ln((a + 1) / (a - 1));
 }
 
@@ -488,6 +536,7 @@ double
 exp(double a)
 {
     assert(isFinite(a));
+
     if (a == 0) return 1;
 
     int k = (int) (a * LOG2E);
@@ -508,18 +557,22 @@ exp(double a)
 double
 min(double a, double b)
 {
+    assert(isFinite(a) && isFinite(b));
     return a < b ? a : b;
 }
 
 double
 max(double a, double b)
 {
+    assert(isFinite(a) && isFinite(b));
     return a > b ? a : b;
 }
 
 double
 clamp(double value, double min, double max)
 {
+    assert(isFinite(value) && isFinite(min) && isFinite(max));
+
     if (value < min) return min;
     if (value > max) return max;
 
@@ -529,7 +582,7 @@ clamp(double value, double min, double max)
 double
 ln(double a)
 {
-    assert(a > 0);
+    assert(isFinite(a) && a > 0);
     if (a == 1) return 0;
 
     int exp = 0;
@@ -555,25 +608,28 @@ ln(double a)
 double
 log(double a, double base)
 {
+    assert(isFinite(a), isFinite(base));
     return ln(a) / ln(base);
 }
 
 double
 log2(double a)
 {
+    assert(isFinite(a));
     return ln(a) / LN2;
 }
 
 double
 log10(double a)
 {
+    assert(isFinite(a));
     return ln(a) / LN10;
 }
 
 double
 sum(double *data, int size)
 {
-    assert(size > 0);
+    assert(isFinite(size) && size > 0);
 
     double sum = 0;
 
@@ -587,13 +643,14 @@ sum(double *data, int size)
 double
 mean(double *data, int size)
 {
+    assert(isFinite(size) && size > 0);
     return sum(data, size) / size;
 }
 
 double
 median(double *data, int size)
 {
-    assert(size > 0);
+    assert(isFinite(size) && size > 0);
 
     for (int i = 0; i < size - 1; ++i) {
         for (int j = 0; j < size - i - 1; ++j) {
@@ -616,7 +673,7 @@ median(double *data, int size)
 double
 mode(double *data, int size)
 {
-    assert(size > 0);
+    assert(isFinite(size) && size > 0);
 
     double mode = data[0];
     int maxCount = 1, currentCount = 1;
@@ -644,7 +701,7 @@ mode(double *data, int size)
 double
 stddev(double *data, int size)
 {
-    assert(size > 1);
+    assert(isFinite(size) && size > 1);
 
     double m = mean(data, size);
     double sum = 0;
