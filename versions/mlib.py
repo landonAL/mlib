@@ -61,7 +61,7 @@ def qisqrt(a: float) -> float:
     y  *= (1.5 - (x2 * y * y))
     y  *= (1.5 - (x2 * y * y))
 
-    return y;
+    return y
 
 def gcd(a: int, b: int) -> int:
     if a < 0: a = -a

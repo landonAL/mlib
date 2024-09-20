@@ -555,7 +555,7 @@ ln(double a)
 double
 log(double a, double base)
 {
-    return ln(a) / ln(base)
+    return ln(a) / ln(base);
 }
 
 double
@@ -587,7 +587,7 @@ sum(double *data, int size)
 double
 mean(double *data, int size)
 {
-    return sum(data) / size;
+    return sum(data, size) / size;
 }
 
 double
