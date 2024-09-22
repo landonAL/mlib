@@ -232,18 +232,27 @@ fn int fact(int a)
  * @note This function asserts that both inputs are finite and that a is less than b.
  * @note The LCG uses a static seed, which is updated with each call to the function.
  * @note The multiplier and modulus values are chosen to create a full-period generator.
+ * @note The function incorporates compile-time information to modify the seed,
+ *       providing additional randomness across different compilations.
  */
 fn int rand(int a, int b)
 {
     assert(isFinite(a) && isFinite(b) && a < b);
 
     static uint seed = 1;
-    const uint multiplier = 16807;  // 7^5
-    const uint modulus = 2147483647;  // 2^31 - 1 (Mersenne prime)
+    static const uint multiplier = 16807;  // 7^5
+    static const uint modulus = 2147483647;  // 2^31 - 1 (Mersenne prime)
 
-    seed = (multiplier * seed) % modulus;
+    uint compile_time_seed = (__TIME__[7] - '0') * 1000000 +
+                             (__TIME__[6] - '0') * 100000 +
+                             (__TIME__[4] - '0') * 10000 +
+                             (__TIME__[3] - '0') * 1000 +
+                             (__TIME__[1] - '0') * 100 +
+                             (__TIME__[0] - '0') * 10;
 
-    return a + (int) (((double) seed / modulus) * (b - a + 1));
+    seed = (multiplier * (seed ^ compile_time_seed)) % modulus;
+
+    return a + (int)(((double)seed / modulus) * (b - a + 1));
 }
 
 /**

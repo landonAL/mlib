@@ -1,5 +1,6 @@
 from typing import List
 import struct
+import time
 
 PI      = 3.1415926535897932
 TAU     = 6.2831853071795864
@@ -184,6 +185,8 @@ def fact(a: int) -> int:
 # @note This function asserts that both inputs are finite and that a is less than b.
 # @note The LCG uses a static seed, which is updated with each call to the function.
 # @note The multiplier and modulus values are chosen to create a full-period generator.
+# @note The function incorporates compile-time information to modify the seed,
+#       providing additional randomness across different compilations.
 def rand(a: int, b: int) -> int:
     assert is_finite(a) and is_finite(b) and a < b
 
@@ -192,7 +195,15 @@ def rand(a: int, b: int) -> int:
     multiplier = 16807  # 7^5
     modulus = 2147483647  # 2^31 - 1 (Mersenne prime)
 
-    seed = (multiplier * seed) % modulus
+    current_time = time.strftime("%H%M%S")
+    compile_time_seed = (int(current_time[5]) * 1000000 +
+                         int(current_time[4]) * 100000 +
+                         int(current_time[2]) * 10000 +
+                         int(current_time[1]) * 1000 +
+                         int(current_time[0]) * 100 +
+                         int(current_time[0]) * 10)
+
+    seed = (multiplier * (seed ^ compile_time_seed)) % modulus
 
     return a + int(((seed / modulus) * (b - a + 1)))
 

@@ -215,18 +215,29 @@ pub fn fact(a: i32) -> i32 {
  * @note This function asserts that both inputs are finite and that a is less than b.
  * @note The LCG uses a static seed, which is updated with each call to the function.
  * @note The multiplier and modulus values are chosen to create a full-period generator.
+ * @note The function incorporates compile-time information to modify the seed,
+ *       providing additional randomness across different compilations.
  */
 pub fn rand(a: i32, b: i32) -> i32 {
-    assert!(is_finite(a as f64) && is_finite(b as f64) && a < b);
+    assert!(is_finite(a.into()) && is_finite(b.into()) && a < b);
 
     static mut SEED: u32 = 1;
     const MULTIPLIER: u32 = 16807;  // 7^5
     const MODULUS: u32 = 2147483647;  // 2^31 - 1 (Mersenne prime)
 
+    let compile_time_seed: u32 =
+        (env!("CARGO_PKG_VERSION_MAJOR").parse::<u32>().unwrap_or(0) * 1000000) +
+        (env!("CARGO_PKG_VERSION_MINOR").parse::<u32>().unwrap_or(0) * 100000) +
+        (env!("CARGO_PKG_VERSION_PATCH").parse::<u32>().unwrap_or(0) * 10000) +
+        (env!("CARGO_PKG_VERSION_PRE").chars().next().unwrap_or('0') as u32 - '0' as u32) * 1000 +
+        (env!("CARGO_PKG_VERSION_PRE").chars().nth(1).unwrap_or('0') as u32 - '0' as u32) * 100 +
+        (env!("CARGO_PKG_VERSION_PRE").chars().nth(2).unwrap_or('0') as u32 - '0' as u32) * 10;
+
     unsafe {
-        SEED = (MULTIPLIER * SEED) % MODULUS;
-        return a + ((SEED as f64 / MODULUS as f64) * (b - a + 1) as f64) as i32;
+        SEED = (MULTIPLIER.wrapping_mul(SEED ^ compile_time_seed)) % MODULUS;
     }
+
+    return a + ((unsafe { SEED } as f64 / MODULUS as f64) * (b - a + 1) as f64) as i32;
 }
 
 /**

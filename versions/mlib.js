@@ -221,19 +221,21 @@ function fact(a) {
  * @note This function asserts that both inputs are finite and that a is less than b.
  * @note The LCG uses a static seed, which is updated with each call to the function.
  * @note The multiplier and modulus values are chosen to create a full-period generator.
+ * @note The function incorporates compile-time information to modify the seed,
+ *       providing additional randomness across different compilations.
  */
 function rand(a, b) {
-    if (!isFinite(a) || !isFinite(b) || a >= b) {
-        throw new Error("a and b must be finite and a must be less than b");
-    }
+    if (!Number.isFinite(a) || !Number.isFinite(b) || a >= b) throw new Error("Inputs must be finite and a must be less than b");
 
     let seed = 1;
     const multiplier = 16807;  // 7^5
     const modulus = 2147483647;  // 2^31 - 1 (Mersenne prime)
 
-    seed = (multiplier * seed) % modulus;
+    const compile_time_seed = new Date().getTime() % modulus;
 
-    return floor(a + (seed / modulus) * (b - a + 1));
+    seed = (multiplier * (seed ^ compile_time_seed)) % modulus;
+
+    return a + Math.floor(((seed / modulus) * (b - a + 1)));
 }
 
 /**

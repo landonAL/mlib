@@ -226,26 +226,35 @@ public static class mlib
     }
 
     /**
-     * Generates a random integer within a specified range using a linear congruential generator (LCG).
-     *
-     * @param a The lower bound of the range (inclusive).
-     * @param b The upper bound of the range (inclusive).
-     * @return A random integer between a and b (inclusive).
-     * @note This function asserts that both inputs are finite and that a is less than b.
-     * @note The LCG uses a static seed, which is updated with each call to the function.
-     * @note The multiplier and modulus values are chosen to create a full-period generator.
-     */
+    * Generates a random integer within a specified range using a linear congruential generator (LCG).
+    *
+    * @param a The lower bound of the range (inclusive).
+    * @param b The upper bound of the range (inclusive).
+    * @return A random integer between a and b (inclusive).
+    * @note This function asserts that both inputs are finite and that a is less than b.
+    * @note The LCG uses a static seed, which is updated with each call to the function.
+    * @note The multiplier and modulus values are chosen to create a full-period generator.
+    * @note The function incorporates compile-time information to modify the seed,
+    *       providing additional randomness across different compilations.
+    */
     public static int Rand(int a, int b)
     {
         Debug.Assert(IsFinite(a) && IsFinite(b) && a < b);
 
+        static uint seed = 1;
         const uint multiplier = 16807;  // 7^5
         const uint modulus = 2147483647;  // 2^31 - 1 (Mersenne prime)
-        uint seed = 1;
 
-        seed = (multiplier * seed) % modulus;
+        uint compile_time_seed = (uint)(DateTime.Now.ToString("HHmmss")[5] - '0') * 1000000 +
+                                (uint)(DateTime.Now.ToString("HHmmss")[4] - '0') * 100000 +
+                                (uint)(DateTime.Now.ToString("HHmmss")[3] - '0') * 10000 +
+                                (uint)(DateTime.Now.ToString("HHmmss")[2] - '0') * 1000 +
+                                (uint)(DateTime.Now.ToString("HHmmss")[1] - '0') * 100 +
+                                (uint)(DateTime.Now.ToString("HHmmss")[0] - '0') * 10;
 
-        return a + (int) (((double) seed / modulus) * (b - a + 1));
+        seed = (multiplier * (seed ^ compile_time_seed)) % modulus;
+
+        return a + (int)(((double)seed / modulus) * (b - a + 1));
     }
 
     /**

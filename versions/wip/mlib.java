@@ -214,15 +214,19 @@ public class mlib {
      * @note This function asserts that both inputs are finite and that a is less than b.
      * @note The LCG uses a static seed, which is updated with each call to the function.
      * @note The multiplier and modulus values are chosen to create a full-period generator.
+     * @note The function incorporates compile-time information to modify the seed,
+     *       providing additional randomness across different compilations.
      */
     public static int rand(int a, int b) {
         assert isFinite(a) && isFinite(b) && a < b;
 
-        final int multiplier = 16807;  // 7^5
-        final int modulus = 2147483647;  // 2^31 - 1 (Mersenne prime)
-        int seed = 1;
+        long seed = 1;
+        final long multiplier = 16807;  // 7^5
+        final long modulus = 2147483647;  // 2^31 - 1 (Mersenne prime)
 
-        seed = (multiplier * seed) % modulus;
+        long compile_time_seed = System.currentTimeMillis() % modulus;
+
+        seed = (multiplier * (seed ^ compile_time_seed)) % modulus;
 
         return a + (int) (((double) seed / modulus) * (b - a + 1));
     }
