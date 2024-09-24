@@ -79,12 +79,12 @@ int rand(int a, int b);
 #ifdef MLIB_IMPLEMENTATION
 
 /**
-* Converts degrees to radians.
-*
-* @param deg The angle in degrees to convert.
-* @return The angle converted to radians.
-* @note This function asserts that the input is finite.
-*/
+ * Converts degrees to radians.
+ *
+ * @param deg The angle in degrees to convert.
+ * @return The angle converted to radians.
+ * @note This function asserts that the input is finite.
+ **/
 double
 toRadian(double deg)
 {
@@ -93,12 +93,12 @@ toRadian(double deg)
 }
 
 /**
-* Converts radians to degrees.
-*
-* @param rad The angle in radians to convert.
-* @return The angle converted to degrees.
-* @note This function asserts that the input is finite.
-*/
+ * Converts radians to degrees.
+ *
+ * @param rad The angle in radians to convert.
+ * @return The angle converted to degrees.
+ * @note This function asserts that the input is finite.
+ **/
 double
 toDegree(double rad)
 {
@@ -107,12 +107,12 @@ toDegree(double rad)
 }
 
 /**
-* Calculates the floor of a given double value.
-*
-* @param a The double value to floor.
-* @return The largest integer less than or equal to the input value.
-* @note This function asserts that the input is finite.
-*/
+ * Calculates the floor of a given double value.
+ *
+ * @param a The double value to floor.
+ * @return The largest integer less than or equal to the input value.
+ * @note This function asserts that the input is finite.
+ **/
 int
 floor(double a)
 {
@@ -121,12 +121,12 @@ floor(double a)
 }
 
 /**
-* Calculates the ceiling of a given double value.
-*
-* @param a The double value to calculate the ceiling for.
-* @return The smallest integer greater than or equal to the input value.
-* @note This function asserts that the input is finite.
-*/
+ * Calculates the ceiling of a given double value.
+ *
+ * @param a The double value to calculate the ceiling for.
+ * @return The smallest integer greater than or equal to the input value.
+ * @note This function asserts that the input is finite.
+ **/
 int
 ceil(double a)
 {
@@ -135,12 +135,12 @@ ceil(double a)
 }
 
 /**
-* Rounds a given double value to the nearest integer.
-*
-* @param a The double value to round.
-* @return The nearest integer to the input value.
-* @note This function asserts that the input is finite.
-*/
+ * Rounds a given double value to the nearest integer.
+ *
+ * @param a The double value to round.
+ * @return The nearest integer to the input value.
+ * @note This function asserts that the input is finite.
+ **/
 int
 round(double a)
 {
@@ -151,12 +151,12 @@ round(double a)
 }
 
 /**
-* Calculates the absolute value of a given double.
-*
-* @param a The input double value.
-* @return The absolute value of the input.
-* @note This function asserts that the input is finite.
-*/
+ * Calculates the absolute value of a given double.
+ *
+ * @param a The input double value.
+ * @return The absolute value of the input.
+ * @note This function asserts that the input is finite.
+ **/
 double
 abs(double a)
 {
@@ -165,12 +165,12 @@ abs(double a)
 }
 
 /**
-* Calculates the square root of a given number using the Newton-Raphson method.
-*
-* @param a The number to calculate the square root of.
-* @return The square root of the input number.
-* @note This function asserts that the input is finite and non-negative.
-*/
+ * Calculates the square root of a given number using the Newton-Raphson method.
+ *
+ * @param a The number to calculate the square root of.
+ * @return The square root of the input number.
+ * @note This function asserts that the input is finite and non-negative.
+ **/
 double
 sqrt(double a)
 {
@@ -193,7 +193,7 @@ sqrt(double a)
  * @param a The number to calculate the inverse square root of.
  * @return The inverse square root of the input number.
  * @note This function asserts that the input is finite.
- */
+ **/
 double
 isqrt(double a)
 {
@@ -208,7 +208,7 @@ isqrt(double a)
  * @return An approximation of the inverse square root of the input number.
  * @note This function uses a bit-level hack for initial guess and Newton's method for refinement.
  * @note This function asserts that the input is finite.
- */
+ **/
 double
 qisqrt(double a)
 {
@@ -236,7 +236,7 @@ qisqrt(double a)
  * @return The GCD of a and b.
  * @note This function asserts that both inputs are finite.
  * @note The function uses the absolute values of the inputs to handle negative numbers.
- */
+ **/
 int
 gcd(int a, int b)
 {
@@ -264,7 +264,7 @@ gcd(int a, int b)
  * @note This function asserts that both inputs are finite.
  * @note The function uses the GCD to calculate the LCM efficiently.
  * @note If the GCD is 0, the function returns 0 to avoid division by zero.
- */
+ **/
 int
 lcm(int a, int b)
 {
@@ -284,7 +284,7 @@ lcm(int a, int b)
  * @note This function asserts that the input is finite and non-negative.
  * @note The factorial is calculated recursively, which may lead to stack overflow for large inputs.
  * @warning This implementation is not suitable for large inputs due to potential stack overflow.
- */
+ **/
 int
 fact(int a)
 {
@@ -305,7 +305,7 @@ fact(int a)
  * @note The multiplier and modulus values are chosen to create a full-period generator.
  * @note The function incorporates compile-time information to modify the seed,
  *       providing additional randomness across different compilations.
- */
+ **/
 int
 rand(int a, int b)
 {
@@ -328,13 +328,13 @@ rand(int a, int b)
 }
 
 /**
-* Calculates the remainder of the division of two integers.
-*
-* @param a The dividend.
-* @param b The divisor.
-* @return The remainder of a divided by b.
-* @note This function asserts that both inputs are finite and that b is positive.
-*/
+ * Calculates the remainder of the division of two integers.
+ *
+ * @param a The dividend.
+ * @param b The divisor.
+ * @return The remainder of a divided by b.
+ * @note This function asserts that both inputs are finite and that b is positive.
+ **/
 int
 rem(int a, int b)
 {
@@ -343,13 +343,13 @@ rem(int a, int b)
 }
 
 /**
-* Performs floor division of two double values.
-*
-* @param a The dividend.
-* @param b The divisor.
-* @return The floor of a divided by b.
-* @note This function asserts that both inputs are finite and that b is positive.
-*/
+ * Performs floor division of two double values.
+ *
+ * @param a The dividend.
+ * @param b The divisor.
+ * @return The floor of a divided by b.
+ * @note This function asserts that both inputs are finite and that b is positive.
+ **/
 int
 fdiv(double a, double b)
 {
@@ -358,15 +358,15 @@ fdiv(double a, double b)
 }
 
 /**
-* Calculates the power of a base number raised to an integer exponent.
-*
-* @param base The base number.
-* @param pow The integer exponent.
-* @return The result of base raised to the power of pow.
-* @note This function asserts that both base and pow are finite.
-* @note For pow = 0, the function returns 1.
-* @note The function uses a simple iterative approach for positive exponents.
-*/
+ * Calculates the power of a base number raised to an integer exponent.
+ *
+ * @param base The base number.
+ * @param pow The integer exponent.
+ * @return The result of base raised to the power of pow.
+ * @note This function asserts that both base and pow are finite.
+ * @note For pow = 0, the function returns 1.
+ * @note The function uses a simple iterative approach for positive exponents.
+ **/
 double
 pow(double base, int pow)
 {
@@ -382,15 +382,15 @@ pow(double base, int pow)
 }
 
 /**
-* Checks if a given integer is prime.
-*
-* @param a The integer to check for primality.
-* @return true if the number is prime, false otherwise.
-* @note This function asserts that the input is finite.
-* @note Numbers less than 2 are not considered prime.
-* @note Even numbers greater than 2 are not prime.
-* @note The function checks for divisibility up to half of the input number.
-*/
+ * Checks if a given integer is prime.
+ *
+ * @param a The integer to check for primality.
+ * @return true if the number is prime, false otherwise.
+ * @note This function asserts that the input is finite.
+ * @note Numbers less than 2 are not considered prime.
+ * @note Even numbers greater than 2 are not prime.
+ * @note The function checks for divisibility up to half of the input number.
+ **/
 bool
 isPrime(int a)
 {
@@ -407,11 +407,11 @@ isPrime(int a)
 }
 
 /**
-* Checks if a given double value is finite.
-*
-* @param a The double value to check.
-* @return true if the value is finite, false otherwise.
-*/
+ * Checks if a given double value is finite.
+ *
+ * @param a The double value to check.
+ * @return true if the value is finite, false otherwise.
+ **/
 bool
 isFinite(double a)
 {
@@ -419,11 +419,11 @@ isFinite(double a)
 }
 
 /**
-* Checks if a given double value is infinite.
-*
-* @param a The double value to check.
-* @return true if the value is infinite, false otherwise.
-*/
+ * Checks if a given double value is infinite.
+ *
+ * @param a The double value to check.
+ * @return true if the value is infinite, false otherwise.
+ **/
 bool
 isInfinite(double a)
 {
@@ -431,11 +431,11 @@ isInfinite(double a)
 }
 
 /**
-* Checks if a given double value is Not-a-Number (NaN).
-*
-* @param a The double value to check.
-* @return true if the value is NaN, false otherwise.
-*/
+ * Checks if a given double value is Not-a-Number (NaN).
+ *
+ * @param a The double value to check.
+ * @return true if the value is NaN, false otherwise.
+ **/
 bool
 isNaN(double a)
 {
@@ -450,7 +450,7 @@ isNaN(double a)
  * @note This function asserts that the input is finite.
  * @note The function normalizes the input angle to the range [-PI, PI].
  * @note The Taylor series is computed up to the 7th term for accuracy.
- */
+ **/
 double
 sin(double a)
 {
@@ -478,7 +478,7 @@ sin(double a)
  * @note This function asserts that the input is finite.
  * @note The function normalizes the input angle to the range [-PI, PI].
  * @note The Taylor series is computed up to the 7th term for accuracy.
- */
+ **/
 double
 cos(double a)
 {
@@ -505,7 +505,7 @@ cos(double a)
  * @return The tangent of the input angle.
  * @note This function asserts that the input is finite.
  * @note The tangent is calculated as the ratio of sine to cosine.
- */
+ **/
 double
 tan(double a)
 {
@@ -525,7 +525,7 @@ tan(double a)
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 0.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 double
 sinh(double a)
 {
@@ -545,7 +545,7 @@ sinh(double a)
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 1.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 double
 cosh(double a)
 {
@@ -565,7 +565,7 @@ cosh(double a)
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 0.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 double
 tanh(double a)
 {
@@ -584,7 +584,7 @@ tanh(double a)
  * @return The arcsine of the input value in radians.
  * @note This function asserts that the input is finite and within the valid range.
  * @note The approximation uses a 7th-degree polynomial for accuracy.
- */
+ **/
 double
 asin(double a)
 {
@@ -601,7 +601,7 @@ asin(double a)
  * @return The arccosine of the input value in radians.
  * @note This function asserts that the input is finite and within the valid range.
  * @note The arccosine is calculated using the relationship: acos(x) = PI/2 - asin(x).
- */
+ **/
 double
 acos(double a)
 {
@@ -616,7 +616,7 @@ acos(double a)
  * @return The arctangent of the input value in radians.
  * @note This function asserts that the input is finite.
  * @note This approximation is less accurate for large input values.
- */
+ **/
 double
 atan(double a)
 {
@@ -636,7 +636,7 @@ atan(double a)
  *       - If b is 0 and a < 0, returns -PI/2
  *       - If b is 0 and a is 0, returns 0
  *       - If b < 0, adjusts the result by adding or subtracting PI
- */
+ **/
 double
 atan2(double a, double b)
 {
@@ -665,7 +665,7 @@ atan2(double a, double b)
  * @param a The input value.
  * @return The inverse hyperbolic sine of the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 double
 asinh(double a)
 {
@@ -679,7 +679,7 @@ asinh(double a)
  * @param a The input value, must be greater than or equal to 1.
  * @return The inverse hyperbolic cosine of the input value.
  * @note This function asserts that the input is finite and greater than or equal to 1.
- */
+ **/
 double
 acosh(double a)
 {
@@ -693,7 +693,7 @@ acosh(double a)
  * @param a The input value, must be in the range (-1, 1).
  * @return The inverse hyperbolic tangent of the input value.
  * @note This function asserts that the input is finite and within the valid range.
- */
+ **/
 double
 atanh(double a)
 {
@@ -708,7 +708,7 @@ atanh(double a)
  * @return The secant of the input angle.
  * @note This function asserts that the input is finite.
  * @note The secant is calculated as the reciprocal of the cosine.
- */
+ **/
 double
 sec(double a)
 {
@@ -726,7 +726,7 @@ sec(double a)
  * @return The cosecant of the input angle.
  * @note This function asserts that the input is finite.
  * @note The cosecant is calculated as the reciprocal of the sine.
- */
+ **/
 double
 csc(double a)
 {
@@ -744,7 +744,7 @@ csc(double a)
  * @return The cotangent of the input angle.
  * @note This function asserts that the input is finite.
  * @note The cotangent is calculated as the ratio of cosine to sine.
- */
+ **/
 double
 cot(double a)
 {
@@ -764,7 +764,7 @@ cot(double a)
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 1.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 double
 sech(double a)
 {
@@ -783,7 +783,7 @@ sech(double a)
  * @return The hyperbolic cosecant of the input value.
  * @note This function asserts that the input is finite.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 double
 csch(double a)
 {
@@ -800,7 +800,7 @@ csch(double a)
  * @return The hyperbolic cotangent of the input value.
  * @note This function asserts that the input is finite.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 double
 coth(double a)
 {
@@ -819,7 +819,7 @@ coth(double a)
  * @note The function uses a Taylor series approximation combined with exponent reduction.
  * @note For a = 0, the function returns 1.
  * @note The calculation is optimized for accuracy and efficiency.
- */
+ **/
 double
 exp(double a)
 {
@@ -849,7 +849,7 @@ exp(double a)
  * @param b The second double value to compare.
  * @return The smaller of the two input values.
  * @note This function asserts that both inputs are finite.
- */
+ **/
 double
 min(double a, double b)
 {
@@ -864,7 +864,7 @@ min(double a, double b)
  * @param b The second double value to compare.
  * @return The larger of the two input values.
  * @note This function asserts that both inputs are finite.
- */
+ **/
 double
 max(double a, double b)
 {
@@ -880,7 +880,7 @@ max(double a, double b)
  * @param max The maximum allowed value.
  * @return The clamped value, which will be between min and max (inclusive).
  * @note This function asserts that all inputs are finite.
- */
+ **/
 double
 clamp(double value, double min, double max)
 {
@@ -899,7 +899,7 @@ clamp(double value, double min, double max)
  * @return The natural logarithm of the input value.
  * @note This function asserts that the input is finite and greater than 0.
  * @note The function uses a series expansion for improved accuracy.
- */
+ **/
 double
 ln(double a)
 {
@@ -934,7 +934,7 @@ ln(double a)
  * @param base The base of the logarithm.
  * @return The logarithm of the input value with the specified base.
  * @note This function asserts that both inputs are finite.
- */
+ **/
 double
 log(double a, double base)
 {
@@ -948,7 +948,7 @@ log(double a, double base)
  * @param a The input value.
  * @return The base-2 logarithm of the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 double
 log2(double a)
 {
@@ -962,7 +962,7 @@ log2(double a)
  * @param a The input value.
  * @return The base-10 logarithm of the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 double
 log10(double a)
 {
@@ -977,7 +977,7 @@ log10(double a)
  * @param size The number of elements in the array.
  * @return The sum of all elements in the array.
  * @note This function asserts that size is finite and greater than 0.
- */
+ **/
 double
 sum(double *data, int size)
 {
@@ -999,7 +999,7 @@ sum(double *data, int size)
  * @param size The number of elements in the array.
  * @return The arithmetic mean of all elements in the array.
  * @note This function asserts that size is finite and greater than 0.
- */
+ **/
 double
 mean(double *data, int size)
 {
@@ -1015,7 +1015,7 @@ mean(double *data, int size)
  * @return The median value of the array.
  * @note This function asserts that size is finite and greater than 0.
  * @note This function modifies the original array by sorting it.
- */
+ **/
 double
 median(double *data, int size)
 {
@@ -1047,7 +1047,7 @@ median(double *data, int size)
  * @return The mode (most frequent value) of the array.
  * @note This function asserts that size is finite and greater than 0.
  * @note If multiple modes exist, this function returns the first one encountered.
- */
+ **/
 double
 mode(double *data, int size)
 {
@@ -1083,7 +1083,7 @@ mode(double *data, int size)
  * @param size The number of elements in the array.
  * @return The sample standard deviation of the array.
  * @note This function asserts that size is finite and greater than 1.
- */
+ **/
 double
 stddev(double *data, int size)
 {

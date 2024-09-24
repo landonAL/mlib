@@ -15,7 +15,7 @@ const CATALAN = 0.915965594177219;
  * @param deg The angle in degrees to convert.
  * @return The angle converted to radians.
  * @note This function asserts that the input is finite.
- */
+ **/
 function toRadian(deg) {
   if (!Number.isFinite(deg)) throw new Error("Input must be finite");
   return deg * (PI / 180);
@@ -27,7 +27,7 @@ function toRadian(deg) {
  * @param rad The angle in radians to convert.
  * @return The angle converted to degrees.
  * @note This function asserts that the input is finite.
- */
+ **/
 function toDegree(rad) {
   if (!Number.isFinite(rad)) throw new Error("Input must be finite");
   return rad * (180 / PI);
@@ -39,7 +39,7 @@ function toDegree(rad) {
  * @param a The double value to floor.
  * @return The largest integer less than or equal to the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 function floor(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -53,7 +53,7 @@ function floor(a) {
  * @param a The double value to calculate the ceiling for.
  * @return The smallest integer greater than or equal to the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 function ceil(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return a > floor(a) ? floor(a) + 1 : floor(a);
@@ -65,7 +65,7 @@ function ceil(a) {
  * @param a The double value to round.
  * @return The nearest integer to the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 function round(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return a + 0.5 >= floor(a) + 1 ? floor(a) + 1 : floor(a);
@@ -77,7 +77,7 @@ function round(a) {
  * @param a The input double value.
  * @return The absolute value of the input.
  * @note This function asserts that the input is finite.
- */
+ **/
 function abs(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return a < 0 ? -a : a;
@@ -89,7 +89,7 @@ function abs(a) {
  * @param a The number to calculate the square root of.
  * @return The square root of the input number.
  * @note This function asserts that the input is finite and non-negative.
- */
+ **/
 function sqrt(a) {
   if (!Number.isFinite(a) || a < 0)
     throw new Error("Input must be finite and non-negative");
@@ -112,7 +112,7 @@ function sqrt(a) {
  * @param a The number to calculate the inverse square root of.
  * @return The inverse square root of the input number.
  * @note This function asserts that the input is finite.
- */
+ **/
 function isqrt(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return 1 / sqrt(a);
@@ -125,7 +125,7 @@ function isqrt(a) {
  * @return An approximation of the inverse square root of the input number.
  * @note This function uses a bit-level hack for initial guess and Newton's method for refinement.
  * @note This function asserts that the input is finite.
- */
+ **/
 function qisqrt(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -156,7 +156,7 @@ function qisqrt(a) {
  * @return The GCD of a and b.
  * @note This function asserts that both inputs are finite.
  * @note The function uses the absolute values of the inputs to handle negative numbers.
- */
+ **/
 function gcd(a, b) {
   if (!Number.isFinite(a) || !Number.isFinite(b))
     throw new Error("Inputs must be finite");
@@ -183,7 +183,7 @@ function gcd(a, b) {
  * @note This function asserts that both inputs are finite.
  * @note The function uses the GCD to calculate the LCM efficiently.
  * @note If the GCD is 0, the function returns 0 to avoid division by zero.
- */
+ **/
 function lcm(a, b) {
   if (!Number.isFinite(a) || !Number.isFinite(b))
     throw new Error("Inputs must be finite");
@@ -202,7 +202,7 @@ function lcm(a, b) {
  * @note This function asserts that the input is finite and non-negative.
  * @note The factorial is calculated recursively, which may lead to stack overflow for large inputs.
  * @warning This implementation is not suitable for large inputs due to potential stack overflow.
- */
+ **/
 function fact(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   if (a <= 1) return 1;
@@ -221,7 +221,7 @@ function fact(a) {
  * @note The multiplier and modulus values are chosen to create a full-period generator.
  * @note The function incorporates compile-time information to modify the seed,
  *       providing additional randomness across different compilations.
- */
+ **/
 function rand(a, b) {
   if (!Number.isFinite(a) || !Number.isFinite(b) || a >= b)
     throw new Error("Inputs must be finite and a must be less than b");
@@ -244,7 +244,7 @@ function rand(a, b) {
  * @param b The divisor.
  * @return The remainder of a divided by b.
  * @note This function asserts that both inputs are finite and that b is positive.
- */
+ **/
 function rem(a, b) {
   if (!Number.isFinite(a) || !Number.isFinite(b) || b <= 0)
     throw new Error("Inputs must be finite and b must be positive");
@@ -258,7 +258,7 @@ function rem(a, b) {
  * @param b The divisor.
  * @return The floor of a divided by b.
  * @note This function asserts that both inputs are finite and that b is positive.
- */
+ **/
 function fdiv(a, b) {
   if (!Number.isFinite(a) || !Number.isFinite(b) || b <= 0)
     throw new Error("Inputs must be finite and b must be positive");
@@ -274,7 +274,7 @@ function fdiv(a, b) {
  * @note This function asserts that both base and pow are finite.
  * @note For pow = 0, the function returns 1.
  * @note The function uses a simple iterative approach for positive exponents.
- */
+ **/
 function pow(base, pow) {
   if (!Number.isFinite(base) || !Number.isFinite(pow))
     throw new Error("Inputs must be finite");
@@ -297,7 +297,7 @@ function pow(base, pow) {
  * @note Numbers less than 2 are not considered prime.
  * @note Even numbers greater than 2 are not prime.
  * @note The function checks for divisibility up to half of the input number.
- */
+ **/
 function isPrime(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -316,7 +316,7 @@ function isPrime(a) {
  *
  * @param a The double value to check.
  * @return true if the value is finite, false otherwise.
- */
+ **/
 function isFinite(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return !isInfinite(a) && !isNaN(a);
@@ -327,7 +327,7 @@ function isFinite(a) {
  *
  * @param a The double value to check.
  * @return true if the value is infinite, false otherwise.
- */
+ **/
 function isInfinite(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return a / a !== a / a;
@@ -338,7 +338,7 @@ function isInfinite(a) {
  *
  * @param a The double value to check.
  * @return true if the value is NaN, false otherwise.
- */
+ **/
 function isNaN(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return a !== a;
@@ -352,7 +352,7 @@ function isNaN(a) {
  * @note This function asserts that the input is finite.
  * @note The function normalizes the input angle to the range [-PI, PI].
  * @note The Taylor series is computed up to the 7th term for accuracy.
- */
+ **/
 function sin(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -378,7 +378,7 @@ function sin(a) {
  * @note This function asserts that the input is finite.
  * @note The function normalizes the input angle to the range [-PI, PI].
  * @note The Taylor series is computed up to the 7th term for accuracy.
- */
+ **/
 function cos(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -403,7 +403,7 @@ function cos(a) {
  * @return The tangent of the input angle.
  * @note This function asserts that the input is finite.
  * @note The tangent is calculated as the ratio of sine to cosine.
- */
+ **/
 function tan(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -421,7 +421,7 @@ function tan(a) {
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 0.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 function sinh(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -439,7 +439,7 @@ function sinh(a) {
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 1.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 function cosh(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -457,7 +457,7 @@ function cosh(a) {
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 0.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 function tanh(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -474,7 +474,7 @@ function tanh(a) {
  * @return The arcsine of the input value in radians.
  * @note This function asserts that the input is finite and within the valid range.
  * @note The approximation uses a 7th-degree polynomial for accuracy.
- */
+ **/
 function asin(a) {
   if (!Number.isFinite(a) || a < -1 || a > 1)
     throw new Error("Input must be finite and between -1 and 1");
@@ -492,7 +492,7 @@ function asin(a) {
  * @return The arccosine of the input value in radians.
  * @note This function asserts that the input is finite and within the valid range.
  * @note The arccosine is calculated using the relationship: acos(x) = PI/2 - asin(x).
- */
+ **/
 function acos(a) {
   if (!Number.isFinite(a) || a < -1 || a > 1)
     throw new Error("Input must be finite and between -1 and 1");
@@ -506,7 +506,7 @@ function acos(a) {
  * @return The arctangent of the input value in radians.
  * @note This function asserts that the input is finite.
  * @note This approximation is less accurate for large input values.
- */
+ **/
 function atan(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return a / (1.28 * pow(a, 2));
@@ -524,7 +524,7 @@ function atan(a) {
  *       - If b is 0 and a < 0, returns -PI/2
  *       - If b is 0 and a is 0, returns 0
  *       - If b < 0, adjusts the result by adding or subtracting PI
- */
+ **/
 function atan2(a, b) {
   if (!Number.isFinite(a) || !Number.isFinite(b))
     throw new Error("Inputs must be finite");
@@ -552,7 +552,7 @@ function atan2(a, b) {
  * @param a The input value.
  * @return The inverse hyperbolic sine of the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 function asinh(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return log(a + sqrt(a * a + 1));
@@ -564,7 +564,7 @@ function asinh(a) {
  * @param a The input value, must be greater than or equal to 1.
  * @return The inverse hyperbolic cosine of the input value.
  * @note This function asserts that the input is finite and greater than or equal to 1.
- */
+ **/
 function acosh(a) {
   if (!Number.isFinite(a) || a < 1)
     throw new Error("Input must be finite and greater than or equal to 1");
@@ -577,7 +577,7 @@ function acosh(a) {
  * @param a The input value, must be in the range (-1, 1).
  * @return The inverse hyperbolic tangent of the input value.
  * @note This function asserts that the input is finite and within the valid range.
- */
+ **/
 function atanh(a) {
   if (!Number.isFinite(a) || a <= -1 || a >= 1)
     throw new Error("Input must be finite and between -1 and 1 (exclusive)");
@@ -591,7 +591,7 @@ function atanh(a) {
  * @return The secant of the input angle.
  * @note This function asserts that the input is finite.
  * @note The secant is calculated as the reciprocal of the cosine.
- */
+ **/
 function sec(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -607,7 +607,7 @@ function sec(a) {
  * @return The cosecant of the input angle.
  * @note This function asserts that the input is finite.
  * @note The cosecant is calculated as the reciprocal of the sine.
- */
+ **/
 function csc(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -623,7 +623,7 @@ function csc(a) {
  * @return The cotangent of the input angle.
  * @note This function asserts that the input is finite.
  * @note The cotangent is calculated as the ratio of cosine to sine.
- */
+ **/
 function cot(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -641,7 +641,7 @@ function cot(a) {
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 1.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 function sech(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -658,7 +658,7 @@ function sech(a) {
  * @return The hyperbolic cosecant of the input value.
  * @note This function asserts that the input is finite.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 function csch(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -673,7 +673,7 @@ function csch(a) {
  * @return The hyperbolic cotangent of the input value.
  * @note This function asserts that the input is finite.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 function coth(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -690,7 +690,7 @@ function coth(a) {
  * @note The function uses a Taylor series approximation combined with exponent reduction.
  * @note For a = 0, the function returns 1.
  * @note The calculation is optimized for accuracy and efficiency.
- */
+ **/
 function exp(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
@@ -718,7 +718,7 @@ function exp(a) {
  * @param b The second double value to compare.
  * @return The smaller of the two input values.
  * @note This function asserts that both inputs are finite.
- */
+ **/
 function min(a, b) {
   if (!Number.isFinite(a) || !Number.isFinite(b))
     throw new Error("Inputs must be finite");
@@ -732,7 +732,7 @@ function min(a, b) {
  * @param b The second double value to compare.
  * @return The larger of the two input values.
  * @note This function asserts that both inputs are finite.
- */
+ **/
 function max(a, b) {
   if (!Number.isFinite(a) || !Number.isFinite(b))
     throw new Error("Inputs must be finite");
@@ -747,7 +747,7 @@ function max(a, b) {
  * @param max The maximum allowed value.
  * @return The clamped value, which will be between min and max (inclusive).
  * @note This function asserts that all inputs are finite.
- */
+ **/
 function clamp(value, min, max) {
   if (!Number.isFinite(value) || !Number.isFinite(min) || !Number.isFinite(max))
     throw new Error("Inputs must be finite");
@@ -765,7 +765,7 @@ function clamp(value, min, max) {
  * @return The natural logarithm of the input value.
  * @note This function asserts that the input is finite and greater than 0.
  * @note The function uses a series expansion for improved accuracy.
- */
+ **/
 function ln(a) {
   if (!Number.isFinite(a) || a <= 0)
     throw new Error("Input must be finite and positive");
@@ -805,7 +805,7 @@ function ln(a) {
  * @param base The base of the logarithm.
  * @return The logarithm of the input value with the specified base.
  * @note This function asserts that both inputs are finite.
- */
+ **/
 function log(a, base) {
   if (!Number.isFinite(a) || !Number.isFinite(base))
     throw new Error("Inputs must be finite");
@@ -818,7 +818,7 @@ function log(a, base) {
  * @param a The input value.
  * @return The base-2 logarithm of the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 function log2(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return ln(a) / LN2;
@@ -830,7 +830,7 @@ function log2(a) {
  * @param a The input value.
  * @return The base-10 logarithm of the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 function log10(a) {
   if (!Number.isFinite(a)) throw new Error("Input must be finite");
   return ln(a) / LN10;
@@ -843,7 +843,7 @@ function log10(a) {
  * @param size The number of elements in the array.
  * @return The sum of all elements in the array.
  * @note This function asserts that size is finite and greater than 0.
- */
+ **/
 function sum(data) {
   if (!Array.isArray(data) || data.length === 0)
     throw new Error("Input must be a non-empty array");
@@ -866,7 +866,7 @@ function sum(data) {
  * @param size The number of elements in the array.
  * @return The arithmetic mean of all elements in the array.
  * @note This function asserts that size is finite and greater than 0.
- */
+ **/
 function mean(data) {
   if (!Array.isArray(data) || data.length === 0)
     throw new Error("Input must be a non-empty array");
@@ -881,7 +881,7 @@ function mean(data) {
  * @return The median value of the array.
  * @note This function asserts that size is finite and greater than 0.
  * @note This function modifies the original array by sorting it.
- */
+ **/
 function median(data) {
   if (!Array.isArray(data) || data.length === 0)
     throw new Error("Input must be a non-empty array");
@@ -907,7 +907,7 @@ function median(data) {
  * @return The mode (most frequent value) of the array.
  * @note This function asserts that size is finite and greater than 0.
  * @note If multiple modes exist, this function returns the first one encountered.
- */
+ **/
 function mode(data) {
   if (!Array.isArray(data) || data.length === 0)
     throw new Error("Input must be a non-empty array");
@@ -947,7 +947,7 @@ function mode(data) {
  * @param size The number of elements in the array.
  * @return The sample standard deviation of the array.
  * @note This function asserts that size is finite and greater than 1.
- */
+ **/
 function stddev(data) {
   if (!Array.isArray(data) || data.length <= 1)
     throw new Error("Input must be an array with at least two elements");

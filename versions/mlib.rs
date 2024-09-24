@@ -10,84 +10,84 @@ pub const EULER:   f64 = 0.5772156649015329;
 pub const CATALAN: f64 = 0.9159655941772190;
 
 /**
-* Converts degrees to radians.
-*
-* @param deg The angle in degrees to convert.
-* @return The angle converted to radians.
-* @note This function asserts that the input is finite.
-*/
+ * Converts degrees to radians.
+ *
+ * @param deg The angle in degrees to convert.
+ * @return The angle converted to radians.
+ * @note This function asserts that the input is finite.
+ **/
 pub fn to_radian(deg: f64) -> f64 {
 	assert!(is_finite(deg));
 	return deg * (PI / 180.0);
 }
 
 /**
-* Converts radians to degrees.
-*
-* @param rad The angle in radians to convert.
-* @return The angle converted to degrees.
-* @note This function asserts that the input is finite.
-*/
+ * Converts radians to degrees.
+ *
+ * @param rad The angle in radians to convert.
+ * @return The angle converted to degrees.
+ * @note This function asserts that the input is finite.
+ **/
 pub fn to_degree(rad: f64) -> f64 {
 	assert!(is_finite(rad));
 	return rad * (180.0 / PI);
 }
 
 /**
-* Calculates the floor of a given double value.
-*
-* @param a The double value to floor.
-* @return The largest integer less than or equal to the input value.
-* @note This function asserts that the input is finite.
-*/
+ * Calculates the floor of a given double value.
+ *
+ * @param a The double value to floor.
+ * @return The largest integer less than or equal to the input value.
+ * @note This function asserts that the input is finite.
+ **/
 pub fn floor(a: f64) -> i32 {
     assert!(is_finite(a));
     return a as i32;
 }
 
 /**
-* Calculates the ceiling of a given double value.
-*
-* @param a The double value to calculate the ceiling for.
-* @return The smallest integer greater than or equal to the input value.
-* @note This function asserts that the input is finite.
-*/
+ * Calculates the ceiling of a given double value.
+ *
+ * @param a The double value to calculate the ceiling for.
+ * @return The smallest integer greater than or equal to the input value.
+ * @note This function asserts that the input is finite.
+ **/
 pub fn ceil(a: f64) -> i32 {
 	assert!(is_finite(a));
 	return (a + 1) as i32;
 }
 
 /**
-* Rounds a given double value to the nearest integer.
-*
-* @param a The double value to round.
-* @return The nearest integer to the input value.
-* @note This function asserts that the input is finite.
-*/
+ * Rounds a given double value to the nearest integer.
+ *
+ * @param a The double value to round.
+ * @return The nearest integer to the input value.
+ * @note This function asserts that the input is finite.
+ **/
 pub fn round(a: f64) -> i32 {
 	assert!(is_finite(a));
 	return if a + 0.5 >= (a as i32 + 1) as f64 { a as i32 + 1 } else { a as i32 };
 }
 
 /**
-* Calculates the absolute value of a given double.
-*
-* @param a The input double value.
-* @return The absolute value of the input.
-* @note This function asserts that the input is finite.
-*/
+ * Calculates the absolute value of a given double.
+ *
+ * @param a The input double value.
+ * @return The absolute value of the input.
+ * @note This function asserts that the input is finite.
+ **/
 pub fn abs(a: f64) -> f64 {
 	assert!(is_finite(a));
 	return if a < 0.0 { -a } else { a };
 }
 
 /**
-* Calculates the square root of a given number using the Newton-Raphson method.
-*
-* @param a The number to calculate the square root of.
-* @return The square root of the input number.
-* @note This function asserts that the input is finite and non-negative.
-*/
+ * Calculates the square root of a given number using the Newton-Raphson method.
+ *
+ * @param a The number to calculate the square root of.
+ * @return The square root of the input number.
+ * @note This function asserts that the input is finite and non-negative.
+ **/
 pub fn sqrt(a: f64) -> f64 {
 	assert!(is_finite(a) && a >= 0.0);
 
@@ -110,7 +110,7 @@ pub fn sqrt(a: f64) -> f64 {
  * @param a The number to calculate the inverse square root of.
  * @return The inverse square root of the input number.
  * @note This function asserts that the input is finite.
- */
+ **/
 pub fn isqrt(a: f64) -> f64 {
     assert!(is_finite(a));
     return 1.0 / sqrt(a);
@@ -123,7 +123,7 @@ pub fn isqrt(a: f64) -> f64 {
  * @return An approximation of the inverse square root of the input number.
  * @note This function uses a bit-level hack for initial guess and Newton's method for refinement.
  * @note This function asserts that the input is finite.
- */
+ **/
 pub fn qisqrt(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -150,7 +150,7 @@ pub fn qisqrt(a: f64) -> f64 {
  * @return The GCD of a and b.
  * @note This function asserts that both inputs are finite.
  * @note The function uses the absolute values of the inputs to handle negative numbers.
- */
+ **/
 pub fn gcd(a: i32, b: i32) -> i32 {
     assert!(is_finite(a.into()) && is_finite(b.into()));
 
@@ -176,7 +176,7 @@ pub fn gcd(a: i32, b: i32) -> i32 {
  * @note This function asserts that both inputs are finite.
  * @note The function uses the GCD to calculate the LCM efficiently.
  * @note If the GCD is 0, the function returns 0 to avoid division by zero.
- */
+ **/
 pub fn lcm(a: i32, b: i32) -> i32 {
     assert!(is_finite(a.into()) && is_finite(b.into()));
 
@@ -194,7 +194,7 @@ pub fn lcm(a: i32, b: i32) -> i32 {
  * @note This function asserts that the input is finite and non-negative.
  * @note The factorial is calculated recursively, which may lead to stack overflow for large inputs.
  * @warning This implementation is not suitable for large inputs due to potential stack overflow.
- */
+ **/
  pub fn fact(a: i32) -> i32 {
      assert!(is_finite(a.into()));
      if a <= 1 { return 1; }
@@ -213,7 +213,7 @@ pub fn lcm(a: i32, b: i32) -> i32 {
  * @note The multiplier and modulus values are chosen to create a full-period generator.
  * @note The function incorporates compile-time information to modify the seed,
  *       providing additional randomness across different compilations.
- */
+ **/
 pub fn rand(a: i32, b: i32) -> i32 {
     assert!(is_finite(a.into()) && is_finite(b.into()) && a < b);
 
@@ -237,41 +237,41 @@ pub fn rand(a: i32, b: i32) -> i32 {
 }
 
 /**
-* Calculates the remainder of the division of two integers.
-*
-* @param a The dividend.
-* @param b The divisor.
-* @return The remainder of a divided by b.
-* @note This function asserts that both inputs are finite and that b is positive.
-*/
+ * Calculates the remainder of the division of two integers.
+ *
+ * @param a The dividend.
+ * @param b The divisor.
+ * @return The remainder of a divided by b.
+ * @note This function asserts that both inputs are finite and that b is positive.
+ **/
 pub fn rem(a: i32, b: i32) -> i32 {
 	assert!(is_finite(a.into()) && is_finite(b.into()) && b > 0);
 	return a % b;
 }
 
 /**
-* Performs floor division of two double values.
-*
-* @param a The dividend.
-* @param b The divisor.
-* @return The floor of a divided by b.
-* @note This function asserts that both inputs are finite and that b is positive.
-*/
+ * Performs floor division of two double values.
+ *
+ * @param a The dividend.
+ * @param b The divisor.
+ * @return The floor of a divided by b.
+ * @note This function asserts that both inputs are finite and that b is positive.
+ **/
 pub fn fdiv(a: f64, b: f64) -> i32 {
 	assert!(is_finite(a) && is_finite(b) && b > 0.0);
 	return floor(a / b);
 }
 
 /**
-* Calculates the power of a base number raised to an integer exponent.
-*
-* @param base The base number.
-* @param pow The integer exponent.
-* @return The result of base raised to the power of pow.
-* @note This function asserts that both base and pow are finite.
-* @note For pow = 0, the function returns 1.
-* @note The function uses a simple iterative approach for positive exponents.
-*/
+ * Calculates the power of a base number raised to an integer exponent.
+ *
+ * @param base The base number.
+ * @param pow The integer exponent.
+ * @return The result of base raised to the power of pow.
+ * @note This function asserts that both base and pow are finite.
+ * @note For pow = 0, the function returns 1.
+ * @note The function uses a simple iterative approach for positive exponents.
+ **/
 pub fn pow(base: f64, pow: i32) -> f64 {
 	assert!(is_finite(base) && is_finite(pow.into()));
 
@@ -287,15 +287,15 @@ pub fn pow(base: f64, pow: i32) -> f64 {
 }
 
 /**
-* Checks if a given integer is prime.
-*
-* @param a The integer to check for primality.
-* @return true if the number is prime, false otherwise.
-* @note This function asserts that the input is finite.
-* @note Numbers less than 2 are not considered prime.
-* @note Even numbers greater than 2 are not prime.
-* @note The function checks for divisibility up to half of the input number.
-*/
+ * Checks if a given integer is prime.
+ *
+ * @param a The integer to check for primality.
+ * @return true if the number is prime, false otherwise.
+ * @note This function asserts that the input is finite.
+ * @note Numbers less than 2 are not considered prime.
+ * @note Even numbers greater than 2 are not prime.
+ * @note The function checks for divisibility up to half of the input number.
+ **/
 pub fn is_prime(a: i32) -> bool {
 	assert!(is_finite(a.into()));
 
@@ -310,31 +310,31 @@ pub fn is_prime(a: i32) -> bool {
 }
 
 /**
-* Checks if a given double value is finite.
-*
-* @param a The double value to check.
-* @return true if the value is finite, false otherwise.
-*/
+ * Checks if a given double value is finite.
+ *
+ * @param a The double value to check.
+ * @return true if the value is finite, false otherwise.
+ **/
 pub fn is_finite(a: f64) -> bool {
 	return !is_infinite(a) && !is_nan(a)
 }
 
 /**
-* Checks if a given double value is infinite.
-*
-* @param a The double value to check.
-* @return true if the value is infinite, false otherwise.
-*/
+ * Checks if a given double value is infinite.
+ *
+ * @param a The double value to check.
+ * @return true if the value is infinite, false otherwise.
+ **/
 pub fn is_infinite(a: f64) -> bool {
 	return a / a != a / a
 }
 
 /**
-* Checks if a given double value is Not-a-Number (NaN).
-*
-* @param a The double value to check.
-* @return true if the value is NaN, false otherwise.
-*/
+ * Checks if a given double value is Not-a-Number (NaN).
+ *
+ * @param a The double value to check.
+ * @return true if the value is NaN, false otherwise.
+ **/
 pub fn is_nan(a: f64) -> bool {
 	return a != a
 }
@@ -347,7 +347,7 @@ pub fn is_nan(a: f64) -> bool {
  * @note This function asserts that the input is finite.
  * @note The function normalizes the input angle to the range [-PI, PI].
  * @note The Taylor series is computed up to the 7th term for accuracy.
- */
+ **/
 pub fn sin(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -375,7 +375,7 @@ pub fn sin(a: f64) -> f64 {
  * @note This function asserts that the input is finite.
  * @note The function normalizes the input angle to the range [-PI, PI].
  * @note The Taylor series is computed up to the 7th term for accuracy.
- */
+ **/
 pub fn cos(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -402,7 +402,7 @@ pub fn cos(a: f64) -> f64 {
  * @return The tangent of the input angle.
  * @note This function asserts that the input is finite.
  * @note The tangent is calculated as the ratio of sine to cosine.
- */
+ **/
 pub fn tan(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -420,7 +420,7 @@ pub fn tan(a: f64) -> f64 {
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 0.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 pub fn sinh(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -438,7 +438,7 @@ pub fn sinh(a: f64) -> f64 {
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 1.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 pub fn cosh(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -456,7 +456,7 @@ pub fn cosh(a: f64) -> f64 {
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 0.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 pub fn tanh(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -473,7 +473,7 @@ pub fn tanh(a: f64) -> f64 {
  * @return The arcsine of the input value in radians.
  * @note This function asserts that the input is finite and within the valid range.
  * @note The approximation uses a 7th-degree polynomial for accuracy.
- */
+ **/
 pub fn asin(a: f64) -> f64 {
     assert!(is_finite(a) && a >= -1.0 && a <= 1.0);
 
@@ -488,7 +488,7 @@ pub fn asin(a: f64) -> f64 {
  * @return The arccosine of the input value in radians.
  * @note This function asserts that the input is finite and within the valid range.
  * @note The arccosine is calculated using the relationship: acos(x) = PI/2 - asin(x).
- */
+ **/
 pub fn acos(a: f64) -> f64 {
     assert!(is_finite(a) && a >= -1.0 && a <= 1.0);
     return (PI / 2.0) - asin(a);
@@ -501,7 +501,7 @@ pub fn acos(a: f64) -> f64 {
  * @return The arctangent of the input value in radians.
  * @note This function asserts that the input is finite.
  * @note This approximation is less accurate for large input values.
- */
+ **/
 pub fn atan(a: f64) -> f64 {
     assert!(is_finite(a));
     return a / (1.28 * pow(a, 2));
@@ -519,7 +519,7 @@ pub fn atan(a: f64) -> f64 {
  *       - If b is 0 and a < 0, returns -PI/2
  *       - If b is 0 and a is 0, returns 0
  *       - If b < 0, adjusts the result by adding or subtracting PI
- */
+ **/
 pub fn atan2(a: f64, b: f64) -> f64 {
     assert!(is_finite(a) && is_finite(b));
 
@@ -546,7 +546,7 @@ pub fn atan2(a: f64, b: f64) -> f64 {
  * @param a The input value.
  * @return The inverse hyperbolic sine of the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 pub fn asinh(a: f64) -> f64 {
     assert!(is_finite(a));
     return ln(a + sqrt(a * a + 1.0));
@@ -558,7 +558,7 @@ pub fn asinh(a: f64) -> f64 {
  * @param a The input value, must be greater than or equal to 1.
  * @return The inverse hyperbolic cosine of the input value.
  * @note This function asserts that the input is finite and greater than or equal to 1.
- */
+ **/
 pub fn acosh(a: f64) -> f64 {
     assert!(is_finite(a) && a >= 1.0);
     return ln(a + sqrt(a * a - 1.0));
@@ -570,7 +570,7 @@ pub fn acosh(a: f64) -> f64 {
  * @param a The input value, must be in the range (-1, 1).
  * @return The inverse hyperbolic tangent of the input value.
  * @note This function asserts that the input is finite and within the valid range.
- */
+ **/
 pub fn atanh(a: f64) -> f64 {
     assert!(is_finite(a) && a > -1.0 && a < 1.0);
     return 0.5 * ln((1.0 + a) / (1.0 - a));
@@ -583,7 +583,7 @@ pub fn atanh(a: f64) -> f64 {
  * @return The secant of the input angle.
  * @note This function asserts that the input is finite.
  * @note The secant is calculated as the reciprocal of the cosine.
- */
+ **/
 pub fn sec(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -599,7 +599,7 @@ pub fn sec(a: f64) -> f64 {
  * @return The cosecant of the input angle.
  * @note This function asserts that the input is finite.
  * @note The cosecant is calculated as the reciprocal of the sine.
- */
+ **/
 pub fn csc(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -615,7 +615,7 @@ pub fn csc(a: f64) -> f64 {
  * @return The cotangent of the input angle.
  * @note This function asserts that the input is finite.
  * @note The cotangent is calculated as the ratio of cosine to sine.
- */
+ **/
 pub fn cot(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -633,7 +633,7 @@ pub fn cot(a: f64) -> f64 {
  * @note This function asserts that the input is finite.
  * @note For a = 0, the function returns 1.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 pub fn sech(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -650,7 +650,7 @@ pub fn sech(a: f64) -> f64 {
  * @return The hyperbolic cosecant of the input value.
  * @note This function asserts that the input is finite.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 pub fn csch(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -665,7 +665,7 @@ pub fn csch(a: f64) -> f64 {
  * @return The hyperbolic cotangent of the input value.
  * @note This function asserts that the input is finite.
  * @note The function uses the exponential function to compute the result.
- */
+ **/
 pub fn coth(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -682,7 +682,7 @@ pub fn coth(a: f64) -> f64 {
  * @note The function uses a Taylor series approximation combined with exponent reduction.
  * @note For a = 0, the function returns 1.
  * @note The calculation is optimized for accuracy and efficiency.
- */
+ **/
 pub fn exp(a: f64) -> f64 {
     assert!(is_finite(a));
 
@@ -710,7 +710,7 @@ pub fn exp(a: f64) -> f64 {
  * @param b The second double value to compare.
  * @return The smaller of the two input values.
  * @note This function asserts that both inputs are finite.
- */
+ **/
 pub fn min(a: f64, b: f64) -> f64 {
     assert!(is_finite(a) && is_finite(b));
     return if a < b { a } else { b };
@@ -723,7 +723,7 @@ pub fn min(a: f64, b: f64) -> f64 {
  * @param b The second double value to compare.
  * @return The larger of the two input values.
  * @note This function asserts that both inputs are finite.
- */
+ **/
 pub fn max(a: f64, b: f64) -> f64 {
     assert!(is_finite(a) && is_finite(b));
     return if a > b { a } else { b };
@@ -737,7 +737,7 @@ pub fn max(a: f64, b: f64) -> f64 {
  * @param max The maximum allowed value.
  * @return The clamped value, which will be between min and max (inclusive).
  * @note This function asserts that all inputs are finite.
- */
+ **/
 pub fn clamp(value: f64, min: f64, max: f64) -> f64 {
     assert!(is_finite(value) && is_finite(min) && is_finite(max));
 
@@ -754,7 +754,7 @@ pub fn clamp(value: f64, min: f64, max: f64) -> f64 {
  * @return The natural logarithm of the input value.
  * @note This function asserts that the input is finite and greater than 0.
  * @note The function uses a series expansion for improved accuracy.
- */
+ **/
 pub fn ln(a: f64) -> f64 {
     assert!(is_finite(a) && a > 0.0);
 
@@ -790,7 +790,7 @@ pub fn ln(a: f64) -> f64 {
  * @param base The base of the logarithm.
  * @return The logarithm of the input value with the specified base.
  * @note This function asserts that both inputs are finite.
- */
+ **/
 pub fn log(a: f64, base: f64) -> f64 {
     assert!(is_finite(a) && is_finite(base));
     return ln(a) / ln(base);
@@ -802,7 +802,7 @@ pub fn log(a: f64, base: f64) -> f64 {
  * @param a The input value.
  * @return The base-2 logarithm of the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 pub fn log2(a: f64) -> f64 {
     assert!(is_finite(a));
     return ln(a) / LN2;
@@ -814,7 +814,7 @@ pub fn log2(a: f64) -> f64 {
  * @param a The input value.
  * @return The base-10 logarithm of the input value.
  * @note This function asserts that the input is finite.
- */
+ **/
 pub fn log10(a: f64) -> f64 {
     assert!(is_finite(a));
     return ln(a) / LN10;
@@ -827,7 +827,7 @@ pub fn log10(a: f64) -> f64 {
  * @param size The number of elements in the array.
  * @return The sum of all elements in the array.
  * @note This function asserts that size is finite and greater than 0.
- */
+ **/
 pub fn sum(data: &[f64]) -> f64 {
     assert!(!data.is_empty());
 
@@ -847,7 +847,7 @@ pub fn sum(data: &[f64]) -> f64 {
  * @param size The number of elements in the array.
  * @return The arithmetic mean of all elements in the array.
  * @note This function asserts that size is finite and greater than 0.
- */
+ **/
 pub fn mean(data: &[f64]) -> f64 {
     assert!(!data.is_empty());
     return sum(data) / data.len() as f64
@@ -861,7 +861,7 @@ pub fn mean(data: &[f64]) -> f64 {
  * @return The median value of the array.
  * @note This function asserts that size is finite and greater than 0.
  * @note This function modifies the original array by sorting it.
- */
+ **/
 pub fn median(data: &mut [f64]) -> f64 {
     assert!(!data.is_empty());
 
@@ -879,7 +879,7 @@ pub fn median(data: &mut [f64]) -> f64 {
  * @return The mode (most frequent value) of the array.
  * @note This function asserts that size is finite and greater than 0.
  * @note If multiple modes exist, this function returns the first one encountered.
- */
+ **/
 pub fn mode(data: &[f64]) -> f64 {
     assert!(!data.is_empty());
 
@@ -914,7 +914,7 @@ pub fn mode(data: &[f64]) -> f64 {
  * @param size The number of elements in the array.
  * @return The sample standard deviation of the array.
  * @note This function asserts that size is finite and greater than 1.
- */
+ **/
 pub fn stddev(data: &[f64]) -> f64 {
     assert!(!data.is_empty() && data.len() > 1);
 
