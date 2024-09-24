@@ -1,109 +1,109 @@
-const PI      = 3.1415926535897932;
-const TAU     = 6.2831853071795864;
-const E       = 2.7182818284590452;
-const PHI     = 1.6180339887498948;
-const LN2     = 0.6931471805599453;
-const LN10    = 2.3025850929940457;
-const LOG2E   = 1.4426950408889634;
-const LOG10E  = 0.4342944819032518;
-const EULER   = 0.5772156649015329;
-const CATALAN = 0.9159655941772190;
+const PI = 3.1415926535897932;
+const TAU = 6.2831853071795864;
+const E = 2.7182818284590452;
+const PHI = 1.6180339887498948;
+const LN2 = 0.6931471805599453;
+const LN10 = 2.3025850929940457;
+const LOG2E = 1.4426950408889634;
+const LOG10E = 0.4342944819032518;
+const EULER = 0.5772156649015329;
+const CATALAN = 0.915965594177219;
 
 /**
-* Converts degrees to radians.
-*
-* @param deg The angle in degrees to convert.
-* @return The angle converted to radians.
-* @note This function asserts that the input is finite.
-*/
+ * Converts degrees to radians.
+ *
+ * @param deg The angle in degrees to convert.
+ * @return The angle converted to radians.
+ * @note This function asserts that the input is finite.
+ */
 function toRadian(deg) {
-		if (!Number.isFinite(deg)) throw new Error("Input must be finite");
-		return deg * (PI / 180);
+  if (!Number.isFinite(deg)) throw new Error("Input must be finite");
+  return deg * (PI / 180);
 }
 
 /**
-* Converts radians to degrees.
-*
-* @param rad The angle in radians to convert.
-* @return The angle converted to degrees.
-* @note This function asserts that the input is finite.
-*/
+ * Converts radians to degrees.
+ *
+ * @param rad The angle in radians to convert.
+ * @return The angle converted to degrees.
+ * @note This function asserts that the input is finite.
+ */
 function toDegree(rad) {
-		if (!Number.isFinite(rad)) throw new Error("Input must be finite");
-		return rad * (180 / PI);
+  if (!Number.isFinite(rad)) throw new Error("Input must be finite");
+  return rad * (180 / PI);
 }
 
 /**
-* Calculates the floor of a given double value.
-*
-* @param a The double value to floor.
-* @return The largest integer less than or equal to the input value.
-* @note This function asserts that the input is finite.
-*/
+ * Calculates the floor of a given double value.
+ *
+ * @param a The double value to floor.
+ * @return The largest integer less than or equal to the input value.
+ * @note This function asserts that the input is finite.
+ */
 function floor(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    a = String.toString(a);
-		return Number.parseInt(a);
+  a = String.toString(a);
+  return Number.parseInt(a);
 }
 
 /**
-* Calculates the ceiling of a given double value.
-*
-* @param a The double value to calculate the ceiling for.
-* @return The smallest integer greater than or equal to the input value.
-* @note This function asserts that the input is finite.
-*/
+ * Calculates the ceiling of a given double value.
+ *
+ * @param a The double value to calculate the ceiling for.
+ * @return The smallest integer greater than or equal to the input value.
+ * @note This function asserts that the input is finite.
+ */
 function ceil(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
-		return a > floor(a) ? floor(a) + 1 : floor(a);
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return a > floor(a) ? floor(a) + 1 : floor(a);
 }
 
 /**
-* Rounds a given double value to the nearest integer.
-*
-* @param a The double value to round.
-* @return The nearest integer to the input value.
-* @note This function asserts that the input is finite.
-*/
+ * Rounds a given double value to the nearest integer.
+ *
+ * @param a The double value to round.
+ * @return The nearest integer to the input value.
+ * @note This function asserts that the input is finite.
+ */
 function round(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
-		return a + 0.5 >= floor(a) + 1
-				? floor(a) + 1
-				: floor(a);
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return a + 0.5 >= floor(a) + 1 ? floor(a) + 1 : floor(a);
 }
 
 /**
-* Calculates the absolute value of a given double.
-*
-* @param a The input double value.
-* @return The absolute value of the input.
-* @note This function asserts that the input is finite.
-*/
+ * Calculates the absolute value of a given double.
+ *
+ * @param a The input double value.
+ * @return The absolute value of the input.
+ * @note This function asserts that the input is finite.
+ */
 function abs(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
-		return a < 0 ? -a : a;
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return a < 0 ? -a : a;
 }
 
 /**
-* Calculates the square root of a given number using the Newton-Raphson method.
-*
-* @param a The number to calculate the square root of.
-* @return The square root of the input number.
-* @note This function asserts that the input is finite and non-negative.
-*/
+ * Calculates the square root of a given number using the Newton-Raphson method.
+ *
+ * @param a The number to calculate the square root of.
+ * @return The square root of the input number.
+ * @note This function asserts that the input is finite and non-negative.
+ */
 function sqrt(a) {
-		if (!Number.isFinite(a) || a < 0) throw new Error("Input must be finite and non-negative");
+  if (!Number.isFinite(a) || a < 0)
+    throw new Error("Input must be finite and non-negative");
 
-		if (a === 0) return 0;
+  if (a === 0) return 0;
 
-		let b = a, root;
+  let b = a,
+    root;
 
-		for (let i = 1; i < 17; ++i) {
-				b = root = (b + (a / b)) / 2;
-		}
+  for (let i = 1; i < 17; ++i) {
+    b = root = (b + a / b) / 2;
+  }
 
-		return root;
+  return root;
 }
 
 /**
@@ -114,8 +114,8 @@ function sqrt(a) {
  * @note This function asserts that the input is finite.
  */
 function isqrt(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
-		return 1 / sqrt(a);
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return 1 / sqrt(a);
 }
 
 /**
@@ -127,25 +127,25 @@ function isqrt(a) {
  * @note This function asserts that the input is finite.
  */
 function qisqrt(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    let i;
-    let x2 = a * 0.5;
-    let y = a;
+  let i;
+  let x2 = a * 0.5;
+  let y = a;
 
-    let buffer = new ArrayBuffer(4);
-    (new Float32Array(buffer))[0] = y;
-    i = (new Uint32Array(buffer))[0];
+  let buffer = new ArrayBuffer(4);
+  new Float32Array(buffer)[0] = y;
+  i = new Uint32Array(buffer)[0];
 
-    i = 0x5f3759df - (i >> 1);
+  i = 0x5f3759df - (i >> 1);
 
-    (new Uint32Array(buffer))[0] = i;
-    y = (new Float32Array(buffer))[0];
+  new Uint32Array(buffer)[0] = i;
+  y = new Float32Array(buffer)[0];
 
-    y *= (1.5 - (x2 * y * y));
-    y *= (1.5 - (x2 * y * y));
+  y *= 1.5 - x2 * y * y;
+  y *= 1.5 - x2 * y * y;
 
-    return y;
+  return y;
 }
 
 /**
@@ -158,19 +158,20 @@ function qisqrt(a) {
  * @note The function uses the absolute values of the inputs to handle negative numbers.
  */
 function gcd(a, b) {
-    if (!Number.isFinite(a) || !Number.isFinite(b)) throw new Error("Inputs must be finite");
+  if (!Number.isFinite(a) || !Number.isFinite(b))
+    throw new Error("Inputs must be finite");
 
-    a = abs(a);
-    b = abs(b);
+  a = abs(a);
+  b = abs(b);
 
-    while (b !== 0) {
-        let temp = b;
+  while (b !== 0) {
+    let temp = b;
 
-        b = a % b;
-        a = temp;
-    }
+    b = a % b;
+    a = temp;
+  }
 
-    return a;
+  return a;
 }
 
 /**
@@ -184,12 +185,13 @@ function gcd(a, b) {
  * @note If the GCD is 0, the function returns 0 to avoid division by zero.
  */
 function lcm(a, b) {
-    if (!Number.isFinite(a) || !Number.isFinite(b)) throw new Error("Inputs must be finite");
+  if (!Number.isFinite(a) || !Number.isFinite(b))
+    throw new Error("Inputs must be finite");
 
-    let result = gcd(a, b);
-    if (result === 0) return 0;
+  let result = gcd(a, b);
+  if (result === 0) return 0;
 
-    return abs(a / result * b);
+  return abs((a / result) * b);
 }
 
 /**
@@ -197,19 +199,15 @@ function lcm(a, b) {
  *
  * @param a The non-negative integer for which to calculate the factorial.
  * @return The factorial of the input number.
- * @note This function asserts that the input is finite.
- * @note The factorial is calculated iteratively to avoid stack overflow for large inputs.
+ * @note This function asserts that the input is finite and non-negative.
+ * @note The factorial is calculated recursively, which may lead to stack overflow for large inputs.
+ * @warning This implementation is not suitable for large inputs due to potential stack overflow.
  */
 function fact(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (a <= 1) return 1;
 
-		let result = 1;
-
-		for (let i = 2; i <= a; ++i) {
-				result *= i;
-		}
-
-		return result;
+  return a * fact(a - 1);
 }
 
 /**
@@ -225,121 +223,125 @@ function fact(a) {
  *       providing additional randomness across different compilations.
  */
 function rand(a, b) {
-    if (!Number.isFinite(a) || !Number.isFinite(b) || a >= b) throw new Error("Inputs must be finite and a must be less than b");
+  if (!Number.isFinite(a) || !Number.isFinite(b) || a >= b)
+    throw new Error("Inputs must be finite and a must be less than b");
 
-    let seed = 1;
-    const multiplier = 16807;  // 7^5
-    const modulus = 2147483647;  // 2^31 - 1 (Mersenne prime)
+  let seed = 1;
+  const multiplier = 16807; // 7^5
+  const modulus = 2147483647; // 2^31 - 1 (Mersenne prime)
 
-    const compile_time_seed = new Date().getTime() % modulus;
+  const compile_time_seed = new Date().getTime() % modulus;
 
-    seed = (multiplier * (seed ^ compile_time_seed)) % modulus;
+  seed = (multiplier * (seed ^ compile_time_seed)) % modulus;
 
-    return a + Math.floor(((seed / modulus) * (b - a + 1)));
+  return a + Math.floor((seed / modulus) * (b - a + 1));
 }
 
 /**
-* Calculates the remainder of the division of two integers.
-*
-* @param a The dividend.
-* @param b The divisor.
-* @return The remainder of a divided by b.
-* @note This function asserts that both inputs are finite and that b is positive.
-*/
+ * Calculates the remainder of the division of two integers.
+ *
+ * @param a The dividend.
+ * @param b The divisor.
+ * @return The remainder of a divided by b.
+ * @note This function asserts that both inputs are finite and that b is positive.
+ */
 function rem(a, b) {
-		if (!Number.isFinite(a) || !Number.isFinite(b) || b <= 0) throw new Error("Inputs must be finite and b must be positive");
-		return a % b;
+  if (!Number.isFinite(a) || !Number.isFinite(b) || b <= 0)
+    throw new Error("Inputs must be finite and b must be positive");
+  return a % b;
 }
 
 /**
-* Performs floor division of two double values.
-*
-* @param a The dividend.
-* @param b The divisor.
-* @return The floor of a divided by b.
-* @note This function asserts that both inputs are finite and that b is positive.
-*/
+ * Performs floor division of two double values.
+ *
+ * @param a The dividend.
+ * @param b The divisor.
+ * @return The floor of a divided by b.
+ * @note This function asserts that both inputs are finite and that b is positive.
+ */
 function fdiv(a, b) {
-		if (!Number.isFinite(a) || !Number.isFinite(b) || b <= 0) throw new Error("Inputs must be finite and b must be positive");
-		return floor(a / b);
+  if (!Number.isFinite(a) || !Number.isFinite(b) || b <= 0)
+    throw new Error("Inputs must be finite and b must be positive");
+  return floor(a / b);
 }
 
 /**
-* Calculates the power of a base number raised to an integer exponent.
-*
-* @param base The base number.
-* @param pow The integer exponent.
-* @return The result of base raised to the power of pow.
-* @note This function asserts that both base and pow are finite.
-* @note For pow = 0, the function returns 1.
-* @note The function uses a simple iterative approach for positive exponents.
-*/
+ * Calculates the power of a base number raised to an integer exponent.
+ *
+ * @param base The base number.
+ * @param pow The integer exponent.
+ * @return The result of base raised to the power of pow.
+ * @note This function asserts that both base and pow are finite.
+ * @note For pow = 0, the function returns 1.
+ * @note The function uses a simple iterative approach for positive exponents.
+ */
 function pow(base, pow) {
-		if (!Number.isFinite(base) || !Number.isFinite(pow)) throw new Error("Inputs must be finite");
+  if (!Number.isFinite(base) || !Number.isFinite(pow))
+    throw new Error("Inputs must be finite");
 
-		if (pow === 0) return 1;
+  if (pow === 0) return 1;
 
-		let product = base;
+  let product = base;
 
-		for (let i = 1; i < pow; ++i) product *= base;
+  for (let i = 1; i < pow; ++i) product *= base;
 
-		return product;
+  return product;
 }
 
 /**
-* Checks if a given integer is prime.
-*
-* @param a The integer to check for primality.
-* @return true if the number is prime, false otherwise.
-* @note This function asserts that the input is finite.
-* @note Numbers less than 2 are not considered prime.
-* @note Even numbers greater than 2 are not prime.
-* @note The function checks for divisibility up to half of the input number.
-*/
+ * Checks if a given integer is prime.
+ *
+ * @param a The integer to check for primality.
+ * @return true if the number is prime, false otherwise.
+ * @note This function asserts that the input is finite.
+ * @note Numbers less than 2 are not considered prime.
+ * @note Even numbers greater than 2 are not prime.
+ * @note The function checks for divisibility up to half of the input number.
+ */
 function isPrime(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-		if (a < 2) return false;
-		if (a > 2 && a % 2 === 0) return false;
+  if (a < 2) return false;
+  if (a > 2 && a % 2 === 0) return false;
 
-		for (let i = 2; i < a / 2; ++i) {
-				if (a % i === 0) return false;
-		}
+  for (let i = 2; i < a / 2; ++i) {
+    if (a % i === 0) return false;
+  }
 
-		return true;
+  return true;
 }
 
 /**
-* Checks if a given double value is finite.
-*
-* @param a The double value to check.
-* @return true if the value is finite, false otherwise.
-*/
+ * Checks if a given double value is finite.
+ *
+ * @param a The double value to check.
+ * @return true if the value is finite, false otherwise.
+ */
 function isFinite(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
-		return !isInfinite(a) && !isNaN(a);
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return !isInfinite(a) && !isNaN(a);
 }
 
 /**
-* Checks if a given double value is infinite.
-*
-* @param a The double value to check.
-* @return true if the value is infinite, false otherwise.
-*/
+ * Checks if a given double value is infinite.
+ *
+ * @param a The double value to check.
+ * @return true if the value is infinite, false otherwise.
+ */
 function isInfinite(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
-		return a / a !== a / a;
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return a / a !== a / a;
 }
 
 /**
-* Checks if a given double value is Not-a-Number (NaN).
-*
-* @param a The double value to check.
-* @return true if the value is NaN, false otherwise.
-*/
+ * Checks if a given double value is Not-a-Number (NaN).
+ *
+ * @param a The double value to check.
+ * @return true if the value is NaN, false otherwise.
+ */
 function isNaN(a) {
-		if (!Number.isFinite(a)) throw new Error("Input must be finite");
-		return a !== a;
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return a !== a;
 }
 
 /**
@@ -352,20 +354,20 @@ function isNaN(a) {
  * @note The Taylor series is computed up to the 7th term for accuracy.
  */
 function sin(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    while (a > PI) a -= 2 * PI;
-    while (a < -PI) a += 2 * PI;
+  while (a > PI) a -= 2 * PI;
+  while (a < -PI) a += 2 * PI;
 
-    let result = a;
-    let term = a;
+  let result = a;
+  let term = a;
 
-    for (let i = 1; i <= 7; ++i) {
-        term *= -a * a / ((2 * i) * (2 * i + 1));
-        result += term;
-    }
+  for (let i = 1; i <= 7; ++i) {
+    term *= (-a * a) / (2 * i * (2 * i + 1));
+    result += term;
+  }
 
-    return result;
+  return result;
 }
 
 /**
@@ -378,20 +380,20 @@ function sin(a) {
  * @note The Taylor series is computed up to the 7th term for accuracy.
  */
 function cos(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    while (a > PI) a -= 2 * PI;
-    while (a < -PI) a += 2 * PI;
+  while (a > PI) a -= 2 * PI;
+  while (a < -PI) a += 2 * PI;
 
-    let result = 1;
-    let term = 1;
+  let result = 1;
+  let term = 1;
 
-    for (let i = 1; i <= 7; ++i) {
-        term *= -a * a / ((2 * i - 1) * (2 * i));
-        result += term;
-    }
+  for (let i = 1; i <= 7; ++i) {
+    term *= (-a * a) / ((2 * i - 1) * (2 * i));
+    result += term;
+  }
 
-    return result;
+  return result;
 }
 
 /**
@@ -403,12 +405,12 @@ function cos(a) {
  * @note The tangent is calculated as the ratio of sine to cosine.
  */
 function tan(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    let s = sin(a);
-    let c = cos(a);
+  let s = sin(a);
+  let c = cos(a);
 
-    return s / c;
+  return s / c;
 }
 
 /**
@@ -421,12 +423,12 @@ function tan(a) {
  * @note The function uses the exponential function to compute the result.
  */
 function sinh(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    if (a === 0) return 0;
+  if (a === 0) return 0;
 
-    let ea = exp(a);
-    return (ea - (1 / ea)) / 2;
+  let ea = exp(a);
+  return (ea - 1 / ea) / 2;
 }
 
 /**
@@ -439,12 +441,12 @@ function sinh(a) {
  * @note The function uses the exponential function to compute the result.
  */
 function cosh(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    if (a === 0) return 1;
+  if (a === 0) return 1;
 
-    let ea = exp(a);
-    return (ea + (1 / ea)) / 2;
+  let ea = exp(a);
+  return (ea + 1 / ea) / 2;
 }
 
 /**
@@ -457,12 +459,12 @@ function cosh(a) {
  * @note The function uses the exponential function to compute the result.
  */
 function tanh(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    if (a === 0) return 0;
+  if (a === 0) return 0;
 
-    let ea = exp(2 * a);
-    return (ea - 1) / (ea + 1);
+  let ea = exp(2 * a);
+  return (ea - 1) / (ea + 1);
 }
 
 /**
@@ -474,10 +476,13 @@ function tanh(a) {
  * @note The approximation uses a 7th-degree polynomial for accuracy.
  */
 function asin(a) {
-    if (!Number.isFinite(a) || a < -1 || a > 1) throw new Error("Input must be finite and between -1 and 1");
+  if (!Number.isFinite(a) || a < -1 || a > 1)
+    throw new Error("Input must be finite and between -1 and 1");
 
-    let a2 = pow(a, 2);
-    return a + a * a2 * (1 / 6 + a2 * (3 / 40 + a2 * (5 / 112 + a2 * 35 / 1152)));
+  let a2 = pow(a, 2);
+  return (
+    a + a * a2 * (1 / 6 + a2 * (3 / 40 + a2 * (5 / 112 + (a2 * 35) / 1152)))
+  );
 }
 
 /**
@@ -489,8 +494,9 @@ function asin(a) {
  * @note The arccosine is calculated using the relationship: acos(x) = PI/2 - asin(x).
  */
 function acos(a) {
-    if (!Number.isFinite(a) || a < -1 || a > 1) throw new Error("Input must be finite and between -1 and 1");
-    return (PI / 2) - asin(a);
+  if (!Number.isFinite(a) || a < -1 || a > 1)
+    throw new Error("Input must be finite and between -1 and 1");
+  return PI / 2 - asin(a);
 }
 
 /**
@@ -502,8 +508,8 @@ function acos(a) {
  * @note This approximation is less accurate for large input values.
  */
 function atan(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
-    return a / (1.28 * pow(a, 2));
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return a / (1.28 * pow(a, 2));
 }
 
 /**
@@ -520,23 +526,24 @@ function atan(a) {
  *       - If b < 0, adjusts the result by adding or subtracting PI
  */
 function atan2(a, b) {
-    if (!Number.isFinite(a) || !Number.isFinite(b)) throw new Error("Inputs must be finite");
+  if (!Number.isFinite(a) || !Number.isFinite(b))
+    throw new Error("Inputs must be finite");
 
-    if (b === 0) {
-        if (a > 0) return PI / 2;
-        if (a < 0) return -PI / 2;
+  if (b === 0) {
+    if (a > 0) return PI / 2;
+    if (a < 0) return -PI / 2;
 
-      return 0;
-    }
+    return 0;
+  }
 
-    let result = atan(a / b);
+  let result = atan(a / b);
 
-    if (b < 0) {
-        if (a >= 0) return result + PI;
-        return result - PI;
-    }
+  if (b < 0) {
+    if (a >= 0) return result + PI;
+    return result - PI;
+  }
 
-    return result;
+  return result;
 }
 
 /**
@@ -547,8 +554,8 @@ function atan2(a, b) {
  * @note This function asserts that the input is finite.
  */
 function asinh(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
-    return log(a + sqrt(a * a + 1));
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return log(a + sqrt(a * a + 1));
 }
 
 /**
@@ -559,8 +566,9 @@ function asinh(a) {
  * @note This function asserts that the input is finite and greater than or equal to 1.
  */
 function acosh(a) {
-    if (!Number.isFinite(a) || a < 1) throw new Error("Input must be finite and greater than or equal to 1");
-    return log(a + sqrt(a * a - 1));
+  if (!Number.isFinite(a) || a < 1)
+    throw new Error("Input must be finite and greater than or equal to 1");
+  return log(a + sqrt(a * a - 1));
 }
 
 /**
@@ -571,8 +579,9 @@ function acosh(a) {
  * @note This function asserts that the input is finite and within the valid range.
  */
 function atanh(a) {
-    if (!Number.isFinite(a) || a <= -1 || a >= 1) throw new Error("Input must be finite and between -1 and 1 (exclusive)");
-    return 0.5 * log((1 + a) / (1 - a));
+  if (!Number.isFinite(a) || a <= -1 || a >= 1)
+    throw new Error("Input must be finite and between -1 and 1 (exclusive)");
+  return 0.5 * log((1 + a) / (1 - a));
 }
 
 /**
@@ -584,11 +593,11 @@ function atanh(a) {
  * @note The secant is calculated as the reciprocal of the cosine.
  */
 function sec(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    let c = cos(a);
+  let c = cos(a);
 
-    return 1 / c;
+  return 1 / c;
 }
 
 /**
@@ -600,11 +609,11 @@ function sec(a) {
  * @note The cosecant is calculated as the reciprocal of the sine.
  */
 function csc(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    let s = sin(a);
+  let s = sin(a);
 
-    return 1 / s;
+  return 1 / s;
 }
 
 /**
@@ -616,12 +625,12 @@ function csc(a) {
  * @note The cotangent is calculated as the ratio of cosine to sine.
  */
 function cot(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    let s = sin(a);
-    let c = cos(a);
+  let s = sin(a);
+  let c = cos(a);
 
-    return c / s;
+  return c / s;
 }
 
 /**
@@ -634,12 +643,12 @@ function cot(a) {
  * @note The function uses the exponential function to compute the result.
  */
 function sech(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    if (a === 0) return 1;
+  if (a === 0) return 1;
 
-    let ea = exp(a);
-    return 2 / (ea + (1 / ea));
+  let ea = exp(a);
+  return 2 / (ea + 1 / ea);
 }
 
 /**
@@ -651,10 +660,10 @@ function sech(a) {
  * @note The function uses the exponential function to compute the result.
  */
 function csch(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    let ea = exp(a);
-    return 2 / (ea - (1 / ea));
+  let ea = exp(a);
+  return 2 / (ea - 1 / ea);
 }
 
 /**
@@ -666,10 +675,10 @@ function csch(a) {
  * @note The function uses the exponential function to compute the result.
  */
 function coth(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    let ea = exp(2 * a);
-    return (ea + 1) / (ea - 1);
+  let ea = exp(2 * a);
+  return (ea + 1) / (ea - 1);
 }
 
 /**
@@ -683,23 +692,23 @@ function coth(a) {
  * @note The calculation is optimized for accuracy and efficiency.
  */
 function exp(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
 
-    if (a === 0) return 1;
+  if (a === 0) return 1;
 
-    let k = floor(a * LOG2E);
-    let r = a - k * LN2;
-    let result = r + 1;
-    let term = r;
+  let k = floor(a * LOG2E);
+  let r = a - k * LN2;
+  let result = r + 1;
+  let term = r;
 
-    for (let i = 2; i <= 12; ++i) {
-        term *= r / i;
-        result += term;
+  for (let i = 2; i <= 12; ++i) {
+    term *= r / i;
+    result += term;
 
-        if (term < 1E-15 * result) break;
-    }
+    if (term < 1e-15 * result) break;
+  }
 
-    return result * pow(2, k);
+  return result * pow(2, k);
 }
 
 /**
@@ -711,8 +720,9 @@ function exp(a) {
  * @note This function asserts that both inputs are finite.
  */
 function min(a, b) {
-    if (!Number.isFinite(a) || !Number.isFinite(b)) throw new Error("Inputs must be finite");
-    return a < b ? a : b;
+  if (!Number.isFinite(a) || !Number.isFinite(b))
+    throw new Error("Inputs must be finite");
+  return a < b ? a : b;
 }
 
 /**
@@ -724,8 +734,9 @@ function min(a, b) {
  * @note This function asserts that both inputs are finite.
  */
 function max(a, b) {
-    if (!Number.isFinite(a) || !Number.isFinite(b)) throw new Error("Inputs must be finite");
-    return a > b ? a : b;
+  if (!Number.isFinite(a) || !Number.isFinite(b))
+    throw new Error("Inputs must be finite");
+  return a > b ? a : b;
 }
 
 /**
@@ -738,12 +749,13 @@ function max(a, b) {
  * @note This function asserts that all inputs are finite.
  */
 function clamp(value, min, max) {
-    if (!Number.isFinite(value) || !Number.isFinite(min) || !Number.isFinite(max)) throw new Error("Inputs must be finite");
+  if (!Number.isFinite(value) || !Number.isFinite(min) || !Number.isFinite(max))
+    throw new Error("Inputs must be finite");
 
-    if (value < min) return min;
-    if (value > max) return max;
+  if (value < min) return min;
+  if (value > max) return max;
 
-    return value;
+  return value;
 }
 
 /**
@@ -755,28 +767,35 @@ function clamp(value, min, max) {
  * @note The function uses a series expansion for improved accuracy.
  */
 function ln(a) {
-    if (!Number.isFinite(a) || a <= 0) throw new Error("Input must be finite and positive");
+  if (!Number.isFinite(a) || a <= 0)
+    throw new Error("Input must be finite and positive");
 
-    if (a === 1) return 0;
+  if (a === 1) return 0;
 
-    let exp = 0;
+  let exp = 0;
 
-    while (a > 2) { a /= 2; exp++; }
-    while (a < 1) { a *= 2; exp--; }
+  while (a > 2) {
+    a /= 2;
+    exp++;
+  }
+  while (a < 1) {
+    a *= 2;
+    exp--;
+  }
 
-    a--;
+  a--;
 
-    let y = a;
-    let sum = y;
-    let i = 1;
+  let y = a;
+  let sum = y;
+  let i = 1;
 
-    do {
-        i++;
-        y *= -a * (i - 1) / i;
-        sum += y;
-    } while (abs(y) > 1E-15);
+  do {
+    i++;
+    y *= (-a * (i - 1)) / i;
+    sum += y;
+  } while (abs(y) > 1e-15);
 
-    return sum + exp * LN2;
+  return sum + exp * LN2;
 }
 
 /**
@@ -788,8 +807,9 @@ function ln(a) {
  * @note This function asserts that both inputs are finite.
  */
 function log(a, base) {
-    if (!Number.isFinite(a) || !Number.isFinite(base)) throw new Error("Inputs must be finite");
-    return ln(a) / ln(base);
+  if (!Number.isFinite(a) || !Number.isFinite(base))
+    throw new Error("Inputs must be finite");
+  return ln(a) / ln(base);
 }
 
 /**
@@ -800,8 +820,8 @@ function log(a, base) {
  * @note This function asserts that the input is finite.
  */
 function log2(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
-    return ln(a) / LN2;
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return ln(a) / LN2;
 }
 
 /**
@@ -812,8 +832,8 @@ function log2(a) {
  * @note This function asserts that the input is finite.
  */
 function log10(a) {
-    if (!Number.isFinite(a)) throw new Error("Input must be finite");
-    return ln(a) / LN10;
+  if (!Number.isFinite(a)) throw new Error("Input must be finite");
+  return ln(a) / LN10;
 }
 
 /**
@@ -825,16 +845,18 @@ function log10(a) {
  * @note This function asserts that size is finite and greater than 0.
  */
 function sum(data) {
-    if (!Array.isArray(data) || data.length === 0) throw new Error("Input must be a non-empty array");
+  if (!Array.isArray(data) || data.length === 0)
+    throw new Error("Input must be a non-empty array");
 
-    let total = 0;
+  let total = 0;
 
-    for (let i = 0; i < data.length; ++i) {
-        if (!Number.isFinite(data[i])) throw new Error("All elements must be finite numbers");
-        total += data[i];
-    }
+  for (let i = 0; i < data.length; ++i) {
+    if (!Number.isFinite(data[i]))
+      throw new Error("All elements must be finite numbers");
+    total += data[i];
+  }
 
-    return total;
+  return total;
 }
 
 /**
@@ -846,8 +868,9 @@ function sum(data) {
  * @note This function asserts that size is finite and greater than 0.
  */
 function mean(data) {
-    if (!Array.isArray(data) || data.length === 0) throw new Error("Input must be a non-empty array");
-    return sum(data) / data.length;
+  if (!Array.isArray(data) || data.length === 0)
+    throw new Error("Input must be a non-empty array");
+  return sum(data) / data.length;
 }
 
 /**
@@ -860,17 +883,20 @@ function mean(data) {
  * @note This function modifies the original array by sorting it.
  */
 function median(data) {
-    if (!Array.isArray(data) || data.length === 0) throw new Error("Input must be a non-empty array");
+  if (!Array.isArray(data) || data.length === 0)
+    throw new Error("Input must be a non-empty array");
 
-    for (let i = 0; i < data.length; i++) {
-        if (!Number.isFinite(data[i])) throw new Error("All elements must be finite numbers");
-    }
+  for (let i = 0; i < data.length; i++) {
+    if (!Number.isFinite(data[i]))
+      throw new Error("All elements must be finite numbers");
+  }
 
-    let sortedData = [...data].sort((a, b) => a - b);
-    let size = sortedData.length;
+  let sortedData = [...data].sort((a, b) => a - b);
+  let size = sortedData.length;
 
-    if (size % 2 === 0) return (sortedData[(size / 2) - 1] + sortedData[size / 2]) / 2;
-    else return sortedData[floor(size / 2)];
+  if (size % 2 === 0)
+    return (sortedData[size / 2 - 1] + sortedData[size / 2]) / 2;
+  else return sortedData[floor(size / 2)];
 }
 
 /**
@@ -883,32 +909,35 @@ function median(data) {
  * @note If multiple modes exist, this function returns the first one encountered.
  */
 function mode(data) {
-    if (!Array.isArray(data) || data.length === 0) throw new Error("Input must be a non-empty array");
+  if (!Array.isArray(data) || data.length === 0)
+    throw new Error("Input must be a non-empty array");
 
-    for (let i = 0; i < data.length; i++) {
-        if (!Number.isFinite(data[i])) throw new Error("All elements must be finite numbers");
+  for (let i = 0; i < data.length; i++) {
+    if (!Number.isFinite(data[i]))
+      throw new Error("All elements must be finite numbers");
+  }
+
+  let sortedData = [...data].sort((a, b) => a - b);
+  let mode = sortedData[0];
+  let maxCount = 1,
+    currentCount = 1;
+
+  for (let i = 1; i < sortedData.length; ++i) {
+    if (sortedData[i] === sortedData[i - 1]) {
+      ++currentCount;
+    } else {
+      if (currentCount > maxCount) {
+        maxCount = currentCount;
+        mode = sortedData[i - 1];
+      }
+
+      currentCount = 1;
     }
+  }
 
-    let sortedData = [...data].sort((a, b) => a - b);
-    let mode = sortedData[0];
-    let maxCount = 1, currentCount = 1;
+  if (currentCount > maxCount) mode = sortedData[sortedData.length - 1];
 
-    for (let i = 1; i < sortedData.length; ++i) {
-        if (sortedData[i] === sortedData[i - 1]) {
-            ++currentCount;
-        } else {
-            if (currentCount > maxCount) {
-                maxCount = currentCount;
-                mode = sortedData[i - 1];
-            }
-
-            currentCount = 1;
-        }
-    }
-
-    if (currentCount > maxCount) mode = sortedData[sortedData.length - 1];
-
-    return mode;
+  return mode;
 }
 
 /**
@@ -920,17 +949,19 @@ function mode(data) {
  * @note This function asserts that size is finite and greater than 1.
  */
 function stddev(data) {
-    if (!Array.isArray(data) || data.length <= 1) throw new Error("Input must be an array with at least two elements");
+  if (!Array.isArray(data) || data.length <= 1)
+    throw new Error("Input must be an array with at least two elements");
 
-    let m = mean(data);
-    let sum = 0;
+  let m = mean(data);
+  let sum = 0;
 
-    for (let i = 0; i < data.length; i++) {
-        if (!Number.isFinite(data[i])) throw new Error("All elements must be finite numbers");
+  for (let i = 0; i < data.length; i++) {
+    if (!Number.isFinite(data[i]))
+      throw new Error("All elements must be finite numbers");
 
-        let diff = data[i] - m;
-        sum += diff * diff;
-    }
+    let diff = data[i] - m;
+    sum += diff * diff;
+  }
 
-    return sqrt(sum / (data.length - 1));
+  return sqrt(sum / (data.length - 1));
 }

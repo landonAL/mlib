@@ -165,17 +165,14 @@ def lcm(a: int, b: int) -> int:
 #
 # @param a The non-negative integer for which to calculate the factorial.
 # @return The factorial of the input number.
-# @note This function asserts that the input is finite.
-# @note The factorial is calculated iteratively to avoid stack overflow for large inputs.
+# @note This function asserts that the input is finite and non-negative.
+# @note The factorial is calculated recursively, which may lead to stack overflow for large inputs.
+# @warning This implementation is not suitable for large inputs due to potential stack overflow.
 def fact(a: int) -> int:
     assert is_finite(a)
+    if a <= 1: return 1
 
-    result = 1
-
-    for i in range(2, a + 1):
-        result *= i
-
-    return result
+    return a * fact(a - 1)
 
 # Generates a random integer within a specified range using a linear congruential generator (LCG).
 #

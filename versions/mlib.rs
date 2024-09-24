@@ -191,20 +191,16 @@ pub fn lcm(a: i32, b: i32) -> i32 {
  *
  * @param a The non-negative integer for which to calculate the factorial.
  * @return The factorial of the input number.
- * @note This function asserts that the input is finite.
- * @note The factorial is calculated iteratively to avoid stack overflow for large inputs.
+ * @note This function asserts that the input is finite and non-negative.
+ * @note The factorial is calculated recursively, which may lead to stack overflow for large inputs.
+ * @warning This implementation is not suitable for large inputs due to potential stack overflow.
  */
-pub fn fact(a: i32) -> i32 {
-	assert!(is_finite(a.into()));
+ pub fn fact(a: i32) -> i32 {
+     assert!(is_finite(a.into()));
+     if a <= 1 { return 1; }
 
-	let mut result = 1;
-
-	for i in 2..=a {
-		result *= i;
-	}
-
-	return result;
-}
+     return a * fact(a - 1);
+ }
 
 /**
  * Generates a random integer within a specified range using a linear congruential generator (LCG).

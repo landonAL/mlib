@@ -1,18 +1,14 @@
-using System;
-using System.Diagnostics;
-
-public static class mlib
-{
-    public const double PI      = 3.1415926535897932;
-    public const double TAU     = 6.2831853071795864;
-    public const double E       = 2.7182818284590452;
-    public const double PHI     = 1.6180339887498948;
-    public const double LN2     = 0.6931471805599453;
-    public const double LN10    = 2.3025850929940457;
-    public const double LOG2E   = 1.4426950408889634;
-    public const double LOG10E  = 0.4342944819032518;
-    public const double EULER   = 0.5772156649015329;
-    public const double CATALAN = 0.9159655941772190;
+public class mlib {
+    public static final double PI      = 3.1415926535897932;
+    public static final double TAU     = 6.2831853071795864;
+    public static final double E       = 2.7182818284590452;
+    public static final double PHI     = 1.6180339887498948;
+    public static final double LN2     = 0.6931471805599453;
+    public static final double LN10    = 2.3025850929940457;
+    public static final double LOG2E   = 1.4426950408889634;
+    public static final double LOG10E  = 0.4342944819032518;
+    public static final double EULER   = 0.5772156649015329;
+    public static final double CATALAN = 0.9159655941772190;
 
     /**
     * Converts degrees to radians.
@@ -21,10 +17,9 @@ public static class mlib
     * @return The angle converted to radians.
     * @note This function asserts that the input is finite.
     */
-    public static double ToRadian(double deg)
-    {
-    	Debug.Assert(IsFinite(deg));
-    	return deg * (PI / 180);
+    public static double toRadian(double deg) {
+        assert isFinite(deg);
+        return deg * (PI / 180);
     }
 
     /**
@@ -34,10 +29,9 @@ public static class mlib
     * @return The angle converted to degrees.
     * @note This function asserts that the input is finite.
     */
-    public static double ToDegree(double rad)
-    {
-    	Debug.Assert(IsFinite(rad));
-    	return rad * (180 / PI);
+    public static double toDegree(double rad) {
+        assert isFinite(rad);
+        return rad * (180 / PI);
     }
 
     /**
@@ -47,10 +41,9 @@ public static class mlib
     * @return The largest integer less than or equal to the input value.
     * @note This function asserts that the input is finite.
     */
-    public static int Floor(double a)
-    {
-    	Debug.Assert(IsFinite(a));
-    	return (int) a;
+    public static int floor(double a) {
+        assert isFinite(a);
+        return (int) a;
     }
 
     /**
@@ -60,10 +53,9 @@ public static class mlib
     * @return The smallest integer greater than or equal to the input value.
     * @note This function asserts that the input is finite.
     */
-    public static int Ceil(double a)
-    {
-    	Debug.Assert(IsFinite(a));
-    	return a > (int) a ? (int) a + 1 : (int) a;
+    public static int ceil(double a) {
+        assert isFinite(a);
+        return a > (int) a ? (int) a + 1 : (int) a;
     }
 
     /**
@@ -73,12 +65,11 @@ public static class mlib
     * @return The nearest integer to the input value.
     * @note This function asserts that the input is finite.
     */
-    public static int Round(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static int round(double a) {
+        assert isFinite(a);
         return a + 0.5 >= (int) a + 1
-            ? (int) a + 1
-            : (int) a;
+                ? (int) a + 1
+                : (int) a;
     }
 
     /**
@@ -88,9 +79,8 @@ public static class mlib
     * @return The absolute value of the input.
     * @note This function asserts that the input is finite.
     */
-    public static double Abs(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double abs(double a) {
+        assert isFinite(a);
         return a < 0 ? -a : a;
     }
 
@@ -101,16 +91,13 @@ public static class mlib
     * @return The square root of the input number.
     * @note This function asserts that the input is finite and non-negative.
     */
-    public static double Sqrt(double a)
-    {
-        Debug.Assert(IsFinite(a) && a >= 0);
-
+    public static double sqrt(double a) {
+        assert isFinite(a) && a >= 0;
         if (a == 0) return 0;
 
-        double b = a, root = 0;
+        double b = a, root;
 
-        for (int i = 1; i < 17; ++i)
-        {
+        for (int i = 1; i < 17; ++i) {
             b = root = (b + (a / b)) / 2;
         }
 
@@ -124,10 +111,9 @@ public static class mlib
      * @return The inverse square root of the input number.
      * @note This function asserts that the input is finite.
      */
-    public static double ISqrt(double a)
-    {
-        Debug.Assert(IsFinite(a));
-        return 1 / Sqrt(a);
+    public static double isqrt(double a) {
+        assert isFinite(a);
+        return 1 / sqrt(a);
     }
 
     /**
@@ -138,18 +124,17 @@ public static class mlib
      * @note This function uses a bit-level hack for initial guess and Newton's method for refinement.
      * @note This function asserts that the input is finite.
      */
-    public static double QISqrt(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double qisqrt(double a) {
+        assert isFinite(a);
 
-        long i;
-        double x2, y;
+        long i = 0;
+        double x2 = 0, y = 0;
 
         x2 = a * 0.5;
         y = a;
-        i = BitConverter.DoubleToInt64Bits(y);
+        i = Double.floatToRawIntBits(y);
         i = 0x5f3759df - (i >> 1);
-        y = BitConverter.Int64BitsToDouble(i);
+        y = Double.intBitsToFloat((int) i);
         y *= (1.5 - (x2 * y * y));
         y *= (1.5 - (x2 * y * y));
 
@@ -165,15 +150,13 @@ public static class mlib
      * @note This function asserts that both inputs are finite.
      * @note The function uses the absolute values of the inputs to handle negative numbers.
      */
-    public static int GCD(int a, int b)
-    {
-        Debug.Assert(IsFinite(a) && IsFinite(b));
+    public static int gcd(int a, int b) {
+        assert isFinite(a) && isFinite(b);
 
-        if (a < 0) a = -a;
-        if (b < 0) b = -b;
+        a = abs(a);
+        b = abs(b);
 
-        while (b != 0)
-        {
+        while (b != 0) {
             int temp = b;
 
             b = a % b;
@@ -193,14 +176,13 @@ public static class mlib
      * @note The function uses the GCD to calculate the LCM efficiently.
      * @note If the GCD is 0, the function returns 0 to avoid division by zero.
      */
-    public static int LCM(int a, int b)
-    {
-        Debug.Assert(IsFinite(a) && IsFinite(b));
+    public static int lcm(int a, int b) {
+        assert isFinite(a) && isFinite(b);
 
-        int result = GCD(a, b);
+        int result = gcd(a, b);
         if (result == 0) return 0;
 
-        return a * b >= 0 ? a / result * b : -(a / result * b);
+        return abs(a / result * b);
     }
 
     /**
@@ -212,44 +194,37 @@ public static class mlib
      * @note The factorial is calculated recursively, which may lead to stack overflow for large inputs.
      * @warning This implementation is not suitable for large inputs due to potential stack overflow.
      */
-    public static int Fact(int a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static int fact(int a) {
+        assert isFinite(a);
         if (a <= 1) return 1;
 
-        return a * Fact(a - 1);
+        return a * fact(a - 1);
     }
 
     /**
-    * Generates a random integer within a specified range using a linear congruential generator (LCG).
-    *
-    * @param a The lower bound of the range (inclusive).
-    * @param b The upper bound of the range (inclusive).
-    * @return A random integer between a and b (inclusive).
-    * @note This function asserts that both inputs are finite and that a is less than b.
-    * @note The LCG uses a static seed, which is updated with each call to the function.
-    * @note The multiplier and modulus values are chosen to create a full-period generator.
-    * @note The function incorporates compile-time information to modify the seed,
-    *       providing additional randomness across different compilations.
-    */
-    public static int Rand(int a, int b)
-    {
-        Debug.Assert(IsFinite(a) && IsFinite(b) && a < b);
+     * Generates a random integer within a specified range using a linear congruential generator (LCG).
+     *
+     * @param a The lower bound of the range (inclusive).
+     * @param b The upper bound of the range (inclusive).
+     * @return A random integer between a and b (inclusive).
+     * @note This function asserts that both inputs are finite and that a is less than b.
+     * @note The LCG uses a static seed, which is updated with each call to the function.
+     * @note The multiplier and modulus values are chosen to create a full-period generator.
+     * @note The function incorporates compile-time information to modify the seed,
+     *       providing additional randomness across different compilations.
+     */
+    public static int rand(int a, int b) {
+        assert isFinite(a) && isFinite(b) && a < b;
 
-        static uint seed = 1;
-        const uint multiplier = 16807;  // 7^5
-        const uint modulus = 2147483647;  // 2^31 - 1 (Mersenne prime)
+        long seed = 1;
+        final long multiplier = 16807;  // 7^5
+        final long modulus = 2147483647;  // 2^31 - 1 (Mersenne prime)
 
-        uint compile_time_seed = (uint)(DateTime.Now.ToString("HHmmss")[5] - '0') * 1000000 +
-                                (uint)(DateTime.Now.ToString("HHmmss")[4] - '0') * 100000 +
-                                (uint)(DateTime.Now.ToString("HHmmss")[3] - '0') * 10000 +
-                                (uint)(DateTime.Now.ToString("HHmmss")[2] - '0') * 1000 +
-                                (uint)(DateTime.Now.ToString("HHmmss")[1] - '0') * 100 +
-                                (uint)(DateTime.Now.ToString("HHmmss")[0] - '0') * 10;
+        long compile_time_seed = System.currentTimeMillis() % modulus;
 
         seed = (multiplier * (seed ^ compile_time_seed)) % modulus;
 
-        return a + (int)(((double)seed / modulus) * (b - a + 1));
+        return a + (int) (((double) seed / modulus) * (b - a + 1));
     }
 
     /**
@@ -260,9 +235,8 @@ public static class mlib
     * @return The remainder of a divided by b.
     * @note This function asserts that both inputs are finite and that b is positive.
     */
-    public static int Rem(int a, int b)
-    {
-        Debug.Assert(IsFinite(a) && IsFinite(b) && b > 0);
+    public static int rem(int a, int b) {
+        assert isFinite(a) && isFinite(b) && b > 0;
         return a % b;
     }
 
@@ -274,10 +248,9 @@ public static class mlib
     * @return The floor of a divided by b.
     * @note This function asserts that both inputs are finite and that b is positive.
     */
-    public static int Fdiv(double a, double b)
-    {
-        Debug.Assert(IsFinite(a) && IsFinite(b) && b > 0);
-        return Floor(a / b);
+    public static int fdiv(double a, double b) {
+        assert isFinite(a) && isFinite(b) && b > 0;
+        return floor(a / b);
     }
 
     /**
@@ -290,15 +263,14 @@ public static class mlib
     * @note For pow = 0, the function returns 1.
     * @note The function uses a simple iterative approach for positive exponents.
     */
-    public static double Pow(double baseV, int pow)
-    {
-        Debug.Assert(IsFinite(baseV) && IsFinite(pow));
+    public static double pow(double base, int pow) {
+        assert isFinite(base) && isFinite(pow);
 
         if (pow == 0) return 1;
 
-        double product = baseV;
+        double product = base;
 
-        for (int i = 1; i < pow; ++i) product *= baseV;
+        for (int i = 1; i < pow; ++i) product *= base;
 
         return product;
     }
@@ -313,15 +285,13 @@ public static class mlib
     * @note Even numbers greater than 2 are not prime.
     * @note The function checks for divisibility up to half of the input number.
     */
-    public static bool IsPrime(int a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static boolean isPrime(int a) {
+        assert isFinite(a);
 
         if (a < 2) return false;
         if (a > 2 && a % 2 == 0) return false;
 
-        for (int i = 2; i < a / 2; ++i)
-        {
+        for (int i = 2; i < a / 2; ++i) {
             if (a % i == 0) return false;
         }
 
@@ -334,9 +304,8 @@ public static class mlib
     * @param a The double value to check.
     * @return true if the value is finite, false otherwise.
     */
-    public static bool IsFinite(double a)
-    {
-        return !IsInfinite(a) && !IsNaN(a);
+    public static boolean isFinite(double a) {
+        return !isInfinite(a) && !isNaN(a);
     }
 
     /**
@@ -345,8 +314,7 @@ public static class mlib
     * @param a The double value to check.
     * @return true if the value is infinite, false otherwise.
     */
-    public static bool IsInfinite(double a)
-    {
+    public static boolean isInfinite(double a) {
         return a / a != a / a;
     }
 
@@ -356,8 +324,7 @@ public static class mlib
     * @param a The double value to check.
     * @return true if the value is NaN, false otherwise.
     */
-    public static bool IsNaN(double a)
-    {
+    public static boolean isNaN(double a) {
         return a != a;
     }
 
@@ -370,9 +337,8 @@ public static class mlib
      * @note The function normalizes the input angle to the range [-PI, PI].
      * @note The Taylor series is computed up to the 7th term for accuracy.
      */
-    public static double Sin(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double sin(double a) {
+        assert isFinite(a);
 
         while (a > PI) a -= 2 * PI;
         while (a < -PI) a += 2 * PI;
@@ -380,8 +346,7 @@ public static class mlib
         double result = a;
         double term = a;
 
-        for (int i = 1; i <= 7; ++i)
-        {
+        for (int i = 1; i <= 7; ++i) {
             term *= -a * a / ((2 * i) * (2 * i + 1));
             result += term;
         }
@@ -398,9 +363,8 @@ public static class mlib
      * @note The function normalizes the input angle to the range [-PI, PI].
      * @note The Taylor series is computed up to the 7th term for accuracy.
      */
-    public static double Cos(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double cos(double a) {
+        assert isFinite(a);
 
         while (a > PI) a -= 2 * PI;
         while (a < -PI) a += 2 * PI;
@@ -408,8 +372,7 @@ public static class mlib
         double result = 1;
         double term = 1;
 
-        for (int i = 1; i <= 7; ++i)
-        {
+        for (int i = 1; i <= 7; ++i) {
             term *= -a * a / ((2 * i - 1) * (2 * i));
             result += term;
         }
@@ -425,12 +388,11 @@ public static class mlib
      * @note This function asserts that the input is finite.
      * @note The tangent is calculated as the ratio of sine to cosine.
      */
-    public static double Tan(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double tan(double a) {
+        assert isFinite(a);
 
-        double s = Sin(a);
-        double c = Cos(a);
+        double s = sin(a);
+        double c = cos(a);
 
         return s / c;
     }
@@ -444,13 +406,12 @@ public static class mlib
      * @note For a = 0, the function returns 0.
      * @note The function uses the exponential function to compute the result.
      */
-    public static double Sinh(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double sinh(double a) {
+        assert isFinite(a);
 
         if (a == 0) return 0;
 
-        double ea = Exp(a);
+        double ea = exp(a);
         return (ea - (1 / ea)) / 2;
     }
 
@@ -463,13 +424,12 @@ public static class mlib
      * @note For a = 0, the function returns 1.
      * @note The function uses the exponential function to compute the result.
      */
-    public static double Cosh(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double cosh(double a) {
+        assert isFinite(a);
 
         if (a == 0) return 1;
 
-        double ea = Exp(a);
+        double ea = exp(a);
         return (ea + (1 / ea)) / 2;
     }
 
@@ -482,13 +442,12 @@ public static class mlib
      * @note For a = 0, the function returns 0.
      * @note The function uses the exponential function to compute the result.
      */
-    public static double Tanh(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double tanh(double a) {
+        assert isFinite(a);
 
         if (a == 0) return 0;
 
-        double ea = Exp(2 * a);
+        double ea = exp(2 * a);
         return (ea - 1) / (ea + 1);
     }
 
@@ -500,11 +459,10 @@ public static class mlib
      * @note This function asserts that the input is finite and within the valid range.
      * @note The approximation uses a 7th-degree polynomial for accuracy.
      */
-    public static double Asin(double a)
-    {
-        Debug.Assert(IsFinite(a) && a >= -1 && a <= 1);
+    public static double asin(double a) {
+        assert isFinite(a) && a >= -1 && a <= 1;
 
-        double a2 = Pow(a, 2);
+        double a2 = pow(a, 2);
         return a + a * a2 * (1 / 6 + a2 * (3 / 40 + a2 * (5 / 112 + a2 * 35 / 1152)));
     }
 
@@ -516,10 +474,9 @@ public static class mlib
      * @note This function asserts that the input is finite and within the valid range.
      * @note The arccosine is calculated using the relationship: acos(x) = PI/2 - asin(x).
      */
-    public static double Acos(double a)
-    {
-        Debug.Assert(IsFinite(a) && a >= -1 && a <= 1);
-        return (PI / 2) - Asin(a);
+    public static double acos(double a) {
+        assert isFinite(a) && a >= -1 && a <= 1;
+        return (PI / 2) - asin(a);
     }
 
     /**
@@ -530,10 +487,9 @@ public static class mlib
      * @note This function asserts that the input is finite.
      * @note This approximation is less accurate for large input values.
      */
-    public static double Atan(double a)
-    {
-        Debug.Assert(IsFinite(a));
-        return a / (1.28 * Pow(a, 2));
+    public static double atan(double a) {
+        assert isFinite(a);
+        return a / (1.28 * pow(a, 2));
     }
 
     /**
@@ -549,22 +505,19 @@ public static class mlib
      *       - If b is 0 and a is 0, returns 0
      *       - If b < 0, adjusts the result by adding or subtracting PI
      */
-    public static double Atan2(double a, double b)
-    {
-        Debug.Assert(IsFinite(a) && IsFinite(b));
+    public static double atan2(double a, double b) {
+        assert isFinite(a) && isFinite(b);
 
-        if (b == 0)
-        {
+        if (b == 0) {
             if (a > 0) return PI / 2;
             if (a < 0) return -PI / 2;
 
             return 0;
         }
 
-        double result = Atan(a / b);
+        double result = atan(a / b);
 
-        if (b < 0)
-        {
+        if (b < 0) {
             if (a >= 0) return result + PI;
             return result - PI;
         }
@@ -579,10 +532,9 @@ public static class mlib
      * @return The inverse hyperbolic sine of the input value.
      * @note This function asserts that the input is finite.
      */
-    public static double Asinh(double a)
-    {
-        Debug.Assert(IsFinite(a));
-        return Log(a + Sqrt(a * a + 1));
+    public static double asinh(double a) {
+        assert isFinite(a);
+        return ln(a + sqrt(a * a + 1));
     }
 
     /**
@@ -592,10 +544,9 @@ public static class mlib
      * @return The inverse hyperbolic cosine of the input value.
      * @note This function asserts that the input is finite and greater than or equal to 1.
      */
-    public static double Acosh(double a)
-    {
-        Debug.Assert(IsFinite(a) && a >= 1);
-        return Log(a + Sqrt(a * a - 1));
+    public static double acosh(double a) {
+        assert isFinite(a) && a >= 1;
+        return ln(a + sqrt(a * a - 1));
     }
 
     /**
@@ -605,10 +556,9 @@ public static class mlib
      * @return The inverse hyperbolic tangent of the input value.
      * @note This function asserts that the input is finite and within the valid range.
      */
-    public static double Atanh(double a)
-    {
-        Debug.Assert(IsFinite(a) && a > -1 && a < 1);
-        return 0.5 * Log((1 + a) / (1 - a));
+    public static double atanh(double a) {
+        assert isFinite(a) && a > -1 && a < 1;
+        return 0.5 * ln((1 + a) / (1 - a));
     }
 
     /**
@@ -619,11 +569,10 @@ public static class mlib
      * @note This function asserts that the input is finite.
      * @note The secant is calculated as the reciprocal of the cosine.
      */
-    public static double Sec(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double sec(double a) {
+        assert isFinite(a);
 
-        double c = Cos(a);
+        double c = cos(a);
 
         return 1 / c;
     }
@@ -636,11 +585,10 @@ public static class mlib
      * @note This function asserts that the input is finite.
      * @note The cosecant is calculated as the reciprocal of the sine.
      */
-    public static double Csc(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double csc(double a) {
+        assert isFinite(a);
 
-        double s = Sin(a);
+        double s = sin(a);
 
         return 1 / s;
     }
@@ -653,12 +601,11 @@ public static class mlib
      * @note This function asserts that the input is finite.
      * @note The cotangent is calculated as the ratio of cosine to sine.
      */
-    public static double Cot(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double cot(double a) {
+        assert isFinite(a);
 
-        double s = Sin(a);
-        double c = Cos(a);
+        double s = sin(a);
+        double c = cos(a);
 
         return c / s;
     }
@@ -672,13 +619,12 @@ public static class mlib
      * @note For a = 0, the function returns 1.
      * @note The function uses the exponential function to compute the result.
      */
-    public static double Sech(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double sech(double a) {
+        assert isFinite(a);
 
         if (a == 0) return 1;
 
-        double ea = Exp(a);
+        double ea = exp(a);
         return 2 / (ea + (1 / ea));
     }
 
@@ -690,11 +636,10 @@ public static class mlib
      * @note This function asserts that the input is finite.
      * @note The function uses the exponential function to compute the result.
      */
-    public static double Csch(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double csch(double a) {
+        assert isFinite(a);
 
-        double ea = Exp(a);
+        double ea = exp(a);
         return 2 / (ea - (1 / ea));
     }
 
@@ -706,11 +651,12 @@ public static class mlib
      * @note This function asserts that the input is finite.
      * @note The function uses the exponential function to compute the result.
      */
-    public static double Coth(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double coth(double a) {
+        assert isFinite(a);
 
-        double ea = Exp(2 * a);
+        if (a == 0) return isInfinite(a);
+
+        double ea = exp(2 * a);
         return (ea + 1) / (ea - 1);
     }
 
@@ -724,9 +670,8 @@ public static class mlib
      * @note For a = 0, the function returns 1.
      * @note The calculation is optimized for accuracy and efficiency.
      */
-    public static double Exp(double a)
-    {
-        Debug.Assert(IsFinite(a));
+    public static double exp(double a) {
+        assert isFinite(a);
 
         if (a == 0) return 1;
 
@@ -735,15 +680,14 @@ public static class mlib
         double result = r + 1;
         double term = r;
 
-        for (int i = 2; i <= 12; ++i)
-        {
+        for (int i = 2; i <= 12; ++i) {
             term *= r / i;
             result += term;
 
             if (term < 1E-15 * result) break;
         }
 
-        return result * Pow(2, k);
+        return result * pow(2, k);
     }
 
     /**
@@ -754,9 +698,8 @@ public static class mlib
      * @return The smaller of the two input values.
      * @note This function asserts that both inputs are finite.
      */
-    public static double Min(double a, double b)
-    {
-        Debug.Assert(IsFinite(a) && IsFinite(b));
+    public static double min(double a, double b) {
+        assert isFinite(a) && isFinite(b);
         return a < b ? a : b;
     }
 
@@ -768,9 +711,8 @@ public static class mlib
      * @return The larger of the two input values.
      * @note This function asserts that both inputs are finite.
      */
-    public static double Max(double a, double b)
-    {
-        Debug.Assert(IsFinite(a) && IsFinite(b));
+    public static double max(double a, double b) {
+        assert isFinite(a) && isFinite(b);
         return a > b ? a : b;
     }
 
@@ -783,9 +725,8 @@ public static class mlib
      * @return The clamped value, which will be between min and max (inclusive).
      * @note This function asserts that all inputs are finite.
      */
-    public static double Clamp(double value, double min, double max)
-    {
-        Debug.Assert(IsFinite(value) && IsFinite(min) && IsFinite(max));
+    public static double clamp(double value, double min, double max) {
+        assert isFinite(value) && isFinite(min) && isFinite(max);
 
         if (value < min) return min;
         if (value > max) return max;
@@ -801,9 +742,8 @@ public static class mlib
      * @note This function asserts that the input is finite and greater than 0.
      * @note The function uses a series expansion for improved accuracy.
      */
-    public static double Ln(double a)
-    {
-        Debug.Assert(IsFinite(a) && a > 0);
+    public static double ln(double a) {
+        assert isFinite(a) && a > 0;
 
         if (a == 1) return 0;
 
@@ -822,7 +762,7 @@ public static class mlib
             i++;
             y *= -a * (i - 1) / i;
             sum += y;
-        } while (Abs(y) > 1E-15);
+        } while (abs(y) > 1E-15);
 
         return sum + exp * LN2;
     }
@@ -835,10 +775,9 @@ public static class mlib
      * @return The logarithm of the input value with the specified base.
      * @note This function asserts that both inputs are finite.
      */
-    public static double Log(double a, double baseValue)
-    {
-        Debug.Assert(IsFinite(a) && IsFinite(baseValue));
-        return Ln(a) / Ln(baseValue);
+    public static double log(double a, double base) {
+        assert isFinite(a) && isFinite(base);
+        return ln(a) / ln(base);
     }
 
     /**
@@ -848,10 +787,9 @@ public static class mlib
      * @return The base-2 logarithm of the input value.
      * @note This function asserts that the input is finite.
      */
-    public static double Log2(double a)
-    {
-        Debug.Assert(IsFinite(a));
-        return Ln(a) / LN2;
+    public static double log2(double a) {
+        assert isFinite(a);
+        return ln(a) / LN2;
     }
 
     /**
@@ -861,10 +799,9 @@ public static class mlib
      * @return The base-10 logarithm of the input value.
      * @note This function asserts that the input is finite.
      */
-    public static double Log10(double a)
-    {
-        Debug.Assert(IsFinite(a));
-        return Ln(a) / LN10;
+    public static double log10(double a) {
+        assert isFinite(a);
+        return ln(a) / LN10;
     }
 
     /**
@@ -875,14 +812,12 @@ public static class mlib
      * @return The sum of all elements in the array.
      * @note This function asserts that size is finite and greater than 0.
      */
-    public static double Sum(double[] data)
-    {
-        Debug.Assert(data != null && data.Length > 0);
+    public static double sum(double[] data) {
+        assert data != null && data.length > 0;
 
         double sum = 0;
 
-        for (int i = 0; i < data.Length; ++i)
-        {
+        for (int i = 0; i < data.length; ++i) {
             sum += data[i];
         }
 
@@ -897,10 +832,9 @@ public static class mlib
      * @return The arithmetic mean of all elements in the array.
      * @note This function asserts that size is finite and greater than 0.
      */
-    public static double Mean(double[] data)
-    {
-        Debug.Assert(data != null && data.Length > 0);
-        return Sum(data) / data.Length;
+    public static double mean(double[] data) {
+        assert data != null && data.length > 0;
+        return sum(data) / data.length;
     }
 
     /**
@@ -912,22 +846,24 @@ public static class mlib
      * @note This function asserts that size is finite and greater than 0.
      * @note This function modifies the original array by sorting it.
      */
-    public static double Median(double[] data)
-    {
-        Debug.Assert(IsFinite(data.Length) && data.Length > 0);
+    public static double median(double[] data) {
+        assert isFinite(data.length) && data.length > 0;
 
-        double[] sortedData = (double[]) data.Clone();
-        Array.Sort(sortedData);
+        for (int i = 0; i < data.length - 1; ++i) {
+            for (int j = 0; j < data.length - i - 1; ++j) {
+                if (data[j] > data[j + 1]) {
+                    double temp = data[j];
 
-        int size = sortedData.Length;
-
-        if (size % 2 == 0)
-        {
-            return (sortedData[(size / 2) - 1] + sortedData[size / 2]) / 2;
+                    data[j] = data[j + 1];
+                    data[j + 1] = temp;
+                }
+            }
         }
-        else
-        {
-            return sortedData[size / 2];
+
+        if (data.length % 2 == 0) {
+            return (data[(data.length / 2) - 1] + data[data.length / 2]) / 2;
+        } else {
+            return data[data.length / 2];
         }
     }
 
@@ -940,23 +876,17 @@ public static class mlib
      * @note This function asserts that size is finite and greater than 0.
      * @note If multiple modes exist, this function returns the first one encountered.
      */
-    public static double Mode(double[] data)
-    {
-        Debug.Assert(IsFinite(data.Length) && data.Length > 0);
+    public static double mode(double[] data) {
+        assert data != null && data.length > 0;
 
         double mode = data[0];
         int maxCount = 1, currentCount = 1;
 
-        for (int i = 1; i < data.Length; ++i)
-        {
-            if (data[i] == data[i - 1])
-            {
+        for (int i = 1; i < data.length; ++i) {
+            if (data[i] == data[i - 1]) {
                 ++currentCount;
-            }
-            else
-            {
-                if (currentCount > maxCount)
-                {
+            } else {
+                if (currentCount > maxCount) {
                     maxCount = currentCount;
                     mode = data[i - 1];
                 }
@@ -965,9 +895,8 @@ public static class mlib
             }
         }
 
-        if (currentCount > maxCount)
-        {
-            mode = data[data.Length - 1];
+        if (currentCount > maxCount) {
+            mode = data[data.length - 1];
         }
 
         return mode;
@@ -981,19 +910,17 @@ public static class mlib
      * @return The sample standard deviation of the array.
      * @note This function asserts that size is finite and greater than 1.
      */
-    public static double StdDev(double[] data)
-    {
-        Debug.Assert(IsFinite(data.Length) && data.Length > 1);
+    public static double stddev(double[] data) {
+        assert data != null && data.length > 1;
 
-        double m = Mean(data);
+        double m = mean(data);
         double sum = 0;
 
-        for (int i = 0; i < data.Length; i++)
-        {
+        for (int i = 0; i < data.length; i++) {
             double diff = data[i] - m;
             sum += diff * diff;
         }
 
-        return Sqrt(sum / (data.Length - 1));
+        return sqrt(sum / (data.length - 1));
     }
 }
