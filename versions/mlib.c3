@@ -206,21 +206,16 @@ fn int lcm(int a, int b)
  *
  * @param a The non-negative integer for which to calculate the factorial.
  * @return The factorial of the input number.
- * @note This function asserts that the input is finite.
- * @note The factorial is calculated iteratively to avoid stack overflow for large inputs.
+ * @note This function asserts that the input is finite and non-negative.
+ * @note The factorial is calculated recursively, which may lead to stack overflow for large inputs.
+ * @warning This implementation is not suitable for large inputs due to potential stack overflow.
  */
 fn int fact(int a)
 {
     assert(isFinite(a));
+    if (a <= 1) return 1;
 
-    int result = 1;
-
-    for (int i = 2; i <= a; ++i)
-    {
-        result *= i;
-    }
-
-    return result;
+    return a * fact(a - 1);
 }
 
 /**
