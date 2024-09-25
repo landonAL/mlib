@@ -1,4 +1,5 @@
 module mlib;
+//this is good lang
 
 const double PI      = 3.1415926535897932;
 const double TAU     = 6.2831853071795864;
