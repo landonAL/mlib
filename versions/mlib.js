@@ -149,6 +149,33 @@ function qisqrt(a) {
 }
 
 /**
+ * Calculates the nth root of a given number.
+ *
+ * @param {number} a The number to calculate the root of.
+ * @param {number} exp The root exponent.
+ * @return {number} The nth root of the input number.
+ * @throws {Error} If inputs are not finite, a is negative, or exp is not positive.
+ * @note For a = 0, the function returns 0.
+ * @note The function uses the power operator for calculation.
+ */
+function root(a, exp) {
+  if (!Number.isFinite(a) || !Number.isFinite(exp) || a < 0 || exp <= 0) {
+    throw new Error(
+      "Invalid input: a must be non-negative, exp must be positive, and both must be finite",
+    );
+  }
+
+  if (a === 0) return 0;
+
+  let result = a;
+  for (let i = 0; i < 16; i++) {
+    result = ((exp - 1) * result + a / pow(result, exp - 1)) / exp;
+  }
+
+  return result;
+}
+
+/**
  * Calculates the Greatest Common Divisor (GCD) of two integers using the Euclidean algorithm.
  *
  * @param a The first integer.

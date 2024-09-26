@@ -87,11 +87,13 @@ def abs(a: float) -> float:
 def sqrt(a: float) -> float:
 	assert is_finite(a) and a >= 0
 
-	if a == 0: return 0
+	if a == 0:
+		return 0
 
-	b, root = a, 0
+	b = a
+	root = 0
 
-	for i in range(1, 18):
+	for _ in range(1, 17):
 		b = root = (b + (a / b)) / 2
 
 	return root
@@ -123,6 +125,24 @@ def qisqrt(a: float) -> float:
     y  *= (1.5 - (x2 * y * y))
 
     return y
+
+# Calculates the nth root of a given number.
+#
+# @param a The number to calculate the root of.
+# @param exp The root exponent.
+# @return The nth root of the input number.
+# @note This function asserts that both inputs are finite, a is non-negative, and exp is positive.
+# @note For a = 0, the function returns 0.
+# @note The function uses the power operator for calculation.
+def root(a: float, exp: int) -> float:
+    assert is_finite(a) and is_finite(exp) and a >= 0 and exp > 0
+    if a == 0: return 0
+
+    result = a
+    for _ in range(16):
+        result = ((exp - 1) * result + a / pow(result, exp - 1)) / exp
+
+    return result
 
 # Calculates the Greatest Common Divisor (GCD) of two integers using the Euclidean algorithm.
 #

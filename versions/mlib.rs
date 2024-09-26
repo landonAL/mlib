@@ -143,6 +143,28 @@ pub fn qisqrt(a: f64) -> f64 {
 }
 
 /**
+ * Calculates the nth root of a given number.
+ *
+ * @param a The number to calculate the root of.
+ * @param exp The root exponent.
+ * @return The nth root of the input number.
+ * @note This function asserts that both inputs are finite, a is non-negative, and exp is positive.
+ * @note For a = 0, the function returns 0.
+ * @note The function uses the power operator for calculation.
+ **/
+pub fn root(a: f64, exp: i32) -> f64 {
+    assert!(is_finite(a) && is_finite(exp.into()) && a >= 0.0 && exp > 0);
+    if a == 0.0 { return 0.0; }
+
+    let mut result = a;
+    for _ in 0..16 {
+        result = ((exp - 1) as f64 * result + a / pow(result, exp - 1)) / exp as f64;
+    }
+
+    return result;
+}
+
+/**
  * Calculates the Greatest Common Divisor (GCD) of two integers using the Euclidean algorithm.
  *
  * @param a The first integer.
@@ -589,7 +611,7 @@ pub fn sec(a: f64) -> f64 {
 
     let c = cos(a);
 
-    return 1.0 / c;
+    return 1.0 / cos(a);
 }
 
 /**
@@ -605,7 +627,7 @@ pub fn csc(a: f64) -> f64 {
 
     let s = sin(a);
 
-    return 1.0 / s;
+    return 1.0 / sin(a);
 }
 
 /**
@@ -622,7 +644,7 @@ pub fn cot(a: f64) -> f64 {
     let s = sin(a);
     let c = cos(a);
 
-    return c / s;
+    return cos(a) / sin(a);
 }
 
 /**

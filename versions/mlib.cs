@@ -157,6 +157,30 @@ public static class mlib
     }
 
     /**
+     * Calculates the nth root of a given number.
+     *
+     * @param a The number to calculate the root of.
+     * @param exp The root exponent.
+     * @return The nth root of the input number.
+     * @note This function asserts that both inputs are finite, a is non-negative, and exp is positive.
+     * @note For a = 0, the function returns 0.
+     * @note The function uses the power operator for calculation.
+     **/
+    public static double Root(double a, int exp)
+    {
+        Debug.Assert(IsFinite(a) && IsFinite(exp) && a >= 0 && exp > 0);
+        if (a == 0) return 0;
+
+        double result = a;
+        for (int i = 0; i < 16; i++)
+        {
+            result = ((exp - 1) * result + a / Pow(result, exp - 1)) / exp;
+        }
+
+        return result;
+    }
+
+    /**
      * Calculates the Greatest Common Divisor (GCD) of two integers using the Euclidean algorithm.
      *
      * @param a The first integer.

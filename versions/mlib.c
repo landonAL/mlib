@@ -4,75 +4,76 @@
 #include <assert.h>
 #include <stdbool.h>
 
-#define PI      3.1415926535897932
-#define TAU     6.2831853071795864
-#define E       2.7182818284590452
-#define PHI     1.6180339887498948
-#define LN2     0.6931471805599453
-#define LN10    2.3025850929940457
-#define LOG2E   1.4426950408889634
-#define LOG10E  0.4342944819032518
-#define EULER   0.5772156649015329
-#define CATALAN 0.9159655941772190
+#define M_PI      3.1415926535897932
+#define M_TAU     6.2831853071795864
+#define M_E       2.7182818284590452
+#define M_PHI     1.6180339887498948
+#define M_LN2     0.6931471805599453
+#define M_LN10    2.3025850929940457
+#define M_LOG2E   1.4426950408889634
+#define M_LOG10E  0.4342944819032518
+#define M_EULER   0.5772156649015329
+#define M_CATALAN 0.9159655941772190
 
-double toRadian(double deg);
-double toDegree(double deg);
-int floor(double a);
-int ceil(double a);
-int round(double a);
-double abs(double a);
-double sqrt(double a);
-double isqrt(double a);
-double qisqrt(double a);
-int rem(int a, int b);
-int fdiv(double a, double b);
-double pow(double base, int pow);
-bool isPrime(int a);
-bool isFinite(double a);
-bool isInfinite(double a);
-bool isNaN(double a);
-double sin(double a);
-double cos(double a);
-double tan(double a);
-double sinh(double a);
-double cosh(double a);
-double tanh(double a);
-double asin(double a);
-double acos(double a);
-double atan(double a);
-double atan2(double a, double b);
-double asinh(double a);
-double acosh(double a);
-double atanh(double a);
-double sec(double a);
-double csc(double a);
-double cot(double a);
-double sech(double a);
-double csch(double a);
-double coth(double a);
-double asec(double a);
-double acsc(double a);
-double acot(double a);
-double asech(double a);
-double acsch(double a);
-double acoth(double a);
-double exp(double a);
-double min(double a, double b);
-double max(double a, double b);
-double clamp(double value, double min, double max);
-double ln(double a);
-double log(double a, double base);
-double log2(double a);
-double log10(double a);
-double sum(double *data, int size);
-double mean(double *data, int size);
-double median(double *data, int size);
-double mode(double *data, int size);
-double stddev(double *data, int size);
-int gcd(int a, int b);
-int lcm(int a, int b);
-int fact(int a);
-int rand(int a, int b);
+double m_radian(double deg);
+double m_degree(double deg);
+int m_floor(double a);
+int m_ceil(double a);
+int m_round(double a);
+double m_abs(double a);
+double m_sqrt(double a);
+double m_isqrt(double a);
+double m_qisqrt(double a);
+double m_root(double a, int exp);
+int m_rem(int a, int b);
+int m_fdiv(double a, double b);
+double m_pow(double base, int pow);
+bool m_prime(int a);
+bool m_finite(double a);
+bool m_infinite(double a);
+bool m_nan(double a);
+double m_sin(double a);
+double m_cos(double a);
+double m_tan(double a);
+double m_sinh(double a);
+double m_cosh(double a);
+double m_tanh(double a);
+double m_asin(double a);
+double m_acos(double a);
+double m_atan(double a);
+double m_atan2(double a, double b);
+double m_asinh(double a);
+double m_acosh(double a);
+double m_atanh(double a);
+double m_sec(double a);
+double m_csc(double a);
+double m_cot(double a);
+double m_sech(double a);
+double m_csch(double a);
+double m_coth(double a);
+double m_asec(double a);
+double m_acsc(double a);
+double m_acot(double a);
+double m_asech(double a);
+double m_acsch(double a);
+double m_acoth(double a);
+double m_exp(double a);
+double m_min(double a, double b);
+double m_max(double a, double b);
+double m_clamp(double value, double min, double max);
+double m_ln(double a);
+double m_log(double a, double base);
+double m_log2(double a);
+double m_log10(double a);
+double m_sum(double *data, int size);
+double m_mean(double *data, int size);
+double m_median(double *data, int size);
+double m_mode(double *data, int size);
+double m_stddev(double *data, int size);
+int m_gcd(int a, int b);
+int m_lcm(int a, int b);
+int m_fact(int a);
+int m_rand(int a, int b);
 
 #endif // MLIB_C_
 
@@ -86,10 +87,10 @@ int rand(int a, int b);
  * @note This function asserts that the input is finite.
  **/
 double
-toRadian(double deg)
+m_radian(double deg)
 {
-	assert(isFinite(deg));
-	return deg * (PI / 180);
+	assert(m_finite(deg));
+	return deg * (M_PI / 180);
 }
 
 /**
@@ -100,10 +101,10 @@ toRadian(double deg)
  * @note This function asserts that the input is finite.
  **/
 double
-toDegree(double rad)
+m_degree(double rad)
 {
-	assert(isFinite(rad));
-	return rad * (180 / PI);
+	assert(m_finite(rad));
+	return rad * (180 / M_PI);
 }
 
 /**
@@ -114,9 +115,9 @@ toDegree(double rad)
  * @note This function asserts that the input is finite.
  **/
 int
-floor(double a)
+m_floor(double a)
 {
-	assert(isFinite(a));
+	assert(m_finite(a));
 	return (int) a;
 }
 
@@ -128,9 +129,9 @@ floor(double a)
  * @note This function asserts that the input is finite.
  **/
 int
-ceil(double a)
+m_ceil(double a)
 {
-	assert(isFinite(a));
+	assert(m_finite(a));
 	return a > (int) a ? (int) a + 1 : (int) a;
 }
 
@@ -142,9 +143,9 @@ ceil(double a)
  * @note This function asserts that the input is finite.
  **/
 int
-round(double a)
+m_round(double a)
 {
-	assert(isFinite(a));
+	assert(m_finite(a));
 	return a + 0.5 >= (int) a + 1
 		? (int) a + 1
 		: (int) a;
@@ -158,9 +159,9 @@ round(double a)
  * @note This function asserts that the input is finite.
  **/
 double
-abs(double a)
+m_abs(double a)
 {
-	assert(isFinite(a));
+	assert(m_finite(a));
 	return a < 0 ? -a : a;
 }
 
@@ -172,9 +173,9 @@ abs(double a)
  * @note This function asserts that the input is finite and non-negative.
  **/
 double
-sqrt(double a)
+m_sqrt(double a)
 {
-	assert(isFinite(a) && a >= 0);
+	assert(m_finite(a) && a >= 0);
 
 	if (a == 0) return 0;
 
@@ -195,10 +196,10 @@ sqrt(double a)
  * @note This function asserts that the input is finite.
  **/
 double
-isqrt(double a)
+m_isqrt(double a)
 {
-    assert(isFinite(a));
-    return 1 / sqrt(a);
+    assert(m_finite(a));
+    return 1 / m_sqrt(a);
 }
 
 /**
@@ -210,9 +211,9 @@ isqrt(double a)
  * @note This function asserts that the input is finite.
  **/
 double
-qisqrt(double a)
+m_qisqrt(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
     long i;
     double x2, y;
@@ -229,6 +230,30 @@ qisqrt(double a)
 }
 
 /**
+ * Calculates the nth root of a given number.
+ *
+ * @param a The number to calculate the root of.
+ * @param exp The root exponent.
+ * @return The nth root of the input number.
+ * @note This function asserts that both inputs are finite, a is non-negative, and exp is positive.
+ * @note For a = 0, the function returns 0.
+ * @note The function uses the power function for calculation.
+ */
+double
+m_root(double a, int exp)
+{
+    assert(m_finite(a) && m_finite(exp) && a >= 0 && exp > 0);
+    if (a == 0) return 0;
+
+    double result = a;
+    for (int i = 0; i < 16; i++) {
+        result = ((exp - 1) * result + a / m_pow(result, exp - 1)) / exp;
+    }
+
+    return result;
+}
+
+/**
  * Calculates the Greatest Common Divisor (GCD) of two integers using the Euclidean algorithm.
  *
  * @param a The first integer.
@@ -238,12 +263,12 @@ qisqrt(double a)
  * @note The function uses the absolute values of the inputs to handle negative numbers.
  **/
 int
-gcd(int a, int b)
+m_gcd(int a, int b)
 {
-    assert(isFinite(a) && isFinite(b));
+    assert(m_finite(a) && m_finite(b));
 
-    a = abs(a);
-    b = abs(b);
+    a = m_abs(a);
+    b = m_abs(b);
 
     while (b != 0) {
         int temp = b;
@@ -266,14 +291,14 @@ gcd(int a, int b)
  * @note If the GCD is 0, the function returns 0 to avoid division by zero.
  **/
 int
-lcm(int a, int b)
+m_lcm(int a, int b)
 {
-    assert(isFinite(a) && isFinite(b));
+    assert(m_finite(a) && m_finite(b));
 
-    int result = gcd(a, b);
+    int result = m_gcd(a, b);
     if (result == 0) return 0;
 
-    return abs(a / result * b);
+    return m_abs(a / result * b);
 }
 
 /**
@@ -286,12 +311,12 @@ lcm(int a, int b)
  * @warning This implementation is not suitable for large inputs due to potential stack overflow.
  **/
 int
-fact(int a)
+m_fact(int a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
     if (a <= 1) return 1;
 
-    return a * fact(a - 1);
+    return a * m_fact(a - 1);
 }
 
 /**
@@ -307,9 +332,9 @@ fact(int a)
  *       providing additional randomness across different compilations.
  **/
 int
-rand(int a, int b)
+m_rand(int a, int b)
 {
-    assert(isFinite(a) && isFinite(b) && a < b);
+    assert(m_finite(a) && m_finite(b) && a < b);
 
     static unsigned int seed = 1;
     static const unsigned int multiplier = 16807;  // 7^5
@@ -336,9 +361,9 @@ rand(int a, int b)
  * @note This function asserts that both inputs are finite and that b is positive.
  **/
 int
-rem(int a, int b)
+m_rem(int a, int b)
 {
-	assert(isFinite(a) && isFinite(b) && b > 0);
+	assert(m_finite(a) && m_finite(b) && b > 0);
 	return a % b;
 }
 
@@ -351,10 +376,10 @@ rem(int a, int b)
  * @note This function asserts that both inputs are finite and that b is positive.
  **/
 int
-fdiv(double a, double b)
+m_fdiv(double a, double b)
 {
-	assert(isFinite(a) && isFinite(b) && b > 0);
-	return floor(a / b);
+	assert(m_finite(a) && m_finite(b) && b > 0);
+	return m_floor(a / b);
 }
 
 /**
@@ -368,9 +393,9 @@ fdiv(double a, double b)
  * @note The function uses a simple iterative approach for positive exponents.
  **/
 double
-pow(double base, int pow)
+m_pow(double base, int pow)
 {
-	assert(isFinite(base) && isFinite(pow));
+	assert(m_finite(base) && m_finite(pow));
 
 	if (pow == 0) return 1;
 
@@ -392,9 +417,9 @@ pow(double base, int pow)
  * @note The function checks for divisibility up to half of the input number.
  **/
 bool
-isPrime(int a)
+m_prime(int a)
 {
-	assert(isFinite(a));
+	assert(m_finite(a));
 
 	if (a < 2) return false;
 	if (a > 2 && a % 2 == 0) return false;
@@ -413,9 +438,9 @@ isPrime(int a)
  * @return true if the value is finite, false otherwise.
  **/
 bool
-isFinite(double a)
+m_finite(double a)
 {
-	return !isInfinite(a) && !isNaN(a);
+	return !m_infinite(a) && !m_nan(a);
 }
 
 /**
@@ -425,7 +450,7 @@ isFinite(double a)
  * @return true if the value is infinite, false otherwise.
  **/
 bool
-isInfinite(double a)
+m_infinite(double a)
 {
 	return a / a != a / a;
 }
@@ -437,7 +462,7 @@ isInfinite(double a)
  * @return true if the value is NaN, false otherwise.
  **/
 bool
-isNaN(double a)
+m_nan(double a)
 {
 	return a != a;
 }
@@ -452,12 +477,12 @@ isNaN(double a)
  * @note The Taylor series is computed up to the 7th term for accuracy.
  **/
 double
-sin(double a)
+m_sin(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
-    while (a > PI) a -= 2 * PI;
-    while (a < -PI) a += 2 * PI;
+    while (a > M_PI) a -= 2 * M_PI;
+    while (a < -M_PI) a += 2 * M_PI;
 
     double result = a;
     double term = a;
@@ -480,12 +505,12 @@ sin(double a)
  * @note The Taylor series is computed up to the 7th term for accuracy.
  **/
 double
-cos(double a)
+m_cos(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
-    while (a > PI) a -= 2 * PI;
-    while (a < -PI) a += 2 * PI;
+    while (a > M_PI) a -= 2 * M_PI;
+    while (a < -M_PI) a += 2 * M_PI;
 
     double result = 1;
     double term = 1;
@@ -507,14 +532,10 @@ cos(double a)
  * @note The tangent is calculated as the ratio of sine to cosine.
  **/
 double
-tan(double a)
+m_tan(double a)
 {
-    assert(isFinite(a));
-
-    double s = sin(a);
-    double c = cos(a);
-
-    return s / c;
+    assert(m_finite(a));
+    return m_sin(a) / m_cos(a);
 }
 
 /**
@@ -527,13 +548,13 @@ tan(double a)
  * @note The function uses the exponential function to compute the result.
  **/
 double
-sinh(double a)
+m_sinh(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
     if (a == 0) return 0;
 
-    double ea = exp(a);
+    double ea = m_exp(a);
     return (ea - (1 / ea)) / 2;
 }
 
@@ -547,13 +568,13 @@ sinh(double a)
  * @note The function uses the exponential function to compute the result.
  **/
 double
-cosh(double a)
+m_cosh(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
     if (a == 0) return 1;
 
-    double ea = exp(a);
+    double ea = m_exp(a);
     return (ea + (1 / ea)) / 2;
 }
 
@@ -567,13 +588,13 @@ cosh(double a)
  * @note The function uses the exponential function to compute the result.
  **/
 double
-tanh(double a)
+m_tanh(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
     if (a == 0) return 0;
 
-    double ea = exp(2 * a);
+    double ea = m_exp(2 * a);
     return (ea - 1) / (ea + 1);
 }
 
@@ -586,11 +607,11 @@ tanh(double a)
  * @note The approximation uses a 7th-degree polynomial for accuracy.
  **/
 double
-asin(double a)
+m_asin(double a)
 {
-    assert(isFinite(a) && a >= -1 && a <= 1);
+    assert(m_finite(a) && a >= -1 && a <= 1);
 
-    double a2 = pow(a, 2);
+    double a2 = m_pow(a, 2);
     return a + a * a2 * (1 / 6 + a2 * (3 / 40 + a2 * (5 / 112 + a2 * 35 / 1152)));
 }
 
@@ -603,10 +624,10 @@ asin(double a)
  * @note The arccosine is calculated using the relationship: acos(x) = PI/2 - asin(x).
  **/
 double
-acos(double a)
+m_acos(double a)
 {
-    assert(isFinite(a) && a >= -1 && a <= 1);
-    return (PI / 2) - asin(a);
+    assert(m_finite(a) && a >= -1 && a <= 1);
+    return (M_PI / 2) - m_asin(a);
 }
 
 /**
@@ -618,10 +639,10 @@ acos(double a)
  * @note This approximation is less accurate for large input values.
  **/
 double
-atan(double a)
+m_atan(double a)
 {
-    assert(isFinite(a));
-    return a / (1.28 * pow(a, 2));
+    assert(m_finite(a));
+    return a / (1.28 * m_pow(a, 2));
 }
 
 /**
@@ -638,22 +659,22 @@ atan(double a)
  *       - If b < 0, adjusts the result by adding or subtracting PI
  **/
 double
-atan2(double a, double b)
+m_atan2(double a, double b)
 {
-    assert(isFinite(a) && isFinite(b));
+    assert(m_finite(a) && m_finite(b));
 
     if (b == 0) {
-        if (a > 0) return PI / 2;
-        if (a < 0) return -PI / 2;
+        if (a > 0) return M_PI / 2;
+        if (a < 0) return -M_PI / 2;
 
         return 0;
     }
 
-    double result = atan(a / b);
+    double result = m_atan(a / b);
 
     if (b < 0) {
-        if (a >= 0) return result + PI;
-        return result - PI;
+        if (a >= 0) return result + M_PI;
+        return result - M_PI;
     }
 
     return result;
@@ -667,10 +688,10 @@ atan2(double a, double b)
  * @note This function asserts that the input is finite.
  **/
 double
-asinh(double a)
+m_asinh(double a)
 {
-    assert(isFinite(a));
-    return ln(a + sqrt(a * a + 1));
+    assert(m_finite(a));
+    return m_ln(a + m_sqrt(a * a + 1));
 }
 
 /**
@@ -681,10 +702,10 @@ asinh(double a)
  * @note This function asserts that the input is finite and greater than or equal to 1.
  **/
 double
-acosh(double a)
+m_acosh(double a)
 {
-    assert(isFinite(a) && a >= 1);
-    return ln(a + sqrt(a * a - 1));
+    assert(m_finite(a) && a >= 1);
+    return m_ln(a + m_sqrt(a * a - 1));
 }
 
 /**
@@ -695,10 +716,10 @@ acosh(double a)
  * @note This function asserts that the input is finite and within the valid range.
  **/
 double
-atanh(double a)
+m_atanh(double a)
 {
-    assert(isFinite(a) && a > -1 && a < 1);
-    return 0.5 * ln((1 + a) / (1 - a));
+    assert(m_finite(a) && a > -1 && a < 1);
+    return 0.5 * m_ln((1 + a) / (1 - a));
 }
 
 /**
@@ -710,13 +731,10 @@ atanh(double a)
  * @note The secant is calculated as the reciprocal of the cosine.
  **/
 double
-sec(double a)
+m_sec(double a)
 {
-    assert(isFinite(a));
-
-    double c = cos(a);
-
-    return 1 / c;
+    assert(m_finite(a));
+    return 1 / m_cos(a);
 }
 
 /**
@@ -728,13 +746,10 @@ sec(double a)
  * @note The cosecant is calculated as the reciprocal of the sine.
  **/
 double
-csc(double a)
+m_csc(double a)
 {
-    assert(isFinite(a));
-
-    double s = sin(a);
-
-    return 1 / s;
+    assert(m_finite(a));
+    return 1 / m_sin(a);
 }
 
 /**
@@ -746,14 +761,10 @@ csc(double a)
  * @note The cotangent is calculated as the ratio of cosine to sine.
  **/
 double
-cot(double a)
+m_cot(double a)
 {
-    assert(isFinite(a));
-
-    double s = sin(a);
-    double c = cos(a);
-
-    return c / s;
+    assert(m_finite(a));
+    return m_cos(a) / m_sin(a);
 }
 
 /**
@@ -766,13 +777,13 @@ cot(double a)
  * @note The function uses the exponential function to compute the result.
  **/
 double
-sech(double a)
+m_sech(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
     if (a == 0) return 1;
 
-    double ea = exp(a);
+    double ea = m_exp(a);
     return 2 / (ea + (1 / ea));
 }
 
@@ -785,11 +796,11 @@ sech(double a)
  * @note The function uses the exponential function to compute the result.
  **/
 double
-csch(double a)
+m_csch(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
-    double ea = exp(a);
+    double ea = m_exp(a);
     return 2 / (ea - (1 / ea));
 }
 
@@ -802,11 +813,11 @@ csch(double a)
  * @note The function uses the exponential function to compute the result.
  **/
 double
-coth(double a)
+m_coth(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
-    double ea = exp(2 * a);
+    double ea = m_exp(2 * a);
     return (ea + 1) / (ea - 1);
 }
 
@@ -821,9 +832,9 @@ coth(double a)
  * @note The calculation is optimized for accuracy and efficiency.
  **/
 double
-exp(double a)
+m_exp(double a)
 {
-    assert(isFinite(a));
+    assert(m_finite(a));
 
     if (a == 0) return 1;
 
@@ -839,7 +850,7 @@ exp(double a)
         if (term < 1E-15 * result) break;
     }
 
-    return result * pow(2, k);
+    return result * m_pow(2, k);
 }
 
 /**
@@ -851,9 +862,9 @@ exp(double a)
  * @note This function asserts that both inputs are finite.
  **/
 double
-min(double a, double b)
+m_min(double a, double b)
 {
-    assert(isFinite(a) && isFinite(b));
+    assert(m_finite(a) && m_finite(b));
     return a < b ? a : b;
 }
 
@@ -866,9 +877,9 @@ min(double a, double b)
  * @note This function asserts that both inputs are finite.
  **/
 double
-max(double a, double b)
+m_max(double a, double b)
 {
-    assert(isFinite(a) && isFinite(b));
+    assert(m_finite(a) && m_finite(b));
     return a > b ? a : b;
 }
 
@@ -882,9 +893,9 @@ max(double a, double b)
  * @note This function asserts that all inputs are finite.
  **/
 double
-clamp(double value, double min, double max)
+m_clamp(double value, double min, double max)
 {
-    assert(isFinite(value) && isFinite(min) && isFinite(max));
+    assert(m_finite(value) && m_finite(min) && m_finite(max));
 
     if (value < min) return min;
     if (value > max) return max;
@@ -901,9 +912,9 @@ clamp(double value, double min, double max)
  * @note The function uses a series expansion for improved accuracy.
  **/
 double
-ln(double a)
+m_ln(double a)
 {
-    assert(isFinite(a) && a > 0);
+    assert(m_finite(a) && a > 0);
 
     if (a == 1) return 0;
 
@@ -922,7 +933,7 @@ ln(double a)
         i++;
         y *= -a * (i - 1) / i;
         sum += y;
-    } while (abs(y) > 1E-15);
+    } while (m_abs(y) > 1E-15);
 
     return sum + exp * LN2;
 }
@@ -936,10 +947,10 @@ ln(double a)
  * @note This function asserts that both inputs are finite.
  **/
 double
-log(double a, double base)
+m_log(double a, double base)
 {
-    assert(isFinite(a) && isFinite(base));
-    return ln(a) / ln(base);
+    assert(m_finite(a) && m_finite(base));
+    return m_ln(a) / m_ln(base);
 }
 
 /**
@@ -950,10 +961,10 @@ log(double a, double base)
  * @note This function asserts that the input is finite.
  **/
 double
-log2(double a)
+m_log2(double a)
 {
-    assert(isFinite(a));
-    return ln(a) / LN2;
+    assert(m_finite(a));
+    return m_ln(a) / LN2;
 }
 
 /**
@@ -964,10 +975,10 @@ log2(double a)
  * @note This function asserts that the input is finite.
  **/
 double
-log10(double a)
+m_log10(double a)
 {
-    assert(isFinite(a));
-    return ln(a) / LN10;
+    assert(m_finite(a));
+    return m_ln(a) / LN10;
 }
 
 /**
@@ -979,9 +990,9 @@ log10(double a)
  * @note This function asserts that size is finite and greater than 0.
  **/
 double
-sum(double *data, int size)
+m_sum(double *data, int size)
 {
-    assert(isFinite(size) && size > 0);
+    assert(m_finite(size) && size > 0);
 
     double sum = 0;
 
@@ -1001,10 +1012,10 @@ sum(double *data, int size)
  * @note This function asserts that size is finite and greater than 0.
  **/
 double
-mean(double *data, int size)
+m_mean(double *data, int size)
 {
-    assert(isFinite(size) && size > 0);
-    return sum(data, size) / size;
+    assert(m_finite(size) && size > 0);
+    return m_sum(data, size) / size;
 }
 
 /**
@@ -1017,9 +1028,9 @@ mean(double *data, int size)
  * @note This function modifies the original array by sorting it.
  **/
 double
-median(double *data, int size)
+m_median(double *data, int size)
 {
-    assert(isFinite(size) && size > 0);
+    assert(m_finite(size) && size > 0);
 
     for (int i = 0; i < size - 1; ++i) {
         for (int j = 0; j < size - i - 1; ++j) {
@@ -1049,9 +1060,9 @@ median(double *data, int size)
  * @note If multiple modes exist, this function returns the first one encountered.
  **/
 double
-mode(double *data, int size)
+m_mode(double *data, int size)
 {
-    assert(isFinite(size) && size > 0);
+    assert(m_finite(size) && size > 0);
 
     double mode = data[0];
     int maxCount = 1, currentCount = 1;
@@ -1085,14 +1096,14 @@ mode(double *data, int size)
  * @note This function asserts that size is finite and greater than 1.
  **/
 double
-stddev(double *data, int size)
+m_stddev(double *data, int size)
 {
-    assert(isFinite(size) && size > 1);
+    assert(m_finite(size) && size > 1);
 
-    double m = mean(data, size);
+    double m = m_mean(data, size);
     double sum = 0;
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; ++i) {
         double diff = data[i] - m;
         sum += diff * diff;
     }
