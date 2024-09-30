@@ -838,8 +838,8 @@ m_exp(double a)
 
     if (a == 0) return 1;
 
-    int k = (int) (a * LOG2E);
-    double r = a - k * LN2;
+    int k = (int) (a * M_LOG2E);
+    double r = a - k * M_LN2;
     double result = r + 1;
     double term = r;
 
@@ -935,7 +935,7 @@ m_ln(double a)
         sum += y;
     } while (m_abs(y) > 1E-15);
 
-    return sum + exp * LN2;
+    return sum + exp * M_LN2;
 }
 
 /**
@@ -964,7 +964,7 @@ double
 m_log2(double a)
 {
     assert(m_finite(a));
-    return m_ln(a) / LN2;
+    return m_ln(a) / M_LN2;
 }
 
 /**
@@ -978,7 +978,7 @@ double
 m_log10(double a)
 {
     assert(m_finite(a));
-    return m_ln(a) / LN10;
+    return m_ln(a) / M_LN10;
 }
 
 /**
@@ -1108,7 +1108,7 @@ m_stddev(double *data, int size)
         sum += diff * diff;
     }
 
-    return sqrt(sum / (size - 1));
+    return m_sqrt(sum / (size - 1));
 }
 
 #endif // MLIB_IMPLEMENTATION
